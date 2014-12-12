@@ -1,0 +1,48 @@
+<div id="userPhoto"></div>
+<div id="userData">
+	<div class="tableBox">
+		<table class="table">
+			<tr>
+				<td>
+					<label><%=ph.name%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).name%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.length%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).length%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.audience%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).audience%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.price%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).price%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.descTx%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).descTx%></div>
+				</td>
+			</tr>
+		</table>
+		<button class="btn" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
+	</div>
+</div>

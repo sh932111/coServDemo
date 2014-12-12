@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+    <ph id="clientId">
+      <zh>客戶編號</zh>
+    </ph>
+    <ph id="name">
+      <zh>姓名</zh>
+    </ph>
+    <ph id="gender">
+      <zh>性別</zh>
+    </ph>
+    <ph id="dob">
+      <zh>出生年月日</zh>
+    </ph>
+    <ph id="addr">
+      <zh>地址</zh>
+    </ph>
+    <ph id="phone">
+      <zh>電話</zh>
+    </ph>
+    <ph id="function">
+      <zh>功能</zh>
+    </ph>
+    <ph id="edit">
+      <zh>編輯</zh>
+    </ph>
+    <ph id="delete">
+      <zh>刪除</zh>
+    </ph>
+    <ph id="checkDelete">
+      <zh>確定刪除？</zh>
+    </ph>
+</phrases>

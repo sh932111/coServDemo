@@ -1,0 +1,14 @@
+.controllBar {
+	height: 40px;
+}
+.listLink {
+	height: 75px;
+}
+
+.tableView {
+	height: 385px;
+}
+
+th ,td{
+	text-align: center;
+}

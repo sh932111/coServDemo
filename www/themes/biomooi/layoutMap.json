@@ -1,0 +1,10 @@
+{
+    "/index": "hdBack",
+    "/A/customer/list": "A/list",
+    "/A": "A/info",
+    "/B": "hdBack",
+    "/C": "hdBack",
+    "/D/btCatalog/list": "D/list",
+    "/D": "D/info",
+    "/E": "hdBack"
+}

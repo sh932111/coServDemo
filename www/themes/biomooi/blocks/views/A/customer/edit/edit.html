@@ -1,0 +1,86 @@
+<div id="userPhoto"></div>
+<div id="userData">
+	<div class="tableBox">
+		<table class="table">
+			<tr>
+				<td>
+					<label><%=ph.name%></label>
+				</td>
+				<td>
+					<input type="text" class="form-control" value="<%= JSON.parse(value.body).name%>" id="nameInput">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.userId%></label>
+				</td>
+				<td>
+					<input type="text" class="form-control" value="<%= JSON.parse(value.body).nid%>" id="userIdInput">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.gender%></label>
+				</td>
+				<td id="genderView">
+					<% if (JSON.parse(value.body).gender === '1') { %> 
+					<label class="radio-inline">
+						<input type="radio" name="optradio" checked="true"><%=ph.boy%>
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio"><%=ph.girl%>
+					</label>
+					<% } else { %>
+					<label class="radio-inline">
+						<input type="radio" name="optradio"><%=ph.boy%>
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio" checked="true"><%=ph.girl%>
+					</label>
+					<% } %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.dob%></label>
+				</td>
+				<td>
+					<input type="text" class="form-control" value="<%= JSON.parse(value.body).dob%>" id="dateInput">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.addr%></label>
+				</td>
+				<td>
+					<input type="text" class="form-control" value="<%= JSON.parse(value.body).addr%>" id="addrInput">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.email%></label>
+				</td>
+				<td>
+					<input type="text" class="form-control" value="<%= JSON.parse(value.body).email%>" id="emailInput">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.phone%></label>
+				</td>
+				<td>
+					<input type="text" class="form-control" value="<%= JSON.parse(value.body).phone%>" id="phoneInput">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.matter%></label>
+				</td>
+				<td>
+					<textarea class="form-control" rows="3" id="matterInput"><%= JSON.parse(value.body).matter%></textarea>
+				</td>
+			</tr>
+		</table>
+		<button class="btn" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
+	</div>
+</div>

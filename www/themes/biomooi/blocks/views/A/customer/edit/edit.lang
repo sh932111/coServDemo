@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+	<ph id="name">
+		<zh>姓名</zh>
+	</ph>
+	<ph id="gender">
+		<zh>性別</zh>
+	</ph>
+	<ph id="dob">
+		<zh>出生年月日</zh>
+	</ph>
+	<ph id="addr">
+		<zh>地址</zh>
+	</ph>
+	<ph id="email">
+		<zh>e-mail</zh>
+	</ph>
+	<ph id="phone">
+		<zh>手機號碼</zh>
+	</ph>
+	<ph id="userId">
+		<zh>身分證字號</zh>
+	</ph>
+	<ph id="matter">
+		<zh>注意事項</zh>
+	</ph>
+	<ph id="boy">
+		<zh>男</zh>
+	</ph>
+	<ph id="girl">
+		<zh>女</zh>
+	</ph>
+	<ph id="save">
+		<zh>儲存</zh>
+	</ph>
+</phrases>

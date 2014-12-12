@@ -1,0 +1,9 @@
+.leftList {
+    float: left;
+    width: 200px;
+    margin: 5px;
+}
+
+.embedRegion {
+    margin-left: 210px;
+}

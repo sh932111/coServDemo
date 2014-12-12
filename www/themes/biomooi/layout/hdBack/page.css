@@ -1,0 +1,17 @@
+/* Add css rules here that are valid for the whole page */
+#pgContainer {
+	margin: 0px auto;
+	width: 960px;
+}
+
+#pgHead {
+	margin: 5px 0px;
+}
+
+#pgContent {
+	margin: 5px;
+}
+
+#pgFooter {
+	clear: both;
+}

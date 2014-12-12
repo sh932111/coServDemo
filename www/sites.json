@@ -1,0 +1,17 @@
+{
+	"127.0.0.1": {
+		"caCode": "biomooi",
+		"theme": "biomooi",
+		"title": "[biomooi] WebSite",
+		"validFrom": "",
+		"validTo": "",
+		"locale": "zh",
+		"home": "/index",
+		"appKeys": {
+			"wcoim": "",
+			"beautyweb": "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9"
+			},
+			"caCode": "beautyweb"
+			
+		}
+	}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+	<ph id="name">
+		<zh>名稱</zh>
+	</ph>
+	<ph id="length">
+      <zh>時程</zh>
+    </ph>
+    <ph id="audience">
+      <zh>適合對象</zh>
+    </ph>
+    <ph id="price">
+      <zh>價格</zh>
+    </ph>
+    <ph id="descTx">
+      <zh>說明</zh>
+    </ph>
+    <ph id="edit">
+		<zh>編輯</zh>
+	</ph>
+</phrases>

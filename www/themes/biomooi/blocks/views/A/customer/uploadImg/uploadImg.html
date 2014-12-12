@@ -1,0 +1,14 @@
+<div class="userPhotoBox">
+	<img src="" id="userPhotoImg">
+</div>
+<div class="box">
+	<div class="btBox">
+		<div style="display:none">
+			<form role="form" id="uploader" name="uploader" action="" enctype="multipart/form-data" method="POST">
+				<input type="file" name="file" multiple="multiple" class="form-control">
+				<input type="hidden" name="nType" value="1">
+			</form>
+		</div>
+		<button id="addIcon" type="button" class="btn btn-primary"><%= ph.upload %></button>
+	</div>
+</div>

@@ -1,0 +1,76 @@
+<div id="userPhoto"></div>
+<div id="userData">
+	<div class="tableBox">
+		<table class="table">
+			<tr>
+				<td>
+					<label><%=ph.name%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).name%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.userId%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).nid%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.gender%></label>
+				</td>
+				<td>
+					<% if (JSON.parse(value.body).gender === '1') { %> 
+					<div>男</div>
+					<% } else { %>
+					<div>女</div>
+					<% } %> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.dob%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).dob%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.addr%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).addr%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.email%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).email%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.phone%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).phone%></div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><%=ph.matter%></label>
+				</td>
+				<td>
+					<div><%= JSON.parse(value.body).matter%></div>
+				</td>
+			</tr>
+		</table>
+		<button class="btn" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
+	</div>
+</div>
