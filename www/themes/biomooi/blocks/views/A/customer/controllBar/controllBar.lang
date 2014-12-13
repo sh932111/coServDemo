@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phrases>
+	<ph id="name">
+		<zh>姓名</zh>
+	</ph>
+	<ph id="phone">
+		<zh>電話</zh>
+	</ph>
+	<ph id="nid">
+		<zh>身份證字號</zh>
+	</ph>
+	<ph id="date">
+		<zh>出生年月日</zh>
+	</ph>
 	<ph id="add">
 		<zh>新增</zh>
 	</ph>
