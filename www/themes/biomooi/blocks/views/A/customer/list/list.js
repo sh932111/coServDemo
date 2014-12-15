@@ -31,8 +31,10 @@ ctrl.startup = function() {
 
 //動態將List生成
 function reloadUserTable(index) {
-	var tbody = document.getElementById("tableBody");
-	$(tbody).empty();
+	var tbody1 = document.getElementById("tableBody1");
+	var tbody2 = document.getElementById("tableBody2");
+	$(tbody1).empty();
+	$(tbody2).empty();
 	var array_lenght = getUserData.length;
 
 	for (var i = 0; i < array_lenght; i++) {
@@ -93,7 +95,10 @@ function reloadUserTable(index) {
 		tr.appendChild(addr_id);
 		tr.appendChild(phone_id);
 		tr.appendChild(fun_id);
-		tbody.appendChild(tr);
+		tbody1.appendChild(tr);
+		var copy_tr = tr.cloneNode(true);
+		copy_tr.removeChild(copy_tr.getElementsByTagName('td')[6]);
+		tbody2.appendChild(copy_tr);
 	}
 }
 
@@ -148,6 +153,7 @@ function getMathRemainder(num,resource) {
 	}
 	return res;
 }
+
 
 function deleteUserData(ngID) {
 	getRoot(function(token){

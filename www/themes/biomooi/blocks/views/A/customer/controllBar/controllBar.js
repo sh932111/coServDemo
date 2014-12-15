@@ -9,7 +9,3 @@ ctrl.addUserData = function(){
 ctrl.selectUserData = function(){
 	$("#modalLink").click();
 };
-
-ctrl.excelUserData = function(){
-
-};

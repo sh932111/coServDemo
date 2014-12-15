@@ -1,8 +1,9 @@
+<script src="http://jordiburgos.com/js/excellentexport.js"></script>
 <div style="text-align:right;">
 	<a href="#mymodal" id="modalLink" data-toggle="modal" class="btn btn-mini" style="display:none"></a>
 	<button class="btn" onclick="<%=ctrl%>.addUserData()"><%=ph.add%></button>
 	<button class="btn" onclick="<%=ctrl%>.selectUserData()"><%=ph.select%></button>
-	<button class="btn" onclick="<%=ctrl%>.excelUserData()"><%=ph.excel%></button>
+	<a download="somedata.xls" id="excelLink" href="#" class="btn" onclick="return ExcellentExport.excel(this, 'myTable', 'Sheet Name Here');" ><%=ph.excel%></a>
 </div>
 
 <div class="modal fade" id="mymodal">

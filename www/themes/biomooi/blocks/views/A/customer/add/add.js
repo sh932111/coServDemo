@@ -16,6 +16,7 @@ ctrl.saveData = function(){
 	if (post) {
 		var req = {url: userSourceCreateApi ,post: post};
 		__.api( req, function(data) {
+			console.log(data);
 			if (data.errCode == 0) {
 				alert("新增成功！");
 				location.href = "/A/customer/list";
