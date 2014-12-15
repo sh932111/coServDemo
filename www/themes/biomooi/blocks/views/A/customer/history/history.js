@@ -1,16 +1,15 @@
 var getUserData;
 var onClickCheck;
 var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var loginApi = "/core/user/login";
-var btCatalogDeleteApi = "/beautywebSource/btCatalog/delete/";
-var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
+var userHistoryCreateApi = "/beautywebSource/userHistory/create/";
 
 ctrl.startup = function() {
 	var get_data = [];
 	'<% for (var i = 0; i < value.list.length; i++) {
 		var item = value.list[i];
 		var ngID = value.list[i].ngID;
-		var summary = item.summary; %>'
+		var summary = item.summary; 
+		%>'
 		var get_item = '<%=summary%>';
 		var get_json = JSON.parse(get_item);
 		get_json["ngID"] = '<%=ngID%>';
@@ -18,7 +17,7 @@ ctrl.startup = function() {
 		'<%}; %>';
 		getUserData = get_data;
 		reloadUserTable(0);
-		//68912
+		
 		var historyDialog = document.getElementById("historyDialog");
 		ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:"68912"},function(data){
 		});
@@ -32,6 +31,7 @@ ctrl.startup = function() {
 		ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
 			refreshLink(0);
 		});
+		addTestData () ;
 	};
 
 //動態將List生成
@@ -120,8 +120,38 @@ function getMathRemainder(num,resource) {
 	}
 	return res;
 }
+
 function  getBodyCtrl()  {
 	var  bodyBkID = $('#historyDialog').children('div').first().attr('id'),
 	bodyCtrl = __.getCtrl(bodyBkID);
 	return  bodyCtrl;
 };
+
+function addTestData () {
+	var req = {url: userHistoryCreateApi ,post: getUserData("68912")};
+	__.api( req, function(data) {
+		if (data.errCode == 0) {
+			//12/16
+		}
+	});
+}
+
+function getUserData(custNo) 
+var get_data = {
+	custNo : custNo,
+	name : "客戶名稱",
+	date : "2014-12-12",
+	salesTotal : "1000",
+	descTx : "descTx",
+	consumptionDate : "2014-12-12",
+	consumptionDetail : "買很多"
+};
+var res = {
+	_key : Key,
+	title : custNo,
+	body : JSON.stringify(get_data),
+	summary : JSON.stringify(get_data),
+	isPublic : "1"
+};
+return res;
+}
