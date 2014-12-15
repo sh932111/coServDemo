@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phrases>
-    <ph id="name">
-      <zh>名稱</zh>
+    <ph id="date">
+      <zh>日期</zh>
     </ph>
-    <ph id="length">
-      <zh>時程</zh>
+    <ph id="salesTotal">
+      <zh>消費金額</zh>
     </ph>
-    <ph id="price">
-      <zh>參考價格</zh>
+    <ph id="descTx">
+      <zh>消費內容</zh>
     </ph>
-    <ph id="use">
-      <zh>引用</zh>
-    </ph>
-    <ph id="add">
-      <zh>新增</zh>
-    </ph>
-    <ph id="function">
-      <zh>功能</zh>
+    <ph id="hasComplaints">
+      <zh>客訴</zh>
     </ph>
     <ph id="edit">
       <zh>編輯</zh>
