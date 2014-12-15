@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+	<ph id="consumptionDate">
+		<zh>消費日期</zh>
+	</ph>
+	<ph id="consumptionDetail">
+		<zh>消費內容</zh>
+	</ph>
+	<ph id="hasComplaintsHistory">
+		<zh>客訴紀錄</zh>
+	</ph>
+</phrases>

@@ -83,9 +83,5 @@
     },
     "/A/customer/history/controllBar": {
         "id": "no"
-    },
-    "/A/customer/history/historyDialog": {
-        "id": "yes",
-        "service": "/beautywebSource/btCatalog/view"
     }
 }

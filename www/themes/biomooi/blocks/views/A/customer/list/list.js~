@@ -19,7 +19,7 @@ ctrl.startup = function() {
 	reloadUserTable(0);
 
 	var controllBar = document.getElementById("controllBar");
-	ctrl.embed(controllBar,"/A/customer/list/controllBar", {},function(data){
+	ctrl.embed(controllBar,"/A/customer/controllBar", {},function(data){
 
 	});
 

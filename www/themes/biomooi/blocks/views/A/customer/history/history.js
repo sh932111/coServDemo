@@ -18,10 +18,14 @@ ctrl.startup = function() {
 		'<%}; %>';
 		getUserData = get_data;
 		reloadUserTable(0);
+		//68912
+		var historyDialog = document.getElementById("historyDialog");
+		ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:"68912"},function(data){
+		});
 
 		var controllBar = document.getElementById("controllBar");
-		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {},function(data){
-
+		ctrl.embed(controllBar,"/A/customer/history/controllBar", {},function(data){
+			
 		});
 
 		var listLink = document.getElementById("listLink");
@@ -52,51 +56,18 @@ function reloadUserTable(index) {
 		var price_id = document.createElement("td");
 		price_id.innerHTML = getUserData[num].price;
 		var fun_id = document.createElement("td");
-		var update_bt = document.createElement("button");
-		update_bt.id = num;
-		update_bt.innerHTML = "編輯";
-		update_bt.className = "btn btn-primary";
-		update_bt.addEventListener("click", function(e){
-			onClickCheck = true;
-			var go = "/D/btCatalog/edit/"+getUserData[this.id].ngID;
-			location.href = go;
+		var info_bt = document.createElement("button");
+		info_bt.id = num;
+		info_bt.innerHTML = "檢視";
+		info_bt.className = "btn btn-primary";
+		info_bt.addEventListener("click", function(e){
+			getBodyCtrl().reload('/A/customer/history/historyDialog', {id:getUserData[this.id].ngID,params: { _loc: '<%=bi.locale%>'}});
 		});
-		var delete_bt = document.createElement("button");
-		delete_bt.id = num;
-		delete_bt.innerHTML = "刪除";
-		delete_bt.className = "btn";
-		delete_bt.addEventListener("click", function(e){
-			onClickCheck = true;
-			if(confirm("確定刪除？")){
-				deleteUserData(getUserData[this.id].ngID);
-			}
-		});
-		fun_id.appendChild(update_bt);
-		fun_id.appendChild(delete_bt);
-		var use_id = document.createElement("td");
-		var use_bt = document.createElement("button");
-		use_bt.id = num;
-		var dialog_title = getUserData[num].use ? "刪除引用？" : "確定引用？";
-		use_bt.addEventListener("click", function(e){
-			onClickCheck = true;
-			if(confirm(dialog_title)){
-				usebtCatalogData(getUserData[this.id].ngID,this.id);
-			}
-		});
-		if (getUserData[num].use) {
-			use_bt.innerHTML = "取消";
-			use_bt.className = "btn";
-		}
-		else {
-			use_bt.innerHTML = "引用";
-			use_bt.className = "btn btn-primary";
-		}
-		use_id.appendChild(use_bt);
+		fun_id.appendChild(info_bt);
 		tr.id = num;
 		tr.addEventListener("click", function(e){
 			if (!onClickCheck) {	
-				var go = "/D/btCatalog/info/"+getUserData[this.id].ngID;
-				location.href = go;
+
 			}
 			onClickCheck = false;
 		});
@@ -104,7 +75,6 @@ function reloadUserTable(index) {
 		tr.appendChild(length_id);
 		tr.appendChild(price_id);
 		tr.appendChild(fun_id);
-		tr.appendChild(use_id);
 		tbody.appendChild(tr);
 	}
 }
@@ -150,71 +120,8 @@ function getMathRemainder(num,resource) {
 	}
 	return res;
 }
-
-//刪除資料
-function deleteUserData(ngID) {
-	getRoot(function(token){
-		var url = btCatalogDeleteApi+ngID;
-		var  req = {url: url,post: {
-			token : token
-		}};
-		__.api( req, function(data) {
-			if (data.errCode==0) {
-				alert("刪除成功！");
-				window.location.reload();
-			}
-		});
-	});
-}
-
-//取得管理員
-function getRoot(callback) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token);
-	});
-}
-
-//引用
-function usebtCatalogData(ngID,index) {
-	var url = btCatalogUpdateApi + ngID;
-	var post = getUpdateData(index);
-	var req = {url:url  ,post: post};
-	__.api( req, function(data) {
-		if (data.errCode == 0) {
-			var dialog_title = getUserData[index].use ? "引用成功" : "取消引用成功";
-			alert(dialog_title);
-			window.location.reload();
-		}
-		else {
-			var dialog_title = getUserData[index].use ? "引用失敗" : "取消引用失敗";
-			alert(dialog_title);
-		}
-	});
-}
-
-//抓取引用的json data
-function getUpdateData(index) {
-	getUserData[index].use = getUserData[index].use ? false : true;
-	var get_data = {
-		name : getUserData[index].name,
-		length : getUserData[index].length,
-		audience : getUserData[index].audience,
-		price : getUserData[index].price,
-		descTx : getUserData[index].descTx,
-		use : getUserData[index].use
-	};
-	var res = {
-		_key : Key,
-		title : getUserData[index].name,
-		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
-		isPublic : "1"
-	};
-	return res;
-}
+function  getBodyCtrl()  {
+	var  bodyBkID = $('#historyDialog').children('div').first().attr('id'),
+	bodyCtrl = __.getCtrl(bodyBkID);
+	return  bodyCtrl;
+};

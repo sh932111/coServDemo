@@ -1,0 +1,9 @@
+.modalBox {
+	margin: 0 auto;
+	width: 400px;
+	background: white;
+}
+
+#mymodal {
+	margin-top: 100px;
+}
