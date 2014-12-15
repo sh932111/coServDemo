@@ -29,7 +29,8 @@
         "id": "no"
     },
     "/A/customer/history": {
-        "id": "no"
+        "id": "no",
+        "service": "/beautywebSource/btCatalog/list"
     },
     "/A/customer/listLink": {
         "id": "no"
