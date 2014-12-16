@@ -16,48 +16,48 @@ ctrl.startup = function() {
 		get_data.push(get_json);
 	'<%}; %>';
 	getUserData = get_data;
-	reloadUserTable(0);
+	reloadUserTable(0,getUserData);
 
 	var controllBar = document.getElementById("controllBar");
 	ctrl.embed(controllBar,"/A/customer/list/controllBar", {},function(data){
-
+		data.addHandler("regReloadHistoryList", ctrl.reloadHistoryList);
 	});
 
 	var listLink = document.getElementById("listLink");
 	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-		refreshLink(0);
+		refreshLink(0,getUserData);
 	});
 };
 
 //動態將List生成
-function reloadUserTable(index) {
+function reloadUserTable(index,get_user_data) {
 	var tbody1 = document.getElementById("tableBody1");
 	var tbody2 = document.getElementById("tableBody2");
 	$(tbody1).empty();
 	$(tbody2).empty();
-	var array_lenght = getUserData.length;
+	var array_lenght = get_user_data.length;
 
 	for (var i = 0; i < array_lenght; i++) {
 		var num = i + index * 20;
 		if (i == 20) {
 			break;
 		}
-		else if (num == getUserData.length) {
+		else if (num == get_user_data.length) {
 			break;
 		}
 		var tr = document.createElement("tr");
 		var client_id = document.createElement("td");
-		client_id.innerHTML = getUserData[num].ngID;
+		client_id.innerHTML = get_user_data[num].ngID;
 		var name_id = document.createElement("td");
-		name_id.innerHTML = getUserData[num].name;
+		name_id.innerHTML = get_user_data[num].name;
 		var gender_id = document.createElement("td");
-		gender_id.innerHTML = showGender(getUserData[num].gender);
+		gender_id.innerHTML = showGender(get_user_data[num].gender);
 		var dob_id = document.createElement("td");
-		dob_id.innerHTML = getUserData[num].dob;
+		dob_id.innerHTML = get_user_data[num].dob;
 		var addr_id = document.createElement("td");
-		addr_id.innerHTML = getUserData[num].addr;
+		addr_id.innerHTML = get_user_data[num].addr;
 		var phone_id = document.createElement("td");
-		phone_id.innerHTML = getUserData[num].phone;
+		phone_id.innerHTML = get_user_data[num].phone;
 		var fun_id = document.createElement("td");
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
@@ -65,7 +65,7 @@ function reloadUserTable(index) {
 		update_bt.className = "btn btn-primary";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
-			var go = "/A/customer/edit/"+getUserData[this.id].ngID;
+			var go = "/A/customer/edit/"+get_user_data[this.id].ngID;
 			location.href = go;
 		});
 		var delete_bt = document.createElement("button");
@@ -75,7 +75,7 @@ function reloadUserTable(index) {
 		delete_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			if(confirm("確定刪除？")){
-				deleteUserData(getUserData[this.id].ngID);
+				deleteUserData(get_user_data[this.id].ngID);
 			}
 		});
 		fun_id.appendChild(update_bt);
@@ -83,7 +83,7 @@ function reloadUserTable(index) {
 		tr.id = num;
 		tr.addEventListener("click", function(e){
 			if (!onClickCheck) {	
-				var go = "/A/customer/info/"+getUserData[this.id].ngID;
+				var go = "/A/customer/info/"+get_user_data[this.id].ngID;
 				location.href = go;
 			}
 			onClickCheck = false;
@@ -103,10 +103,10 @@ function reloadUserTable(index) {
 }
 
 //動態產生下方button，index為需disabled的值
-function refreshLink(index) {
+function refreshLink(index,get_user_data) {
 	var listLinkBox = document.getElementById("listLinkBox");
 	$(listLinkBox).empty();
-	var num = getMathRemainder(getUserData.length,20);
+	var num = getMathRemainder(get_user_data.length,20);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
 		if (i == index) {
@@ -119,8 +119,8 @@ function refreshLink(index) {
 		a.innerHTML = i + 1;
 		a.id = i;
 		a.addEventListener("click", function(e){
-			refreshLink(this.id);
-			reloadUserTable(this.id);
+			refreshLink(this.id,get_user_data);
+			reloadUserTable(this.id,get_user_data);
 		});
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
@@ -181,3 +181,7 @@ function getRoot(callback) {
 		callback(data.token);
 	});
 }
+
+ctrl.reloadHistoryList = function(get_tag) {
+	reloadUserTable(0,[get_tag]);
+};

@@ -29,14 +29,14 @@
         "id": "no"
     },
     "/A/customer/history": {
-        "id": "no",
-        "service": "/beautywebSource/btCatalog/list"
+        "id": "no"
     },
     "/A/customer/listLink": {
         "id": "no"
     },
     "/A/customer/list/controllBar": {
-        "id": "no"
+        "id": "no",
+        "service": "/beautywebSource/userSource/list"
     },
     "/A/customer/edit": {
         "id": "yes",
@@ -82,10 +82,11 @@
         "id": "no"
     },
     "/A/customer/history/controllBar": {
-        "id": "no"
+        "id": "no",
+        "service": "/beautywebSource/userSource/list"
     },
     "/A/customer/history/historyDialog": {
-        "id": "yes",
-        "service": "/beautywebSource/btCatalog/view"
+        "id": "maybe",
+        "service": "/beautywebSource/userHistory/view"
     }
 }

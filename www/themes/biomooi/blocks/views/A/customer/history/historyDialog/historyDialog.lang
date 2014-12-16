@@ -9,4 +9,10 @@
 	<ph id="hasComplaintsHistory">
 		<zh>客訴紀錄</zh>
 	</ph>
+	<ph id="inputComplaintsDetail">
+		<zh>請輸入客訴內容</zh>
+	</ph>
+	<ph id="add">
+		<zh>新增</zh>
+	</ph>
 </phrases>

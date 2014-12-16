@@ -11,12 +11,12 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label"><%=ph.consumptionDate%></label>
 						<div class="col-sm-8">
-							<label class="col-sm-12 control-label"><%= JSON.parse(value.body).name%>
+							<label class="col-sm-12 control-label"><%= JSON.parse(value.body).consumptionDate%>
 							</label>
 						</div>
 						<label class="col-sm-4 control-label"><%=ph.consumptionDetail%></label>
 						<div class="col-sm-8">
-							<label class="col-sm-12 control-label"><%= JSON.parse(value.body).name%></label>
+							<label class="col-sm-12 control-label"><%= JSON.parse(value.body).consumptionDetail%></label>
 						</div>
 					</div>
 				</form>
@@ -25,6 +25,8 @@
 		</div>  
 	</div>
 	<div class="modal-footer modalBox">
-		<a href="" class="btn" data-dismiss="modal">ok</a>
+		<div class="hasComplaintsDetail"></div>
+		<input type="text" class="form-control" placeholder="<%=ph.inputComplaintsDetail%>">
+		<button type="button" class="btn btn-primary" onclick="<%=ctrl%>.addComplaintsDetail()"><%=ph.add%></button>
 	</div>
 </div> 

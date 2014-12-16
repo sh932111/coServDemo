@@ -6,31 +6,35 @@
 	<a download="somedata.xls" id="excelLink" href="#" class="btn" onclick="return ExcellentExport.excel(this, 'myTable', 'Sheet Name Here');" ><%=ph.excel%></a>
 </div>
 
-<div class="modal fade" id="mymodal">
+<div class="modal fade" id="mymodal" onclick="<%=ctrl%>.clearList()">
 	<div class="modal-header modalBox">
-		<button class="close" data-dismiss="modal">x</button>
+		<button class="close" data-dismiss="modal" onclick="<%=ctrl%>.clearList()">x</button>
 		<h4><%=ph.select%></h4>
 	</div>
 	<div class="modal-body modalBox">
 		<div class="row">
 			<div class="col-sm-10">
 				<form class="form-horizontal" role="form">
-					<div class="form-group">
+					<div class="form-group" id="formGroup">
 						<label class="col-sm-4 control-label"><%=ph.name%></label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" placeholder="<%=ph.name%>">
+							<input type="text" class="form-control" id="NameValue" placeholder="<%=ph.name%>">
+							<ul class="dropdown-menu col-sm-10 myMenu" id="NameMenu"></ul>
 						</div>
 						<label class="col-sm-4 control-label"><%=ph.phone%></label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" placeholder="<%=ph.phone%>">
+							<input type="text" class="form-control" id="PhoneValue" placeholder="<%=ph.phone%>">
+							<ul class="dropdown-menu col-sm-10 myMenu" id="PhoneMenu"></ul>
 						</div>
 						<label class="col-sm-4 control-label"><%=ph.nid%></label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" placeholder="<%=ph.nid%>">
+							<input type="text" class="form-control" id="NidValue" placeholder="<%=ph.nid%>">
+							<ul class="dropdown-menu col-sm-10 myMenu" id="NidMenu"></ul>
 						</div>
 						<label class="col-sm-4 control-label"><%=ph.date%></label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" placeholder="<%=ph.date%>">
+							<input type="text" class="form-control" id="DateValue" placeholder="<%=ph.date%>">
+							<ul class="dropdown-menu col-sm-10 myMenu" id="DateMenu"></ul>
 						</div>
 					</div>
 				</form>
@@ -39,6 +43,6 @@
 		</div>  
 	</div>
 	<div class="modal-footer modalBox">
-		<a href="" class="btn" data-dismiss="modal">ok</a>
+		<a href="" onclick="<%=ctrl%>.checkSelectData()" class="btn" data-dismiss="modal"><%=ph.select%></a>
 	</div>
 </div> 

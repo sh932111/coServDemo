@@ -12,13 +12,10 @@
 	<ph id="date">
 		<zh>出生年月日</zh>
 	</ph>
-	<ph id="add">
-		<zh>新增</zh>
-	</ph>
 	<ph id="select">
 		<zh>查詢</zh>
 	</ph>
-	<ph id="excel">
-		<zh>Excel</zh>
+	<ph id="custNo">
+		<zh>客戶編號</zh>
 	</ph>
 </phrases>
