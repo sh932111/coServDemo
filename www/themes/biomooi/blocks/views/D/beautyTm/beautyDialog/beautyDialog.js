@@ -8,12 +8,15 @@ ctrl.startup = function() {
 	var type = '<%=bi.query._type%>';
 	if (type == "1") {
 		$("#beautymodalLink").click();
+		'<%if (errCode === 0) {%>'
 		var get_body = '<%= value.body%>';
 		getBeautyData = JSON.parse(get_body);
+		'<%}%>'
 	}
 };
 
 ctrl.checkUpdateData = function() {
+	'<%if (errCode === 0) {%>'
 	var url = beautyTmUpdateApi+"<%=value.ngID%>";
 	var post =  getBeautyTmData();
 	if (post) {
@@ -28,6 +31,7 @@ ctrl.checkUpdateData = function() {
 			}
 		});
 	}
+	'<%}%>'
 };
 
 //取得管理員
@@ -53,10 +57,13 @@ function getBeautyTmData() {
 		date : document.getElementById("DateValue").value,
 		use : true
 	};
-
+	var title = "";
+	'<%if (errCode === 0) {%>'
+		title = "<%=value.title%>";
+	'<%}%>'
 	var res = {
 		_key : Key,
-		title : "<%=value.title%>",
+		title : title,
 		body : JSON.stringify(get_data),
 		summary : JSON.stringify(get_data),
 		isPublic : "1"

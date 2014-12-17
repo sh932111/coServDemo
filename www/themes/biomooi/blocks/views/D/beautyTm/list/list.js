@@ -80,7 +80,6 @@ function reloadUserTable(index) {
 			onClickCheck = true;
 			var dialog_title = getUserData[this.id].use ? "確定不提供？" : "確定提供？";
 			if(confirm(dialog_title)){
-				console.log(getUserData[this.id]);
 				getUserData[this.id].use = getUserData[this.id].use ? false : true;
 				useBeautyData(getUserData[this.id].ngID,this.id,getUserData[this.id].use);
 			}
@@ -90,8 +89,8 @@ function reloadUserTable(index) {
 		tr.id = num;
 		tr.addEventListener("click", function(e){
 			if (!onClickCheck) {	
-				// var go = "/D/btCatalog/info/"+getUserData[this.id].ngID;
-				// location.href = go;
+				var go = "/D/beautyTm/info/"+getUserData[this.id].ngID;
+				location.href = go;
 			}
 			onClickCheck = false;
 		});
@@ -187,6 +186,7 @@ function getBeautyTmData(index,result) {
 		price : getUserData[index].price,
 		descTx : getUserData[index].descTx,
 		date : getUserData[index].date,
+		image_url : getUserData[index].image_url,
 		use : result
 	};
 

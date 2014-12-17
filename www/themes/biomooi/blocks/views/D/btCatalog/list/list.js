@@ -4,10 +4,10 @@ var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
 var loginApi = "/core/user/login";
 var btCatalogDeleteApi = "/beautywebSource/btCatalog/delete/";
 var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
+var btCatalogListAuxApi = "/beautywebSource/btCatalog/listAux/";
 var beautyTmCreateApi = "/beautywebSource/beautyTm/create";
 var beautyTmListApi = "/beautywebSource/beautyTm/list";
 var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
-
 
 ctrl.startup = function() {
 	var get_data = [];
@@ -186,54 +186,70 @@ function getRoot(callback) {
 
 //引用
 function usebtCatalogData(ngID,index) {
-	var url = btCatalogUpdateApi + ngID;
-	var post = getUpdateData(index);
-	var req = {url:url  ,post: post};
-	__.api( req, function(data) {
-		if (data.errCode == 0) {
-			if (getUserData[index].use) {
-				var post_beauty = getBeautyTmData(index);
-				var req1 = {url:beautyTmCreateApi ,post: post_beauty};
-				__.api( req1, function(data) {
-					if (data.errCode == 0) {
-						alert("引用成功");
-						window.location.reload();
-					}
-					else {
-						alert("引用失敗！");
-					}
-				});
+	getBtCatalogImg(ngID,function(path){
+		var url = btCatalogUpdateApi + ngID;
+		var post = getUpdateData(index);
+		var req = {url:url  ,post: post};
+		__.api( req, function(data) {
+			if (data.errCode == 0) {
+				if (getUserData[index].use) {
+					var post_beauty = getBeautyTmData(index,path);
+					var req1 = {url:beautyTmCreateApi ,post: post_beauty};
+					__.api( req1, function(data) {
+						if (data.errCode == 0) {
+							alert("引用成功");
+							window.location.reload();
+						}
+						else {
+							alert("引用失敗！");
+						}
+					});
+				}
+				else {
+					var req1 = {url:beautyTmListApi ,post: {}};
+					__.api( req1, function(data) {
+						if (data.errCode == 0) {
+							var get_list = data.value.list;
+							for (var i = 0; i < get_list.length; i++) {
+								if (get_list[i].title == getUserData[index].ngID) {
+									var req_url = beautyTmDeleteApi+get_list[i].ngID;
+									var req2 = {url:req_url ,post: {}};
+									__.api( req2, function(data) {
+										if (data.errCode == 0) {
+											alert("取消引用成功");
+											window.location.reload();
+										}
+										else {
+											alert("取消引用失敗！");
+										}
+									});
+								}							
+							}
+						}
+						else {
+							alert("取消引用失敗！");
+						}
+					});
+				}
 			}
 			else {
-				var req1 = {url:beautyTmListApi ,post: {}};
-				__.api( req1, function(data) {
-					if (data.errCode == 0) {
-						var get_list = data.value.list;
-						for (var i = 0; i < get_list.length; i++) {
-							if (get_list[i].title == getUserData[index].ngID) {
-								var req_url = beautyTmDeleteApi+get_list[i].ngID;
-								var req2 = {url:req_url ,post: {}};
-								__.api( req2, function(data) {
-									if (data.errCode == 0) {
-										alert("取消引用成功");
-										window.location.reload();
-									}
-									else {
-										alert("取消引用失敗！");
-									}
-								});
-							}							
-						}
-					}
-					else {
-						alert("取消引用失敗！");
-					}
-				});
+				var dialog_title = getUserData[index].use ? "引用失敗" : "取消引用失敗";
+				alert(dialog_title);
 			}
+		});
+});
+}
+
+function getBtCatalogImg(ngID,callback) {
+	var url = btCatalogListAuxApi + ngID;
+	var req = {url:url  ,post: {nType : 1}};
+	__.api( req, function(data) {
+		if (data.errCode == 0 && data.value.iconURI) {
+			var path = "http://tw.coimotion.com/images/"+ngID+"?path="+data.value.iconURI;
+			callback(path);
 		}
 		else {
-			var dialog_title = getUserData[index].use ? "引用失敗" : "取消引用失敗";
-			alert(dialog_title);
+			callback(false);
 		}
 	});
 }
@@ -259,7 +275,7 @@ function getUpdateData(index) {
 	return res;
 }
 
-function getBeautyTmData(index) {
+function getBeautyTmData(index,path) {
 	var get_data = {
 		name : getUserData[index].name,
 		length : getUserData[index].length,
@@ -267,6 +283,7 @@ function getBeautyTmData(index) {
 		price : getUserData[index].price,
 		descTx : getUserData[index].descTx,
 		date : getNowTime(),
+		image_url : path,
 		use : true
 	};
 

@@ -1,0 +1,21 @@
+#userPhoto {
+	width: 50%;
+	height: 500px;
+	float: left;
+}
+
+#userData {
+	margin-left: 50%;
+	width: 50%;
+	height: 500px;
+}
+.tableBox {
+	width: 80%;
+	text-align: right;
+}
+
+.table td {
+	text-align: center;
+	vertical-align: middle;
+	border-top: none; 
+}

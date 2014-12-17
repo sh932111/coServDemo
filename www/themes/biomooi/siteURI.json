@@ -93,5 +93,22 @@
     "/D/beautyTm/beautyDialog": {
         "id": "maybe",
         "service": "/beautywebSource/beautyTm/view"
+    },
+    "/D/beautyTm/edit": {
+        "id": "yes",
+        "service": "/beautywebSource/beautyTm/view",
+        "params": {
+            "icon": 1
+        }
+    },
+    "/D/beautyTm/info": {
+        "id": "yes",
+        "service": "/beautywebSource/beautyTm/view",
+        "params": {
+            "icon": 1
+        }
+    },
+    "/D/beautyTm/uploadImg": {
+        "id": "no"
     }
 }
