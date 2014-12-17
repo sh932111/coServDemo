@@ -3,7 +3,10 @@ var userSourceCreateApi = "/beautywebSource/userSource/create";
 
 ctrl.startup = function() {
 	var dateInput = document.getElementById('dateInput');
-	$(dateInput).datepicker();
+	$(dateInput).datetimepicker({
+		format: 'yyyy-mm-dd',
+		minView: 3
+	});
 	var userPhoto = document.getElementById("userPhoto");
 	ctrl.embed(userPhoto,"/A/customer/uploadImg", {},function(data){
 		var addIcon = document.getElementById("addIcon");

@@ -5,6 +5,11 @@ var beautyTmUpdateApi = "/beautywebSource/beautyTm/update/";
 
 ctrl.startup = function() {
 	$("#beautymodal").modal({show:false});
+	var dateInput = document.getElementById('DateValue');
+	$(dateInput).datetimepicker({
+		format: 'yyyy-mm-dd',
+		minView: 3
+	});
 	var type = '<%=bi.query._type%>';
 	if (type == "1") {
 		$("#beautymodalLink").click();

@@ -1,3 +1,2 @@
-http://code.jquery.com/jquery-1.10.2.js
-http://code.jquery.com/ui/1.11.2/jquery-ui.js
-http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css
+http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css
+http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js

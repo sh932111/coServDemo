@@ -2,6 +2,7 @@ var getUserData = [];
 var getIndex = 0;
 ctrl.startup = function() {
 	$("#mymodal").modal({show:false});
+	
 	var get_data = [];
 	'<% for (var i = 0; i < value.list.length; i++) {
 		var item = value.list[i];

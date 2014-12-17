@@ -2,7 +2,11 @@ var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
 var userSourceUpdateApi = "/beautywebSource/userSource/update/";
 
 ctrl.startup = function() {
-	$(dateInput).datepicker();
+	var dateInput = document.getElementById('dateInput');
+	$(dateInput).datetimepicker({
+		format: 'yyyy-mm-dd',
+		minView: 3
+	});
 	var userPhoto = document.getElementById("userPhoto");
 	var get_id = '<%=value.ngID%>';
 	var params = {
