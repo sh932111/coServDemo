@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+	<ph id="name">
+		<zh>名稱：</zh>
+	</ph>
+	<ph id="setPrice">
+		<zh>設定價格</zh>
+	</ph>
+	<ph id="price">
+		<zh>價格：</zh>
+	</ph>
+	<ph id="date">
+		<zh>生效日期：</zh>
+	</ph>
+	<ph id="check">
+		<zh>確認</zh>
+	</ph>
+</phrases>

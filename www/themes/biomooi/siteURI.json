@@ -26,7 +26,8 @@
         "service": "/beautywebSource/btCatalog/list"
     },
     "/D/beautyTm/list": {
-        "id": "no"
+        "id": "no",
+        "service": "/beautywebSource/beautyTm/list"
     },
     "/A/customer/history": {
         "id": "no"
@@ -88,5 +89,9 @@
     "/A/customer/history/historyDialog": {
         "id": "maybe",
         "service": "/beautywebSource/userHistory/view"
+    },
+    "/D/beautyTm/beautyDialog": {
+        "id": "maybe",
+        "service": "/beautywebSource/beautyTm/view"
     }
 }

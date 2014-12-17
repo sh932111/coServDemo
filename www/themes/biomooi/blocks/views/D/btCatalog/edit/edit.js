@@ -20,7 +20,6 @@ ctrl.startup = function() {
 
 ctrl.saveData = function(){
 	var url = btCatalogUpdateApi+"<%=value.ngID%>";
-	getUserData();
 	var req = {url:url  ,post: getUserData()};
 	__.api( req, function(data) {
 		if (data.errCode == 0) {

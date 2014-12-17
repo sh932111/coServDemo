@@ -1,7 +1,8 @@
 <div class="controllItems">
+	<label><%=ph.categoryClass%></label>
 	<select id="selectpicker1" onchange="<%=ctrl%>.setCategory(this)"></select>
 	<select id="selectpicker2" onchange="<%=ctrl%>.setDetail(this)"></select>
 </div>
-<div  class="controllItems" style="text-align:right;">
+<div  class="controllItems" style="text-align:right;" id="controllBarBt">
 	<button class="btn" onclick="<%=ctrl%>.addUserData()"><%=ph.add%></button>
 </div>

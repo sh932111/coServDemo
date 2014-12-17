@@ -4,6 +4,10 @@ var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
 var loginApi = "/core/user/login";
 var btCatalogDeleteApi = "/beautywebSource/btCatalog/delete/";
 var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
+var beautyTmCreateApi = "/beautywebSource/beautyTm/create";
+var beautyTmListApi = "/beautywebSource/beautyTm/list";
+var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
+
 
 ctrl.startup = function() {
 	var get_data = [];
@@ -76,9 +80,9 @@ function reloadUserTable(index) {
 		var use_id = document.createElement("td");
 		var use_bt = document.createElement("button");
 		use_bt.id = num;
-		var dialog_title = getUserData[num].use ? "刪除引用？" : "確定引用？";
 		use_bt.addEventListener("click", function(e){
 			onClickCheck = true;
+			var dialog_title = getUserData[this.id].use ? "刪除引用？" : "確定引用？";
 			if(confirm(dialog_title)){
 				usebtCatalogData(getUserData[this.id].ngID,this.id);
 			}
@@ -187,9 +191,45 @@ function usebtCatalogData(ngID,index) {
 	var req = {url:url  ,post: post};
 	__.api( req, function(data) {
 		if (data.errCode == 0) {
-			var dialog_title = getUserData[index].use ? "引用成功" : "取消引用成功";
-			alert(dialog_title);
-			window.location.reload();
+			if (getUserData[index].use) {
+				var post_beauty = getBeautyTmData(index);
+				var req1 = {url:beautyTmCreateApi ,post: post_beauty};
+				__.api( req1, function(data) {
+					if (data.errCode == 0) {
+						alert("引用成功");
+						window.location.reload();
+					}
+					else {
+						alert("引用失敗！");
+					}
+				});
+			}
+			else {
+				var req1 = {url:beautyTmListApi ,post: {}};
+				__.api( req1, function(data) {
+					if (data.errCode == 0) {
+						var get_list = data.value.list;
+						for (var i = 0; i < get_list.length; i++) {
+							if (get_list[i].title == getUserData[index].ngID) {
+								var req_url = beautyTmDeleteApi+get_list[i].ngID;
+								var req2 = {url:req_url ,post: {}};
+								__.api( req2, function(data) {
+									if (data.errCode == 0) {
+										alert("取消引用成功");
+										window.location.reload();
+									}
+									else {
+										alert("取消引用失敗！");
+									}
+								});
+							}							
+						}
+					}
+					else {
+						alert("取消引用失敗！");
+					}
+				});
+			}
 		}
 		else {
 			var dialog_title = getUserData[index].use ? "引用失敗" : "取消引用失敗";
@@ -217,4 +257,34 @@ function getUpdateData(index) {
 		isPublic : "1"
 	};
 	return res;
+}
+
+function getBeautyTmData(index) {
+	var get_data = {
+		name : getUserData[index].name,
+		length : getUserData[index].length,
+		audience : getUserData[index].audience,
+		price : getUserData[index].price,
+		descTx : getUserData[index].descTx,
+		date : getNowTime(),
+		use : true
+	};
+
+	var res = {
+		_key : Key,
+		title : getUserData[index].ngID,
+		body : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data),
+		isPublic : "1"
+	};
+	return res;
+}
+
+function getNowTime() {
+	var dt = new Date();
+	var month = dt.getMonth()+1;
+	var day = dt.getDate();
+	var year = dt.getFullYear();
+	var send_time = year +"/"+ month +"/"+ day;
+	return send_time;
 }

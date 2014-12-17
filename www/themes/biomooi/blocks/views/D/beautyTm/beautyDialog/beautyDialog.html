@@ -1,0 +1,33 @@
+<a href="#beautymodal" id="beautymodalLink" data-toggle="modal" class="btn btn-mini"  style="display:none"></a>
+<div class="modal fade" id="beautymodal">
+	<div class="modal-header modalBox">
+		<button class="close" data-dismiss="modal">x</button>
+		<h4><%=ph.setPrice%></h4>
+	</div>
+	<div class="modal-body modalBox">
+		<div class="row">
+			<div class="col-sm-10">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-4 control-label myLabel"><%=ph.name%></label>
+						<div class="col-sm-8">
+							<label class="col-sm-14 control-label myLabel"><%= JSON.parse(value.body).name%></label>
+						</div>
+						<label class="col-sm-4 control-label myLabel"><%=ph.price%></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" value="<%= JSON.parse(value.body).price%>" id="PriceValue">
+						</div>
+						<label class="col-sm-4 control-label myLabel"><%=ph.date%></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" value="<%= JSON.parse(value.body).date%>"  id="DateValue">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-6"></div>
+		</div>  
+	</div>
+	<div class="modal-footer modalBox">
+		<button type="button" class="btn btn-primary" onclick="<%=ctrl%>.checkUpdateData()" data-dismiss="modal"><%=ph.check%></button>
+	</div>
+</div> 

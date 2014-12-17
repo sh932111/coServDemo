@@ -55,11 +55,12 @@ function reloadUserTable(index,get_user_data) {
 		info_bt.innerHTML = "檢視";
 		info_bt.className = "btn btn-primary";
 		info_bt.addEventListener("click", function(e){
-			var historyDialog = document.getElementById("historyDialog");
-			$(historyDialog).empty();
-			ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:get_user_data[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
-				data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
-			});
+			// var historyDialog = document.getElementById("historyDialog");
+			// $(historyDialog).empty();
+			// ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:get_user_data[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
+			// 	data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
+			// });
+			getBodyCtrl().reload('/A/customer/history/historyDialog', {id:get_user_data[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
 		});
 		fun_id.appendChild(info_bt);
 		tr.id = num;
@@ -192,9 +193,10 @@ ctrl.reloadHistoryList = function(get_tag) {
 };
 
 ctrl.reloadHasComplaints = function(ngID) {
-	var historyDialog = document.getElementById("historyDialog");
-	$(historyDialog).empty();
-	ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
-		data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
-	});
+	// var historyDialog = document.getElementById("historyDialog");
+	// $(historyDialog).empty();
+	// ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
+	// 	data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
+	// });
+	getBodyCtrl().reload('/A/customer/history/historyDialog', {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
 };
