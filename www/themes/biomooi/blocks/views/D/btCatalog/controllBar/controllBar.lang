@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phrases>
+	<ph id="pageTitle1">
+		<zh>療程型錄查詢</zh>
+	</ph>
+	<ph id="pageTitle2">
+		<zh>療程項目維護</zh>
+	</ph>
 	<ph id="add">
 		<zh>新增</zh>
 	</ph>

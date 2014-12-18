@@ -1,13 +1,13 @@
 <div class="controllBar" id="controllBar"></div>
 <div class="tableView scroll">
-	<table class="table table-hover">
+	<table border="1" class="table table-hover">
 		<thead>
-			<tr class="info">
-				<th><%=ph.name%></th>
-				<th><%=ph.length%></th>
-				<th><%=ph.price%></th>
-				<th><%=ph.function%></th>
-				<th><%=ph.use%></th>
+			<tr>
+				<th class="col-md-2"><%=ph.name%></th>
+				<th class="col-md-1"><%=ph.length%></th>
+				<th class="col-md-1"><%=ph.price%></th>
+				<th class="col-md-3"><%=ph.function%></th>
+				<th class="col-md-1"><%=ph.use%></th>
 			</tr>
 		</thead>
 		<tbody id="tableBody">

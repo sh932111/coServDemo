@@ -1,3 +1,6 @@
+<div class="page-header">
+	<h2><%=ph.pageTitle%></h2>
+</div>
 <div id="userPhoto"></div>
 <div id="userData">
 	<div class="tableBox">
@@ -39,10 +42,10 @@
 					<label><%=ph.descTx%></label>
 				</td>
 				<td>
-					<textarea class="form-control" rows="3" id="descTxInput"><%= JSON.parse(value.body).descTx%></textarea>
+					<textarea class="form-control textAreaSize" rows="3" id="descTxInput"><%= JSON.parse(value.body).descTx%></textarea>
 				</td>
 			</tr>
 		</table>
-		<button class="btn" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
+		<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
 	</div>
 </div>

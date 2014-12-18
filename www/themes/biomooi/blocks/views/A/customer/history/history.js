@@ -53,7 +53,7 @@ function reloadUserTable(index,get_user_data) {
 		var info_bt = document.createElement("button");
 		info_bt.id = num;
 		info_bt.innerHTML = "檢視";
-		info_bt.className = "btn btn-primary";
+		info_bt.className = "btn btn-info";
 		info_bt.addEventListener("click", function(e){
 			var historyDialog = document.getElementById("historyDialog");
 			$(historyDialog).empty();

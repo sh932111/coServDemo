@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phrases>
-	<ph id="name">
-		<zh>名稱</zh>
-	</ph>
+  <ph id="pageTitle">
+    <zh>新增療程資訊</zh>
+  </ph>
+  <ph id="name">
+    <zh>名稱</zh>
+  </ph>
 	<ph id="length">
       <zh>時程</zh>
     </ph>

@@ -1,8 +1,26 @@
+<div class="page-header">
+	<% if (bi.query._type === "btCatalog") { %>
+	<h2><%=ph.pageTitle1%></h2>
+	<% } else { %>
+	<h2><%=ph.pageTitle2%></h2>
+	<% } %>
+</div>
 <div class="controllItems">
 	<label><%=ph.categoryClass%></label>
-	<select id="selectpicker1" onchange="<%=ctrl%>.setCategory(this)"></select>
-	<select id="selectpicker2" onchange="<%=ctrl%>.setDetail(this)"></select>
+	<div class="btn-group">
+		<a id="pickerBt1" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu" id="selectpicker1"></ul>
+	</div>   	
+	<code>></code>
+	<div class="btn-group">
+		<a id="pickerBt2" class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu" id="selectpicker2"></ul>
+	</div>
 </div>
 <div  class="controllItems" style="text-align:right;" id="controllBarBt">
-	<button class="btn" onclick="<%=ctrl%>.addUserData()"><%=ph.add%></button>
+	<button class="btn btn-insert glyphicon glyphicon-plus" onclick="<%=ctrl%>.addUserData()"></button>
 </div>

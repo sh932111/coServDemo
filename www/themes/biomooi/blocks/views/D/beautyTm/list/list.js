@@ -26,7 +26,7 @@ ctrl.startup = function() {
 		});
 
 		var controllBar = document.getElementById("controllBar");
-		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {},function(data){
+		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "beautyTm"}},function(data){
 			var controllBarBt = document.getElementById("controllBarBt");
 			controllBarBt.style.display = "none";
 		});

@@ -24,7 +24,7 @@ ctrl.startup = function() {
 		reloadUserTable(0);
 
 		var controllBar = document.getElementById("controllBar");
-		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {},function(data){
+		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "btCatalog"}},function(data){
 
 		});
 
@@ -59,7 +59,7 @@ function reloadUserTable(index) {
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
 		update_bt.innerHTML = "編輯";
-		update_bt.className = "btn btn-primary";
+		update_bt.className = "btn";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			var go = "/D/btCatalog/edit/"+getUserData[this.id].ngID;
@@ -68,7 +68,7 @@ function reloadUserTable(index) {
 		var delete_bt = document.createElement("button");
 		delete_bt.id = num;
 		delete_bt.innerHTML = "刪除";
-		delete_bt.className = "btn";
+		delete_bt.className = "btn btn-danger";
 		delete_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			if(confirm("確定刪除？")){

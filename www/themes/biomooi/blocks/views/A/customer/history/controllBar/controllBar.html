@@ -1,8 +1,11 @@
+<div class="page-header">
+	<h2><%=ph.pageTitle%></h2>
+</div>
 <div>
 	<label class="col-sm-4 control-label" id="controllBarCustNo"><%=ph.custNo%></label>
 	<label class="col-sm-4 control-label" id="controllBarName"><%=ph.name%></label>
 	<a href="#controllModal" id="controllModalLink" data-toggle="modal" class="btn btn-mini" style="display:none"></a>
-	<button class="btn" style="float:right" onclick="<%=ctrl%>.selectUserData()"><%=ph.select%></button>
+	<button class="btn btn-query glyphicon glyphicon-search" style="float:right" onclick="<%=ctrl%>.selectUserData()"></button>
 </div>
 
 <div class="modal fade" id="controllModal" onclick="<%=ctrl%>.clearList()">
@@ -42,6 +45,6 @@
 		</div>  
 	</div>
 	<div class="modal-footer modalBox">
-		<a href="" onclick="<%=ctrl%>.checkSelectData()" class="btn" data-dismiss="modal"><%=ph.select%></a>
+		<a href="" onclick="<%=ctrl%>.checkSelectData()" class="btn btn-query glyphicon glyphicon-search" data-dismiss="modal"></a>
 	</div>
 </div> 

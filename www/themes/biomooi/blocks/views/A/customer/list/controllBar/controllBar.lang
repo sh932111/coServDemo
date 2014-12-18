@@ -18,6 +18,9 @@
 	<ph id="select">
 		<zh>查詢</zh>
 	</ph>
+	<ph id="pageTitle">
+		<zh>客戶查詢</zh>
+	</ph>
 	<ph id="excel">
 		<zh>Excel</zh>
 	</ph>

@@ -15,3 +15,175 @@
 #pgFooter {
 	clear: both;
 }
+
+/* -------------------------------- 
+
+  A、 D
+
+-------------------------------- */
+#pgContent {
+	width: 100%;
+	height: 500px;
+}
+
+.scroll {
+	overflow-x: hidden; 
+	overflow-y: auto; 
+	white-space: nowrap;
+}
+
+.textAreaSize {
+	resize: none;
+}
+
+/* -------------------------------- 
+
+ Customized boostrap
+
+-------------------------------- */
+
+.page-header {
+	margin-top: 0px;
+}
+.table {
+	border-color: #e6e6e6;
+}
+.table>thead {
+	background: -webkit-linear-gradient(top, #f8f8f8, #f2f2f2);
+	background: #f8f8f8;
+}
+.table>tbody>tr>td {
+	padding: 7px;
+}
+.table>tbody>tr>td:last-child {
+	padding: 5px 8px 0;
+}
+/*按鈕－分類*/
+.btn-purple {
+	color: #fff;
+	background: #5a84dd;
+	border-color: #406cc4;
+}
+.btn-purple:hover,
+.btn-purple:focus,
+.btn-purple:active,
+.btn-purple.active,
+.open .dropdown-toggle.btn-purple {
+	color: #fff;
+	background: #406cc4;
+	border-color: #315fbc;
+}
+/*按鈕－新增*/
+.btn-insert {
+	color: #fff;
+	background: #40c494;
+	padding: 6px !important;
+	font-size: 16px;
+}
+.btn-insert:hover,
+.btn-insert:focus,
+.btn-insert:active,
+.btn-insert.active,
+.open .dropdown-toggle.btn-insert {
+	color: #fff;
+	background: #2eb282;
+	border-color: #24a576;
+}
+/*按鈕－查詢*/
+.btn-query {
+	color: #fff;
+	background: #e8a47a;
+	padding: 6px !important;
+	font-size: 16px;
+}
+.btn-query:hover,
+.btn-query:focus,
+.btn-query:active,
+.btn-query.active,
+.open .dropdown-toggle.btn-query {
+	color: #fff;
+	background: #d89670 ;
+}
+/*按鈕－匯出*/
+.btn-export {
+	color: #fff;
+	background:#3dccce;
+	padding: 6px !important;
+	font-size: 16px;
+}
+.btn-export:hover,
+.btn-export:focus,
+.btn-export:active,
+.btn-export.active,
+.open .dropdown-toggle.btn-export {
+	color: #fff;
+	background: #2fbcbf;
+}
+code {
+	color: #333;
+	background: transparent;
+}
+.search {
+	margin-top:10px;
+	border: 1px solid #f5f5f5;
+	border-radius: 5px;
+	padding: 6px 15px;
+	background: #f5f5f5;
+}
+input + label {
+	margin-left: 10px;
+}
+input.btn, .btn, .search .btn {
+	padding: 1px 12px 3px;
+}
+.btn + .btn{
+	margin-left: 5px;
+}
+.inquiry {
+	margin-left: 20px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+/* --------------------------------
+ pagination
+-------------------------------- */
+
+.pagination > li > a,
+.pagination > li > span {  
+  color: #777;  
+  background-color: #fff;
+  border-color: #ddd;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {  
+  color: #fff;  
+  background-color: #428bca;
+  border-color: #428bca;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 2;
+  cursor: default;  
+  color: #777; 
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  cursor: not-allowed;
+  color: #777;
+  background-color: #eee;
+  border-color: #ddd;  
+}

@@ -1,12 +1,8 @@
 {
     "/index": "hdBack",
-    "/A/customer/list": "A/list",
-    "/A/customer/history": "A/list",
-    "/A": "A/info",
+    "/A": "hdBack",
     "/B": "hdBack",
     "/C": "hdBack",
-    "/D/btCatalog/list": "D/list",
-    "/D/beautyTm/list": "D/list",
-    "/D": "D/info",
+    "/D": "hdBack",
     "/E": "hdBack"
 }

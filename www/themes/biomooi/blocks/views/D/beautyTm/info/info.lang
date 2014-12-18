@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phrases>
+  <ph id="pageTitle">
+    <zh>檢視療程</zh>
+  </ph>
 	<ph id="name">
 		<zh>名稱</zh>
 	</ph>

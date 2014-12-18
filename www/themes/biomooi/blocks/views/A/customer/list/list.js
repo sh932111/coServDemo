@@ -62,7 +62,7 @@ function reloadUserTable(index,get_user_data) {
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
 		update_bt.innerHTML = "編輯";
-		update_bt.className = "btn btn-primary";
+		update_bt.className = "btn";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			var go = "/A/customer/edit/"+get_user_data[this.id].ngID;
@@ -71,7 +71,7 @@ function reloadUserTable(index,get_user_data) {
 		var delete_bt = document.createElement("button");
 		delete_bt.id = num;
 		delete_bt.innerHTML = "刪除";
-		delete_bt.className = "btn";
+		delete_bt.className = "btn btn-danger";
 		delete_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			if(confirm("確定刪除？")){

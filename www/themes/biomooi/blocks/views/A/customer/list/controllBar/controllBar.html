@@ -1,9 +1,12 @@
 <script src="http://jordiburgos.com/js/excellentexport.js"></script>
+<div class="page-header">
+	<h2><%=ph.pageTitle%></h2>
+</div>
 <div style="text-align:right;">
 	<a href="#mymodal" id="modalLink" data-toggle="modal" class="btn btn-mini" style="display:none"></a>
-	<button class="btn" onclick="<%=ctrl%>.addUserData()"><%=ph.add%></button>
-	<button class="btn" onclick="<%=ctrl%>.selectUserData()"><%=ph.select%></button>
-	<a download="somedata.xls" id="excelLink" href="#" class="btn" onclick="return ExcellentExport.excel(this, 'myTable', 'Sheet Name Here');" ><%=ph.excel%></a>
+	<button class="btn btn-insert glyphicon glyphicon-plus" onclick="<%=ctrl%>.addUserData()"></button>
+	<button class="btn btn-query glyphicon glyphicon-search" onclick="<%=ctrl%>.selectUserData()"></button>
+	<a download="somedata.xls" id="excelLink" href="#" class="btn btn-export glyphicon glyphicon-export" onclick="return ExcellentExport.excel(this, 'myTable', 'Sheet Name Here');" ></a>
 </div>
 
 <div class="modal fade" id="mymodal" onclick="<%=ctrl%>.clearList()">
