@@ -1,6 +1,4 @@
 var getHistoryData;
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var userHistoryUpdateApi = "/beautywebSource/userHistory/update/";
 
 ctrl.startup = function() {
 	$("#mymodal").modal({show:false});
@@ -28,11 +26,9 @@ ctrl.addComplaintsDetail = function(){
 	var url = userHistoryUpdateApi + ngID;
 	var post = getData();
 	if (post) {
-		var req = {url:url  ,post: post};
-		__.api( req, function(data) {
-			if (data.errCode == 0) {
+		updateApiData(url,post,function(res){
+			if (res) {
 				alert("新增成功！");
-
 				ctrl.callHandler("regReloadHasComplaints",ngID);
 			}
 			else {

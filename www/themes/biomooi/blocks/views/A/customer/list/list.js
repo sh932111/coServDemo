@@ -1,8 +1,5 @@
 var getUserData;
 var onClickCheck;
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var loginApi = "/core/user/login";
-var deleteUserDataApi = "/beautywebSource/userSource/delete/";
 
 ctrl.startup = function() {
 	var get_data = [];
@@ -75,7 +72,15 @@ function reloadUserTable(index,get_user_data) {
 		delete_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			if(confirm("確定刪除？")){
-				deleteUserData(get_user_data[this.id].ngID);
+				deleteApiData(deleteUserDataApi,get_user_data[this.id].ngID,function(res){
+					if (res) {
+						alert("刪除成功！");
+						window.location.reload();
+					}
+					else {
+						alert("刪除失敗！");
+					}
+				});
 			}
 		});
 		fun_id.appendChild(update_bt);
@@ -125,61 +130,6 @@ function refreshLink(index,get_user_data) {
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
 	}
-}
-
-//判斷男女
-function showGender(i){
-	if (i == "0") {
-		return "女";
-	}
-	else {
-		return "男";
-	}
-}
-
-//決定button數量
-function getMathRemainder(num,resource) {
-	if (resource == 0) {
-		return 1;
-	}
-	var res = 1;
-	var x = 0;
-	for (var i = 0; i < num; i++) {
-		if (x == resource) {
-			x = 0;
-			res++;
-		}
-		x ++;
-	}
-	return res;
-}
-
-
-function deleteUserData(ngID) {
-	getRoot(function(token){
-		var url = deleteUserDataApi+ngID;
-		var  req = {url: url,post: {
-			token : token
-		}};
-		__.api( req, function(data) {
-			if (data.errCode==0) {
-				alert("刪除成功！");
-				window.location.reload();
-			}
-		});
-	});
-}
-
-function getRoot(callback) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token);
-	});
 }
 
 ctrl.reloadHistoryList = function(get_tag) {

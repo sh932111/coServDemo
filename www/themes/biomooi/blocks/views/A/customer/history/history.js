@@ -103,23 +103,6 @@ function refreshLink(index,get_user_data) {
 	}
 }
 
-//決定button數量
-function getMathRemainder(num,resource) {
-	if (resource == 0) {
-		return 1;
-	}
-	var res = 1;
-	var x = 0;
-	for (var i = 0; i < num; i++) {
-		if (x == resource) {
-			x = 0;
-			res++;
-		}
-		x ++;
-	}
-	return res;
-}
-
 function  getBodyCtrl()  {
 	var  bodyBkID = $('#historyDialog').children('div').first().attr('id'),
 	bodyCtrl = __.getCtrl(bodyBkID);
@@ -166,18 +149,6 @@ function getUserDataToID(custNo,token) {
 		isPublic : "1"
 	};
 	return res;
-}
-
-function getRoot(callback) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token);
-	});
 }
 
 ctrl.reloadHistoryList = function(get_tag) {
