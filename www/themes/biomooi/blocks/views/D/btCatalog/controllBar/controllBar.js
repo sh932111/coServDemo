@@ -14,10 +14,17 @@ ctrl.startup = function() {
 };
 
 ctrl.addUserData = function(){
-	location.href = "/D/btCatalog/add";	
+	if (spinner1.objIndex != 0 ) {
+		location.href = "/D/btCatalog/add?category="+spinner1.getText+"&detail="+spinner2.getText;
+	}
+	else {
+		alert("請先選擇分類！");
+	}
 };
 
 function getSpinner() {
+	this.objIndex = 0;
+	this.getText = "";
 	this.loadSpinner = function(index,obj,obj2,text_array){
 		$(obj).empty();
 		for (var i = 0; i < text_array.length; i++) {
@@ -28,13 +35,28 @@ function getSpinner() {
 			a.addEventListener("click", function(e){
 				obj2.innerHTML = text_array[this.id];
 				if (index == 1) {
+					spinner1.objIndex = this.id;
+					spinner1.getText = text_array[this.id];
 					spinner2.loadSpinner(2,selectPicker2,pickerBt2,spinnerData.detail[this.id]);
+					var response = {
+						category : spinner1.getText,
+						detail : spinner2.getText
+					};
+					ctrl.callHandler("regReloadList",response);
+				}
+				else {
+					spinner2.getText = text_array[this.id];
+					var response = {
+						category : spinner1.getText,
+						detail : spinner2.getText
+					};
+					ctrl.callHandler("regReloadList",response);
 				}
 			});
-
 			li.appendChild(a);
 	    	if (i == 0) {
 	    		obj2.innerHTML = text_array[i];
+	    		this.getText = text_array[i];
 			}
 			obj.appendChild(li);
 	    }

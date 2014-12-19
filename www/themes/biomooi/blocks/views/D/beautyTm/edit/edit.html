@@ -18,7 +18,13 @@
 					<label><%=ph.length%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control" value="<%= JSON.parse(value.body).length%>" id="lengthInput">
+					<input type="text" class="form-control myInput" value="<%= parseInt(JSON.parse(value.body).length)%>" id="lengthInput">
+					<div class="btn-group">
+						<a id="pickerBt" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" id="selectpicker"></ul>
+					</div>  
 				</td>
 			</tr>
 			<tr>
@@ -34,7 +40,7 @@
 					<label><%=ph.price%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control" value="<%= JSON.parse(value.body).price%>" id="priceInput">
+					<input type="text" class="form-control myInput"  value="<%= parseInt(JSON.parse(value.body).price)%>"  id="priceInput"><label>元</label>
 				</td>
 			</tr>
 			<tr>

@@ -15,11 +15,13 @@
 }
 
 .table td {
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
 	border-top: none; 
 }
 
-#genderView {
-	text-align: left;
+
+.myInput {
+	width: 75%;
+	float: left;
 }

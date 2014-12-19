@@ -3,6 +3,7 @@ var onClickCheck;
 var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
 var loginApi = "/core/user/login";
 var beautyTmUpdateApi = "/beautywebSource/beautyTm/update/";
+var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
 
 ctrl.startup = function() {
 	var get_data = [];
@@ -18,7 +19,12 @@ ctrl.startup = function() {
 		get_data.push(get_json);
 		'<%}; %>';
 		getUserData = get_data;
-		reloadUserTable(0);
+
+		// for (var i = 0; i < getUserData.length; i++) {
+		// 	deleteUserData(getUserData[i].ngID);
+		// };
+
+		reloadUserTable(getUserData,0);
 
 		var beautyDialog = document.getElementById("beautyDialog");
 		ctrl.embed(beautyDialog,"/D/beautyTm/beautyDialog", {params: { _loc: '<%=bi.locale%>',_type: 0}},function(data){
@@ -29,6 +35,7 @@ ctrl.startup = function() {
 		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "beautyTm"}},function(data){
 			var controllBarBt = document.getElementById("controllBarBt");
 			controllBarBt.style.display = "none";
+			data.addHandler("regReloadList", ctrl.reloadbeautyTmList);
 		});
 
 		var listLink = document.getElementById("listLink");
@@ -37,27 +44,43 @@ ctrl.startup = function() {
 		});
 	};
 
+ctrl.reloadbeautyTmList = function(nData) {
+	if (nData.category != "總類") {
+		var reload_data = [];
+		for (var i = 0; i < getUserData.length; i++) {
+			if((getUserData[i].category == nData.category) && (getUserData[i].detail == nData.detail)){
+				reload_data.push(getUserData[i]);
+			}
+		}
+		reloadUserTable(reload_data,0);
+		refreshLink(reload_data,0);
+	}
+	else {
+		reloadUserTable(getUserData,0);
+		refreshLink(getUserData,0);
+	}
+};
 //動態將List生成
-function reloadUserTable(index) {
+function reloadUserTable(getAllData,index) {
 	var tbody = document.getElementById("tableBody");
 	$(tbody).empty();
-	var array_lenght = getUserData.length;
+	var array_lenght = getAllData.length;
 
 	for (var i = 0; i < array_lenght; i++) {
 		var num = i + index * 10;
 		if (i == 10) {
 			break;
 		}
-		else if (num == getUserData.length) {
+		else if (num == getAllData.length) {
 			break;
 		}
 		var tr = document.createElement("tr");
 		var name_id = document.createElement("td");
-		name_id.innerHTML = getUserData[num].name;
+		name_id.innerHTML = getAllData[num].name;
 		var length_id = document.createElement("td");
-		length_id.innerHTML = getUserData[num].length;
+		length_id.innerHTML = getAllData[num].length;
 		var price_id = document.createElement("td");
-		price_id.innerHTML = getUserData[num].price;
+		price_id.innerHTML = getAllData[num].price;
 		var fun_id = document.createElement("td");
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
@@ -65,12 +88,12 @@ function reloadUserTable(index) {
 		update_bt.className = "btn btn-primary";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
-			getBodyCtrl().reload('/D/beautyTm/beautyDialog', {id:getUserData[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
+			getBodyCtrl().reload('/D/beautyTm/beautyDialog', {id:getAllData[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
 		});
 		var delete_bt = document.createElement("button");
 		delete_bt.id = num;
 		delete_bt.className = "btn";
-		if (getUserData[num].use) {
+		if (getAllData[num].use) {
 			delete_bt.innerHTML = "不提供";
 		}
 		else {
@@ -78,10 +101,10 @@ function reloadUserTable(index) {
 		}
 		delete_bt.addEventListener("click", function(e){
 			onClickCheck = true;
-			var dialog_title = getUserData[this.id].use ? "確定不提供？" : "確定提供？";
+			var dialog_title = getAllData[this.id].use ? "確定不提供？" : "確定提供？";
 			if(confirm(dialog_title)){
-				getUserData[this.id].use = getUserData[this.id].use ? false : true;
-				useBeautyData(getUserData[this.id].ngID,this.id,getUserData[this.id].use);
+				getAllData[this.id].use = getAllData[this.id].use ? false : true;
+				useBeautyData(getAllData,getAllData[this.id].ngID,this.id,getAllData[this.id].use);
 			}
 		});
 		fun_id.appendChild(delete_bt);
@@ -89,7 +112,7 @@ function reloadUserTable(index) {
 		tr.id = num;
 		tr.addEventListener("click", function(e){
 			if (!onClickCheck) {	
-				var go = "/D/beautyTm/info/"+getUserData[this.id].ngID;
+				var go = "/D/beautyTm/info/"+getAllData[this.id].ngID;
 				location.href = go;
 			}
 			onClickCheck = false;
@@ -103,10 +126,10 @@ function reloadUserTable(index) {
 }
 
 //動態產生下方button，index為需disabled的值
-function refreshLink(index) {
+function refreshLink(getAllData,index) {
 	var listLinkBox = document.getElementById("listLinkBox");
 	$(listLinkBox).empty();
-	var num = getMathRemainder(getUserData.length,10);
+	var num = getMathRemainder(getAllData.length,10);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
 		if (i == index) {
@@ -119,8 +142,8 @@ function refreshLink(index) {
 		a.innerHTML = i + 1;
 		a.id = i;
 		a.addEventListener("click", function(e){
-			refreshLink(this.id);
-			reloadUserTable(this.id);
+			refreshLink(getAllData,this.id);
+			reloadUserTable(getAllData,this.id);
 		});
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
@@ -163,9 +186,9 @@ function  getBodyCtrl()  {
 	return  bodyCtrl;
 }
 
-function useBeautyData(ngID,index,result) {
+function useBeautyData(getAllData,ngID,index,result) {
 	var url = beautyTmUpdateApi + ngID;
-	var post = getBeautyTmData(index,result);
+	var post = getBeautyTmData(getAllData,index,result);
 	var req = {url: url ,post: post};
 	__.api( req, function(data) {
 		if (data.errCode == 0) {
@@ -178,24 +201,38 @@ function useBeautyData(ngID,index,result) {
 	});
 }
 
-function getBeautyTmData(index,result) {
+function getBeautyTmData(getAllData,index,result) {
 	var get_data = {
-		name : getUserData[index].name,
-		length : getUserData[index].length,
-		audience : getUserData[index].audience,
-		price : getUserData[index].price,
-		descTx : getUserData[index].descTx,
-		date : getUserData[index].date,
-		image_url : getUserData[index].image_url,
-		use : result
+		name : getAllData[index].name,
+		length : getAllData[index].length,
+		audience : getAllData[index].audience,
+		price : getAllData[index].price,
+		descTx : getAllData[index].descTx,
+		date : getAllData[index].date,
+		image_url : getAllData[index].image_url,
+		use : result,
+		category : getAllData[index].category,
+		detail : getAllData[index].detail
 	};
 
 	var res = {
 		_key : Key,
-		title : getUserData[index].title,
+		title : getAllData[index].title,
 		body : JSON.stringify(get_data),
 		summary : JSON.stringify(get_data),
 		isPublic : "1"
 	};
 	return res;
+}
+
+function deleteUserData(ngID) {
+	getRoot(function(token){
+		var url = beautyTmDeleteApi+ngID;
+		var  req = {url: url,post: {
+			token : token
+		}};
+		__.api( req, function(data) {
+			console.log(data);
+		});
+	});
 }

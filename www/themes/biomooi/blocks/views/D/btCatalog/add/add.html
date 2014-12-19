@@ -18,7 +18,13 @@
 					<label><%=ph.length%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control" id="lengthInput">
+					<input type="text" class="form-control myInput" id="lengthInput">
+					<div class="btn-group">
+						<a id="pickerBt" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" id="selectpicker"></ul>
+					</div>  
 				</td>
 			</tr>
 			<tr>
@@ -34,7 +40,7 @@
 					<label><%=ph.price%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control" id="priceInput">
+					<input type="text" class="form-control myInput" id="priceInput"><label>元</label>
 				</td>
 			</tr>
 			<tr>

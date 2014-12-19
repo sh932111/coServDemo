@@ -21,40 +21,57 @@ ctrl.startup = function() {
 		get_data.push(get_json);
 		'<%}; %>';
 		getUserData = get_data;
-		reloadUserTable(0);
-
+		reloadUserTable(getUserData,0);
+		
 		var controllBar = document.getElementById("controllBar");
 		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "btCatalog"}},function(data){
-
+			data.addHandler("regReloadList", ctrl.reloadbtCatalogList);
 		});
 
 		var listLink = document.getElementById("listLink");
 		ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-			refreshLink(0);
+			refreshLink(getUserData,0);
 		});
 	};
 
+ctrl.reloadbtCatalogList = function(nData) {
+	if (nData.category != "總類") {
+		var reload_data = [];
+		for (var i = 0; i < getUserData.length; i++) {
+			if((getUserData[i].category == nData.category) && (getUserData[i].detail == nData.detail)){
+				reload_data.push(getUserData[i]);
+			}
+		}
+		reloadUserTable(reload_data,0);
+		refreshLink(reload_data,0);
+	}
+	else {
+		reloadUserTable(getUserData,0);
+		refreshLink(getUserData,0);
+	}
+};
+
 //動態將List生成
-function reloadUserTable(index) {
+function reloadUserTable(getAllData,index) {
 	var tbody = document.getElementById("tableBody");
 	$(tbody).empty();
-	var array_lenght = getUserData.length;
+	var array_lenght = getAllData.length;
 
 	for (var i = 0; i < array_lenght; i++) {
 		var num = i + index * 10;
 		if (i == 10) {
 			break;
 		}
-		else if (num == getUserData.length) {
+		else if (num == getAllData.length) {
 			break;
 		}
 		var tr = document.createElement("tr");
 		var name_id = document.createElement("td");
-		name_id.innerHTML = getUserData[num].name;
+		name_id.innerHTML = getAllData[num].name;
 		var length_id = document.createElement("td");
-		length_id.innerHTML = getUserData[num].length;
+		length_id.innerHTML = getAllData[num].length;
 		var price_id = document.createElement("td");
-		price_id.innerHTML = getUserData[num].price;
+		price_id.innerHTML = getAllData[num].price;
 		var fun_id = document.createElement("td");
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
@@ -62,7 +79,7 @@ function reloadUserTable(index) {
 		update_bt.className = "btn";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
-			var go = "/D/btCatalog/edit/"+getUserData[this.id].ngID;
+			var go = "/D/btCatalog/edit/"+getAllData[this.id].ngID;
 			location.href = go;
 		});
 		var delete_bt = document.createElement("button");
@@ -72,7 +89,7 @@ function reloadUserTable(index) {
 		delete_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			if(confirm("確定刪除？")){
-				deleteUserData(getUserData[this.id].ngID);
+				deleteUserData(getAllData[this.id].ngID);
 			}
 		});
 		fun_id.appendChild(update_bt);
@@ -82,12 +99,12 @@ function reloadUserTable(index) {
 		use_bt.id = num;
 		use_bt.addEventListener("click", function(e){
 			onClickCheck = true;
-			var dialog_title = getUserData[this.id].use ? "刪除引用？" : "確定引用？";
+			var dialog_title = getAllData[this.id].use ? "刪除引用？" : "確定引用？";
 			if(confirm(dialog_title)){
-				usebtCatalogData(getUserData[this.id].ngID,this.id);
+				usebtCatalogData(getAllData,getAllData[this.id].ngID,this.id);
 			}
 		});
-		if (getUserData[num].use) {
+		if (getAllData[num].use) {
 			use_bt.innerHTML = "取消";
 			use_bt.className = "btn";
 		}
@@ -99,7 +116,7 @@ function reloadUserTable(index) {
 		tr.id = num;
 		tr.addEventListener("click", function(e){
 			if (!onClickCheck) {	
-				var go = "/D/btCatalog/info/"+getUserData[this.id].ngID;
+				var go = "/D/btCatalog/info/"+getAllData[this.id].ngID;
 				location.href = go;
 			}
 			onClickCheck = false;
@@ -114,10 +131,10 @@ function reloadUserTable(index) {
 }
 
 //動態產生下方button，index為需disabled的值
-function refreshLink(index) {
+function refreshLink(getAllData,index) {
 	var listLinkBox = document.getElementById("listLinkBox");
 	$(listLinkBox).empty();
-	var num = getMathRemainder(getUserData.length,10);
+	var num = getMathRemainder(getAllData.length,10);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
 		if (i == index) {
@@ -130,8 +147,8 @@ function refreshLink(index) {
 		a.innerHTML = i + 1;
 		a.id = i;
 		a.addEventListener("click", function(e){
-			refreshLink(this.id);
-			reloadUserTable(this.id);
+			refreshLink(getAllData,this.id);
+			reloadUserTable(getAllData,this.id);
 		});
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
@@ -171,6 +188,20 @@ function deleteUserData(ngID) {
 	});
 }
 
+function deleteAllUserData() {
+	for (var i = 0; i < getUserData.length; i++) {
+		getRoot2(function(token,index){
+			var url = btCatalogDeleteApi+getUserData[index].ngID;
+			var  req = {url: url,post: {
+				token : token
+			}};
+			__.api( req, function(data) {
+				console.log(data);
+			});
+		},i);
+	}
+}
+
 //取得管理員
 function getRoot(callback) {
 	var root_reg = {
@@ -184,60 +215,77 @@ function getRoot(callback) {
 	});
 }
 
+function getRoot2(callback,index) {
+	var root_reg = {
+		_key : Key,
+		accName : "root",
+		passwd : "root"
+	};
+	var req = {url: loginApi ,post: root_reg};
+	__.api( req, function(data) {
+		callback(data.token,index);
+	});
+}
+
 //引用
-function usebtCatalogData(ngID,index) {
+function usebtCatalogData(getAllData,ngID,index) {
 	getBtCatalogImg(ngID,function(path){
-		var url = btCatalogUpdateApi + ngID;
-		var post = getUpdateData(index);
-		var req = {url:url  ,post: post};
-		__.api( req, function(data) {
-			if (data.errCode == 0) {
-				if (getUserData[index].use) {
-					var post_beauty = getBeautyTmData(index,path);
-					var req1 = {url:beautyTmCreateApi ,post: post_beauty};
-					__.api( req1, function(data) {
+		if (!getAllData[index].use) {
+			var post_beauty = getBeautyTmData(getAllData,index,path);
+			var req1 = {url:beautyTmCreateApi ,post: post_beauty};
+			__.api( req1, function(data) {
+				if (data.errCode == 0) {
+					var url = btCatalogUpdateApi + ngID;
+					var post = getUpdateData(getAllData,index);
+					var req = {url:url  ,post: post};
+					__.api( req, function(data) {
 						if (data.errCode == 0) {
-							alert("引用成功");
-							window.location.reload();
-						}
-						else {
-							alert("引用失敗！");
+					alert("引用成功");
+					window.location.reload();
 						}
 					});
 				}
 				else {
-					var req1 = {url:beautyTmListApi ,post: {}};
-					__.api( req1, function(data) {
-						if (data.errCode == 0) {
-							var get_list = data.value.list;
-							for (var i = 0; i < get_list.length; i++) {
-								if (get_list[i].title == getUserData[index].ngID) {
-									var req_url = beautyTmDeleteApi+get_list[i].ngID;
-									var req2 = {url:req_url ,post: {}};
-									__.api( req2, function(data) {
+					alert("引用失敗！");
+				}
+			});
+		}
+		else {
+			var req1 = {url:beautyTmListApi ,post: {}};
+			__.api( req1, function(data) {
+				if (data.errCode == 0) {
+					var get_list = data.value.list;
+					for (var i = 0; i < get_list.length; i++) {
+						console.log(get_list[i].title);
+						console.log(getAllData[index].ngID);
+						if (get_list[i].title == getAllData[index].ngID) {
+							var req_url = beautyTmDeleteApi+get_list[i].ngID;
+							var req2 = {url:req_url ,post: {}};
+							__.api( req2, function(data) {
+								if (data.errCode == 0) {
+									var url = btCatalogUpdateApi + ngID;
+									var post = getUpdateData(getAllData,index);
+									var req = {url:url  ,post: post};
+									__.api( req, function(data) {
 										if (data.errCode == 0) {
 											alert("取消引用成功");
 											window.location.reload();
 										}
-										else {
-											alert("取消引用失敗！");
-										}
 									});
-								}							
-							}
-						}
-						else {
-							alert("取消引用失敗！");
-						}
-					});
+								}
+								else {
+									alert("取消引用失敗！");
+								}
+							});
+						}							
+					}
 				}
-			}
-			else {
-				var dialog_title = getUserData[index].use ? "引用失敗" : "取消引用失敗";
-				alert(dialog_title);
-			}
-		});
-});
+				else {
+					alert("取消引用失敗！");
+				}
+			});
+		}
+	});
 }
 
 function getBtCatalogImg(ngID,callback) {
@@ -255,19 +303,21 @@ function getBtCatalogImg(ngID,callback) {
 }
 
 //抓取引用的json data
-function getUpdateData(index) {
-	getUserData[index].use = getUserData[index].use ? false : true;
+function getUpdateData(getAllData,index) {
+	getAllData[index].use = getAllData[index].use ? false : true;
 	var get_data = {
-		name : getUserData[index].name,
-		length : getUserData[index].length,
-		audience : getUserData[index].audience,
-		price : getUserData[index].price,
-		descTx : getUserData[index].descTx,
-		use : getUserData[index].use
+		name : getAllData[index].name,
+		length : getAllData[index].length,
+		audience : getAllData[index].audience,
+		price : getAllData[index].price,
+		descTx : getAllData[index].descTx,
+		use : getAllData[index].use,
+		category : getAllData[index].category,
+		detail : getAllData[index].detail
 	};
 	var res = {
 		_key : Key,
-		title : getUserData[index].name,
+		title : getAllData[index].name,
 		body : JSON.stringify(get_data),
 		summary : JSON.stringify(get_data),
 		isPublic : "1"
@@ -275,21 +325,23 @@ function getUpdateData(index) {
 	return res;
 }
 
-function getBeautyTmData(index,path) {
+function getBeautyTmData(getAllData,index,path) {
 	var get_data = {
-		name : getUserData[index].name,
-		length : getUserData[index].length,
-		audience : getUserData[index].audience,
-		price : getUserData[index].price,
-		descTx : getUserData[index].descTx,
+		name : getAllData[index].name,
+		length : getAllData[index].length,
+		audience : getAllData[index].audience,
+		price : getAllData[index].price,
+		descTx : getAllData[index].descTx,
 		date : getNowTime(),
 		image_url : path,
-		use : true
+		use : true,
+		category : getAllData[index].category,
+		detail : getAllData[index].detail
 	};
 
 	var res = {
 		_key : Key,
-		title : getUserData[index].ngID,
+		title : getAllData[index].ngID,
 		body : JSON.stringify(get_data),
 		summary : JSON.stringify(get_data),
 		isPublic : "1"

@@ -1,7 +1,11 @@
 var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
 var btCatalogCreateApi = "/beautywebSource/btCatalog/create";
+var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
+	var selectPicker1 = document.getElementById('selectpicker');
+	var pickerBt1 = document.getElementById('pickerBt');
+	spinner1.loadSpinner(1,selectPicker1,pickerBt1,["小時","分鐘"]);
 	var userPhoto = document.getElementById("userPhoto");
 	ctrl.embed(userPhoto,"/D/btCatalog/uploadImg", {},function(data){
 		var addIcon = document.getElementById("addIcon");
@@ -10,23 +14,26 @@ ctrl.startup = function() {
 };
 
 ctrl.saveData = function(){
-	var req = {url: btCatalogCreateApi ,post: getUserData()};
-	__.api( req, function(data) {
-		if (data.errCode == 0) {
-			alert("新增成功！");
-			location.href = "/D/btCatalog/list";
-		}
-		else {
-			alert("新增失敗！");
-		}
-	});
+	var post = getUserData();
+	if (post) {
+		var req = {url: btCatalogCreateApi ,post: post};
+		__.api( req, function(data) {
+			if (data.errCode == 0) {
+				alert("新增成功！");
+				location.href = "/D/btCatalog/list";
+			}
+			else {
+				alert("新增失敗！");
+			}
+		});
+	}
 };
 
 function getUserData() {
 	var nameInput = document.getElementById('nameInput').value;
-	var lengthInput = document.getElementById('lengthInput').value;
+	var lengthInput = document.getElementById('lengthInput').value+spinner1.getText;
 	var audienceInput = document.getElementById('audienceInput').value;
-	var priceInput = document.getElementById('priceInput').value;
+	var priceInput = document.getElementById('priceInput').value+"元";
 	var descTxInput = document.getElementById('descTxInput').value;
 	var get_data = {
 		name : nameInput,
@@ -34,7 +41,9 @@ function getUserData() {
 		audience : audienceInput,
 		price : priceInput,
 		descTx : descTxInput,
-		use : false
+		use : false,
+		category : '<%=bi.query.category%>',
+		detail : '<%=bi.query.detail%>'
 	};
 	var res = {
 		_key : Key,
@@ -44,4 +53,28 @@ function getUserData() {
 		isPublic : "1"
 	};
 	return res;
+}
+
+function getSpinner() {
+	this.objIndex = 0;
+	this.getText = "";
+	this.loadSpinner = function(index,obj,obj2,text_array){
+		$(obj).empty();
+		for (var i = 0; i < text_array.length; i++) {
+	    	var li = document.createElement("li");
+			var a = document.createElement("a");
+			a.innerHTML = text_array[i];
+			a.id = i;
+			a.addEventListener("click", function(e){
+				obj2.innerHTML = text_array[this.id];
+				spinner1.getText = text_array[this.id];
+			});
+			li.appendChild(a);
+	    	if (i == 0) {
+	    		obj2.innerHTML = text_array[i];
+	    		this.getText = text_array[i];
+			}
+			obj.appendChild(li);
+	    }
+	}
 }

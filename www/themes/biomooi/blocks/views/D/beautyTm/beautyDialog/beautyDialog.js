@@ -53,6 +53,16 @@ function getRoot(callback) {
 }
 
 function getBeautyTmData() {
+	var check = true ,category = "",detail = "",get_path = "";
+	
+	'<%if (errCode === 0) {%>'
+		check = '<%= JSON.parse(value.body).use%>';
+		check = check == "true";
+		category = '<%= JSON.parse(value.body).category%>';
+		detail = '<%= JSON.parse(value.body).detail%>';
+		get_path = '<%= JSON.parse(value.body).image_url%>';
+	'<%}%>'
+
 	var get_data = {
 		name : getBeautyData.name,
 		length : getBeautyData.length,
@@ -60,7 +70,10 @@ function getBeautyTmData() {
 		price : document.getElementById("PriceValue").value,
 		descTx : getBeautyData.descTx,
 		date : document.getElementById("DateValue").value,
-		use : true
+		use : check,
+		image_url : get_path,
+		category : category,
+		detail : detail
 	};
 	var title = "";
 	'<%if (errCode === 0) {%>'
