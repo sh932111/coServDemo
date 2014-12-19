@@ -173,3 +173,12 @@ function checkNum(key) {
 		return false;
 	}
 }
+//抓取現在
+function getNowTime() {
+	var dt = new Date();
+	var month = dt.getMonth()+1;
+	var day = dt.getDate();
+	var year = dt.getFullYear();
+	var send_time = year +"/"+ month +"/"+ day;
+	return send_time;
+}

@@ -155,23 +155,6 @@ function refreshLink(getAllData,index) {
 	}
 }
 
-//決定button數量
-function getMathRemainder(num,resource) {
-	if (resource == 0) {
-		return 1;
-	}
-	var res = 1;
-	var x = 0;
-	for (var i = 0; i < num; i++) {
-		if (x == resource) {
-			x = 0;
-			res++;
-		}
-		x ++;
-	}
-	return res;
-}
-
 //刪除資料
 function deleteUserData(ngID) {
 	getRoot(function(token){
@@ -347,13 +330,4 @@ function getBeautyTmData(getAllData,index,path) {
 		isPublic : "1"
 	};
 	return res;
-}
-
-function getNowTime() {
-	var dt = new Date();
-	var month = dt.getMonth()+1;
-	var day = dt.getDate();
-	var year = dt.getFullYear();
-	var send_time = year +"/"+ month +"/"+ day;
-	return send_time;
 }
