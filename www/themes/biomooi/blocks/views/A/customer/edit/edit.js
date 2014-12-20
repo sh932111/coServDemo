@@ -26,10 +26,10 @@ ctrl.saveData = function(){
 	var post = getUserData();
 
 	if (post) {
-		updateApiData(url,post,function(res){
+		callApi(url,post,function(res){
 			if (res) {
 				alert("更新成功！");
-				location.href = "/A/customer/list";
+				location.href = "/A/customer/list?_pn=1&_ps=20&key=-1";
 			}
 			else {
 				alert("更新失敗！");

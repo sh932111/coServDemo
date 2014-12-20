@@ -26,7 +26,7 @@ ctrl.addComplaintsDetail = function(){
 	var url = userHistoryUpdateApi + ngID;
 	var post = getData();
 	if (post) {
-		updateApiData(url,post,function(res){
+		callApi (url,post,function(res) {
 			if (res) {
 				alert("新增成功！");
 				ctrl.callHandler("regReloadHasComplaints",ngID);

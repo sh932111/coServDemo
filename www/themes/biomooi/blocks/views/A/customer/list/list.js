@@ -13,7 +13,7 @@ ctrl.startup = function() {
 	if (index == -1) {
 		entries = 1;
 	}
-
+	console.log(entries);
 	var controllBar = document.getElementById("controllBar");
 
 	ctrl.embed(controllBar,"/A/customer/list/controllBar", {},function(data){
@@ -94,7 +94,8 @@ ctrl.editData = function(ngID) {
 ctrl.deleteData = function(ngID) {
 	onClickCheck = true;
 	if(confirm("確定刪除？")){
-		deleteApiData(deleteUserDataApi,ngID,function(res){
+		var url = deleteUserDataApi+ngID;
+		callApi(url,{},function(res){
 			if (res) {
 				alert("刪除成功！");
 				window.location.reload();

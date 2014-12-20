@@ -15,10 +15,10 @@ ctrl.startup = function() {
 ctrl.saveData = function(){
 	var post = getUserData();
 	if (post) {
-		createApiData(userSourceCreateApi,post,function(res){
+		callApi(userSourceCreateApi,post,function(res){
 			if (res) {
 				alert("新增成功！");
-				location.href = "/A/customer/list";
+				location.href = "/A/customer/list?_pn=1&_ps=20&key=-1";
 			}
 			else {
 				alert("新增失敗！");

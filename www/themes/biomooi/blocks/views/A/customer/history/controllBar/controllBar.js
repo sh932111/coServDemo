@@ -1,20 +1,7 @@
 var getUserData = [];
-var getIndex = 0;
+var getIndex = -1;
 ctrl.startup = function() {
 	$("#mymodal").modal({show:false});
-	
-	var get_data = [];
-	'<% for (var i = 0; i < value.list.length; i++) {
-		var item = value.list[i];
-		var ngID = value.list[i].ngID;
-		var summary = item.summary; %>'
-	var get_item = '<%=summary%>';
-
-	var get_json = JSON.parse(get_item);
-	get_json["ngID"] = '<%=ngID%>';
-	get_data.push(get_json);
-	'<%}; %>';
-	getUserData = get_data;
 
 	$('#NameValue').on('valuechange', function (e, previous) {
 		hideAllList();
@@ -39,15 +26,39 @@ ctrl.startup = function() {
 };
 
 ctrl.selectUserData = function(){
-	$("#controllModalLink").click();
+	if (getUserData.length  == 0) {
+		callApi(userSourceListApi,{},function(data){
+			if (data) {
+				var get_data = [];
+				for (var i = 0; i < data.value.list.length; i++) {
+					var item = data.value.list[i];
+					var ngID = data.value.list[i].ngID;
+					var summary = item.summary; 
+					var get_json = JSON.parse(summary);
+					get_json["ngID"] = ngID;
+					get_data.push(get_json);
+				}
+				getUserData = get_data;
+				$("#controllModalLink").click();
+			}
+			else {
+				alert("讀取失敗！");
+			}
+		});
+	}
+	else {
+		$("#controllModalLink").click();
+	}
 };
 
 ctrl.checkSelectData = function(){
-	var get_user_detail_data = getUserData[getIndex];
-	document.getElementById("controllBarName").innerHTML = "姓名："+get_user_detail_data.name;
-	document.getElementById("controllBarCustNo").innerHTML = "客戶編號："+get_user_detail_data.ngID;
-			
-	ctrl.callHandler("regReloadHistoryList",get_user_detail_data);
+	if (getIndex != -1) {
+		var get_user_detail_data = getUserData[getIndex];
+		document.getElementById("controllBarName").innerHTML = "姓名："+get_user_detail_data.name;
+		document.getElementById("controllBarCustNo").innerHTML = "客戶編號："+get_user_detail_data.ngID;
+				
+		ctrl.callHandler("regReloadHistoryList",get_user_detail_data);
+	}
 };
 
 ctrl.clearList = function(){

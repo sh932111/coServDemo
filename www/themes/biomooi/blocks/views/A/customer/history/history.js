@@ -1,10 +1,5 @@
 var getUserData = [];
 var onClickCheck;
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var loginApi = "/core/user/login";
-var userHistoryCreateApi = "/beautywebSource/userHistory/create";
-var userHistoryListApi = "/beautywebSource/userHistory/list";
-var userHistoryViewApi = "/beautywebSource/userHistory/view/";
 
 ctrl.startup = function() {
 	
@@ -22,7 +17,7 @@ ctrl.startup = function() {
 	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
 		refreshLink(0,[]);
 	});
-	getTestData();
+	getApiData () ;
 };
 
 //動態將List生成
@@ -85,19 +80,19 @@ function refreshLink(index,get_user_data) {
 	var num = getMathRemainder(get_user_data.length,10);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.innerHTML = i + 1;
+		a.id = i;
 		if (i == index) {
 			li.className = "disabled";
 		}
 		else {
 			li.className = "active";
+			a.addEventListener("click", function(e){
+				refreshLink(this.id,get_user_data);
+				reloadUserTable(this.id,get_user_data);
+			});
 		}
-		var a = document.createElement("a");
-		a.innerHTML = i + 1;
-		a.id = i;
-		a.addEventListener("click", function(e){
-			refreshLink(this.id,get_user_data);
-			reloadUserTable(this.id,get_user_data);
-		});
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
 	}
@@ -109,46 +104,12 @@ function  getBodyCtrl()  {
 	return  bodyCtrl;
 };
 
-function getTestData () {
-	var req = {url: userHistoryListApi ,post: {}};
-	__.api( req, function(data) {
-		if (data.errCode == 0) {
+function getApiData () {
+	callApi (userHistoryListApi,{},function(data) {
+		if (data) {
 			getUserData = data.value.list;
 		}
 	});
-}
-
-function addTestData () {
-	getRoot(function(token){
-		var req = {url: userHistoryCreateApi ,post: getUserDataToID("70276",token)};
-		__.api( req, function(data) {
-			if (data.errCode == 0) {
-				console.log(data);
-			}
-		});
-	});
-}
-
-function getUserDataToID(custNo,token) {
-	var get_data = {
-		custNo : custNo,
-		name : "test",
-		date : "12/02/2014",
-		salesTotal : "1000",
-		descTx : "餅乾.糖果",
-		consumptionDate : "2014-12-12",
-		consumptionDetail : "買很多"
-	};
-
-	var res = {
-		_key : Key,
-		title : custNo,
-		token : token,
-		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
-		isPublic : "1"
-	};
-	return res;
 }
 
 ctrl.reloadHistoryList = function(get_tag) {
@@ -169,5 +130,4 @@ ctrl.reloadHasComplaints = function(ngID) {
 	ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
 		data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
 	});
-	//getBodyCtrl().reload('/A/customer/history/historyDialog', {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
 };

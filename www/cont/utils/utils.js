@@ -1,9 +1,16 @@
 var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
 var loginApi = "/core/user/login";
+//user api
 var deleteUserDataApi = "/beautywebSource/userSource/delete/";
 var userSourceCreateApi = "/beautywebSource/userSource/create";
 var userSourceUpdateApi = "/beautywebSource/userSource/update/";
+var userSourceListApi = "/beautywebSource/userSource/list";
+//history api
 var userHistoryUpdateApi = "/beautywebSource/userHistory/update/";
+var userHistoryCreateApi = "/beautywebSource/userHistory/create";
+var userHistoryListApi = "/beautywebSource/userHistory/list";
+var userHistoryViewApi = "/beautywebSource/userHistory/view/";
+
 
 //取得下方button的數目
 function getMathRemainder(num,resource) {
@@ -32,38 +39,15 @@ function showGender(i){
 	}
 }
 
-//刪除資料
-function deleteApiData(Api,ngID,callback) {
-	getRoot(function(token){
-		if (token) {
-			var url = Api+ngID;
-			var  req = {url: url,post: {
-				token : token
-			}};
-			__.api( req, function(data) {
-				if (data.errCode == 0) {
-					callback(true);
-				}
-				else {
-					callback(false);
-				}
-			});
-		}
-		else {
-			callback(false);
-		}
-	});
-}
-
-//新增資料
-function createApiData(Api,post,callback) {
-	getRoot(function(token){
+//使用Api
+function callApi (Api,post,callback) {
+	getRoot(-1,function(token,index){
 		if (token) {
 			post["token"] = token;
 			var req = {url: Api ,post: post};
 			__.api( req, function(data) {
 				if (data.errCode == 0) {
-					callback(true);
+					callback(data);
 				}
 				else {
 					callback(false);
@@ -76,28 +60,28 @@ function createApiData(Api,post,callback) {
 	});
 }
 
-function updateApiData(Api,post,callback) {
-	getRoot(function(token){
+//刪除某資源所有資料
+function  deleteAllData (listApi,deleteApi,post) {
+	getRoot(-1,function(token,index){
 		if (token) {
 			post["token"] = token;
-			var req = {url:Api  ,post: post};
+			var req = {url: listApi ,post: post};
 			__.api( req, function(data) {
 				if (data.errCode == 0) {
-					callback(true);
-				}
-				else {
-					callback(false);
+					for (var i = 0; i < data.value.list.length; i++) {
+						var url = deleteApi+data.value.list[i].ngID;
+						callApi (url,{},function (res) {
+							console.log(res);
+						}) 
+					};
 				}
 			});
-		}
-		else {
-			callback(false);
 		}
 	});
 }
 
 //取得管理員
-function getRoot(callback) {
+function getRoot(index,callback) {
 	var root_reg = {
 		_key : Key,
 		accName : "root",
@@ -106,10 +90,10 @@ function getRoot(callback) {
 	var req = {url: loginApi ,post: root_reg};
 	__.api( req, function(data) {
 		if (data.errCode == 0) {
-			callback(data.token);
+			callback(data.token,index);
 		}
 		else {
-			callback(false);
+			callback(false,index);
 		}
 	});
 }
@@ -181,4 +165,36 @@ function getNowTime() {
 	var year = dt.getFullYear();
 	var send_time = year +"/"+ month +"/"+ day;
 	return send_time;
+}
+
+//歷史紀錄測試資料
+function getHistoryDataToID(custNo,token) {
+	var get_data = {
+		custNo : custNo,
+		name : "test",
+		date : "12/02/2014",
+		salesTotal : "1000",
+		descTx : "餅乾.糖果",
+		consumptionDate : "2014-12-12",
+		consumptionDetail : "買很多"
+	};
+
+	var res = {
+		_key : Key,
+		title : custNo,
+		token : token,
+		body : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data),
+		isPublic : "1"
+	};
+	return res;
+}
+//增加歷史資料
+function addTestData (ngID) {
+	var post = getHistoryDataToID(ngID,token);
+	if (post) {
+		callApi (userHistoryCreateApi,post,function(data){
+			console.log(data);
+		}) ;
+	};
 }

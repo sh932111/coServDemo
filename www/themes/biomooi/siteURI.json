@@ -82,8 +82,7 @@
         "id": "no"
     },
     "/A/customer/history/controllBar": {
-        "id": "no",
-        "service": "/beautywebSource/userSource/list"
+        "id": "no"
     },
     "/A/customer/history/historyDialog": {
         "id": "maybe",
