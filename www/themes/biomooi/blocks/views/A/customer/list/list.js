@@ -24,7 +24,12 @@ ctrl.startup = function() {
 	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
 		refreshLink( index, entries);
 	});
-	
+	//deleteAllData (userHistoryListApi,userHistoryDeleteApi,{}) ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70863") ;
+	// addTestData ("70863") ;
 };
 
 //動態產生下方button，index為需disabled的值

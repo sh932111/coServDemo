@@ -10,6 +10,7 @@ var userHistoryUpdateApi = "/beautywebSource/userHistory/update/";
 var userHistoryCreateApi = "/beautywebSource/userHistory/create";
 var userHistoryListApi = "/beautywebSource/userHistory/list";
 var userHistoryViewApi = "/beautywebSource/userHistory/view/";
+var userHistoryDeleteApi = "/beautywebSource/userHistory/delete/";
 
 
 //取得下方button的數目
@@ -167,22 +168,46 @@ function getNowTime() {
 	return send_time;
 }
 
+function getRandomMoney () {
+	var maxNum = 2;  
+	var minNum = 0;  
+	var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
+	var array = ["100","1000","2000"];
+	return array[n];
+}
+
+function getRandomDescTx () {
+	var maxNum = 3;  
+	var minNum = 0;  
+	var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
+	var array = ["餅乾","糖果","水果","飲料"];
+	return array[n];
+}
+
+function getRandomConsumptionDetail () {
+	var maxNum = 3;  
+	var minNum = 0;  
+	var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
+	var array = ["買很多","很多","很少","用搶的"];
+	return array[n];
+}
+
 //歷史紀錄測試資料
-function getHistoryDataToID(custNo,token) {
+function getHistoryDataToID(custNo) {
 	var get_data = {
 		custNo : custNo,
-		name : "test",
-		date : "12/02/2014",
-		salesTotal : "1000",
-		descTx : "餅乾.糖果",
-		consumptionDate : "2014-12-12",
-		consumptionDetail : "買很多"
+		name : getRandomDescTx (),
+		date : getNowTime(),
+		salesTotal : getRandomMoney (),
+		descTx : getRandomDescTx (),
+		consumptionDate : getNowTime(),
+		consumptionDetail :  getRandomConsumptionDetail () ,
+		hasComplaints : []
 	};
 
 	var res = {
 		_key : Key,
 		title : custNo,
-		token : token,
 		body : JSON.stringify(get_data),
 		summary : JSON.stringify(get_data),
 		isPublic : "1"
@@ -191,7 +216,7 @@ function getHistoryDataToID(custNo,token) {
 }
 //增加歷史資料
 function addTestData (ngID) {
-	var post = getHistoryDataToID(ngID,token);
+	var post = getHistoryDataToID(ngID);
 	if (post) {
 		callApi (userHistoryCreateApi,post,function(data){
 			console.log(data);
