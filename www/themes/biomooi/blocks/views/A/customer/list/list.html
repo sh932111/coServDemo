@@ -15,23 +15,25 @@
 		<tbody>
 			<% for (var i in value.list)  {
 				var item = value.list[i];
-				var summary = JSON.parse(item.summary);
 				var ngID = item.ngID;
-				var gender = summary.gender === "1" ? '男' : '女';
-			%>
-				<tr onclick="<%=ctrl%>.infoData(<%= ngID %>)">
-					<td><%= ngID %></td>
-					<td><%= summary.name %></td>
-					<td><%= gender %></td>
-					<td><%= summary.dob %></td>
-					<td><%= summary.addr %></td>
-					<td><%= summary.phone %></td>
-					<td>
-						<button class="btn" onclick="<%=ctrl%>.editData(<%= ngID %>)"><%=ph.edit%></button>
-						<button class="btn btn-danger" onclick="<%=ctrl%>.deleteData(<%= ngID %>)"><%=ph.delete%></button>
-					</td>
-				</tr>
-			<% } %>
+				if(bi.query.key == "-1" || bi.query.key ==  ngID){
+					var summary = JSON.parse(item.summary);
+					var gender = summary.gender === "1" ? '男' : '女';
+				%>
+					<tr onclick="<%=ctrl%>.infoData(<%= ngID %>)">
+						<td><%= ngID %></td>
+						<td><%= summary.name %></td>
+						<td><%= gender %></td>
+						<td><%= summary.dob %></td>
+						<td><%= summary.addr %></td>
+						<td><%= summary.phone %></td>
+						<td>
+							<button class="btn" onclick="<%=ctrl%>.editData(<%= ngID %>)"><%=ph.edit%></button>
+							<button class="btn btn-danger" onclick="<%=ctrl%>.deleteData(<%= ngID %>)"><%=ph.delete%></button>
+						</td>
+					</tr>
+				<% }
+			} %>
 		</tbody>
 	</table>
 	<!-- excel列印 -->

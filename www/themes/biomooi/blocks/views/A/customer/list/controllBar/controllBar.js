@@ -1,21 +1,8 @@
 var getUserData = [];
-var getIndex = 0;
+var getIndex = -1;
 
 ctrl.startup = function() {
 	$("#mymodal").modal({show:false});
-	$("#mymodal").modal({show:false});
-	var get_data = [];
-	'<% for (var i = 0; i < value.list.length; i++) {
-		var item = value.list[i];
-		var ngID = value.list[i].ngID;
-		var summary = item.summary; %>'
-	var get_item = '<%=summary%>';
-
-	var get_json = JSON.parse(get_item);
-	get_json["ngID"] = '<%=ngID%>';
-	get_data.push(get_json);
-	'<%}; %>';
-	getUserData = get_data;
 
 	$('#NameValue').on('valuechange', function (e, previous) {
 		hideAllList();
@@ -48,12 +35,42 @@ ctrl.addUserData = function(){
 };
 
 ctrl.selectUserData = function(){
-	$("#modalLink").click();
+	if (getUserData.length  == 0) {
+		getRoot(function(token){
+			var req = {url: "/beautywebSource/userSource/list" ,post: {
+				token : token
+			}};
+			__.api( req, function(data) {
+				if (data.errCode == 0) {
+					var get_data = [];
+					for (var i = 0; i < data.value.list.length; i++) {
+						var item = data.value.list[i];
+						var ngID = data.value.list[i].ngID;
+						var summary = item.summary; 
+						var get_json = JSON.parse(summary);
+						get_json["ngID"] = ngID;
+						get_data.push(get_json);
+					}
+					getUserData = get_data;
+					$("#modalLink").click();
+				}
+			});
+		});
+	}
+	else {
+		$("#modalLink").click();
+	}
 };
 
 ctrl.checkSelectData = function(){
-	var get_user_detail_data = getUserData[getIndex];
-	ctrl.callHandler("regReloadHistoryList",get_user_detail_data);
+	if (getIndex != -1) {
+		var get_user_detail_data = getUserData[getIndex];
+		ctrl.callHandler("regReloadHistoryList",get_user_detail_data);
+	}
+	else {
+		ctrl.callHandler("regReloadHistoryList",-1);
+	}
+	
 };
 
 $.event.special.valuechange = {

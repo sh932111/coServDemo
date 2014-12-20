@@ -27,7 +27,7 @@ ctrl.startup = function() {
 
 //動態將List生成
 function reloadUserTable(index,get_user_data) {
-	console.log(get_user_data);
+	
 	var tbody = document.getElementById("tableBody");
 	$(tbody).empty();
 	var array_lenght = get_user_data.length;

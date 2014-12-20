@@ -1,0 +1,20 @@
+/* Add css rules here that are valid for the whole page */
+#pgContainer {
+	margin: 0px auto;
+	width: 960px;
+}
+
+#pgHead {
+	margin: 5px 0px;
+}
+
+#pgContent {
+	width: 100%;
+	height: 500px;
+}
+
+.scroll {
+	overflow-x: hidden; 
+	overflow-y: auto; 
+	white-space: nowrap;
+}

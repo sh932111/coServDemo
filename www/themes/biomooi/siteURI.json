@@ -36,8 +36,7 @@
         "id": "no"
     },
     "/A/customer/list/controllBar": {
-        "id": "no",
-        "service": "/beautywebSource/userSource/list"
+        "id": "no"
     },
     "/A/customer/edit": {
         "id": "yes",

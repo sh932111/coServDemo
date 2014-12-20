@@ -6,8 +6,12 @@ ctrl.startup = function() {
 
 	var entries = '<%= value.entries; %>';
 	var index = '<%=bi.query.index%>'; 
+
 	if (!parseInt(index)) {
 		index = 0;
+	}
+	if (index == -1) {
+		entries = 1;
 	}
 
 	var controllBar = document.getElementById("controllBar");
@@ -42,6 +46,7 @@ function refreshLink(index,entries) {
 				getBodyCtrl().reload('/A/customer/list', {
 					params: { 
 						index : parseInt(this.id),
+						key : '<%=bi.query.key%>',
 						_loc: '<%=bi.locale%>',
 						_pn : parseInt(this.innerHTML),
 						_ps : 20 
@@ -56,8 +61,28 @@ function refreshLink(index,entries) {
 }
 
 ctrl.reloadHistoryList = function(get_tag) {
-	var go = "/A/customer/info/" + get_tag.ngID;
-	location.href = go;
+	if (get_tag != -1) {
+		getBodyCtrl().reload('/A/customer/list', {
+			params: { 
+				index : -1,
+				key : get_tag.ngID,
+				_loc: '<%=bi.locale%>'
+			}
+		});
+	}
+	else {
+		getBodyCtrl().reload('/A/customer/list', {
+			params: { 
+				index : 0,
+				key : -1,
+				_loc: '<%=bi.locale%>',
+				_pn : 1,
+				_ps : 20 
+			}
+		});
+	}
+	// var go = "/A/customer/info/" + get_tag.ngID;
+	// location.href = go;
 };
 
 ctrl.editData = function(ngID) {

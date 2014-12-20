@@ -11,6 +11,12 @@
 			</tr>
 		</thead>
 		<tbody id="tableBody">
+			<% for (var i in value.list)  {
+				var item = value.list[i];
+				var summary = JSON.parse(item.summary);
+				var ngID = item.ngID;
+			%>
+			<% } %>
 		</tbody>
 	</table>
 </div>
