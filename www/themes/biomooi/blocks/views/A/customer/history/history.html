@@ -10,7 +10,33 @@
 				<th><%=ph.hasComplaints%></th>
 			</tr>
 		</thead>
-		<tbody id="tableBody">
+		<tbody >
+			<% 
+			var get_length = 0;
+			var get_index = bi.query.index*10; 
+			for (var i = 0; i < value.list.length; i++) {
+				var item = value.list[i];
+				var title = item.title;
+				var ngID = item.ngID;
+				if(bi.query.key != "-1" && bi.query.key ==  title){
+					get_length ++;
+					var get_last = get_index+11;
+					if(get_length > get_index && get_length < get_last){
+					var summary = JSON.parse(item.summary);
+				%>
+					<tr>
+						<td><%= summary.date %></td>
+						<td><%= summary.salesTotal %></td>
+						<td><%= summary.descTx %></td>
+						<td>
+							<button class="btn btn-info" onclick="<%=ctrl%>.reView(<%= ngID %>)"><%=ph.view%></button>
+						</td>
+					</tr>
+				<%}
+				}
+			} 
+			%>
+			<div id="getLength" style="display:none"><%= get_length %></div>
 		</tbody>
 	</table>
 </div>

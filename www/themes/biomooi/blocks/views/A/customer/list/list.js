@@ -28,6 +28,12 @@ ctrl.startup = function() {
 	// addTestData ("70865") ;
 	// addTestData ("70865") ;
 	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
+	// addTestData ("70865") ;
 	// addTestData ("70863") ;
 	// addTestData ("70863") ;
 };
@@ -66,28 +72,16 @@ function refreshLink(index,entries) {
 }
 
 ctrl.reloadHistoryList = function(get_tag) {
-	if (get_tag != -1) {
-		getBodyCtrl().reload('/A/customer/list', {
-			params: { 
-				index : -1,
-				key : get_tag.ngID,
-				_loc: '<%=bi.locale%>'
-			}
-		});
-	}
-	else {
-		getBodyCtrl().reload('/A/customer/list', {
-			params: { 
-				index : 0,
-				key : -1,
-				_loc: '<%=bi.locale%>',
-				_pn : 1,
-				_ps : 20 
-			}
-		});
-	}
-	// var go = "/A/customer/info/" + get_tag.ngID;
-	// location.href = go;
+	// if (get_tag != -1) {
+	// 	var go = "/A/customer/list?index=-1&key="+get_tag.ngID+"&_loc="+'<%=bi.locale%>';
+	// 	location.replace(go);
+	// }
+	// else {
+	// 	var go = "/A/customer/list?index=0&key=-1&_loc="+'<%=bi.locale%>'+"&_pn=1&_ps=20";
+	// 	location.replace(go);
+	// }
+	var go = "/A/customer/info/" + get_tag.ngID;
+	location.href = go;
 };
 
 ctrl.editData = function(ngID) {

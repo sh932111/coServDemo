@@ -3,81 +3,54 @@ var onClickCheck;
 
 ctrl.startup = function() {
 	
+	var entries = '<%= value.entries; %>';
+	var index = '<%=bi.query.index%>'; 
+	var getKey = '<%=bi.query.key%>';
+	var getLength = document.getElementById("getLength").innerHTML;
+	
+	var params = {};
+
+	if (getKey != "-1") {
+		var custNo =  getKey;
+		var name = '<%=bi.query.name%>';
+		params["name"] = name;
+		params["custNo"] = custNo;
+	}
+
+	if (!parseInt(index)) {
+		index = 0;
+	}
+	
+	if (index == -1) {
+		entries = 1;
+	}
+
 	var historyDialog = document.getElementById("historyDialog");
 	ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {params: { _loc: '<%=bi.locale%>',_type: 0}},function(data){
 		data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
 	});
 
 	var controllBar = document.getElementById("controllBar");
-	ctrl.embed(controllBar,"/A/customer/history/controllBar", {},function(data){
+	ctrl.embed(controllBar,"/A/customer/history/controllBar", {params:params},function(data){
 		data.addHandler("regReloadHistoryList", ctrl.reloadHistoryList);
 	});
 
 	var listLink = document.getElementById("listLink");
 	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-		refreshLink(0,[]);
+		if (index == -1) {
+			refreshLink(0,getLength);
+		}
+		else {
+			refreshLink(index,getLength);
+		}
 	});
-	getApiData () ;
 };
 
-//動態將List生成
-function reloadUserTable(index,get_user_data) {
-	
-	var tbody = document.getElementById("tableBody");
-	$(tbody).empty();
-	var array_lenght = get_user_data.length;
-
-	for (var i = 0; i < array_lenght; i++) {
-		var num = i + index * 10;
-		if (i == 10) {
-			break;
-		}
-		else if (num == get_user_data.length) {
-			break;
-		}
-		var summary = JSON.parse(get_user_data[i].summary);
-
-		var tr = document.createElement("tr");
-		var date_id = document.createElement("td");
-		date_id.innerHTML = summary.date;
-		var salesTotal_id = document.createElement("td");
-		salesTotal_id.innerHTML = summary.salesTotal;
-		var descTx_id = document.createElement("td");
-		descTx_id.innerHTML = summary.descTx;
-		var fun_id = document.createElement("td");
-		var info_bt = document.createElement("button");
-		info_bt.id = num;
-		info_bt.innerHTML = "檢視";
-		info_bt.className = "btn btn-info";
-		info_bt.addEventListener("click", function(e){
-			var historyDialog = document.getElementById("historyDialog");
-			$(historyDialog).empty();
-			ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:get_user_data[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
-				data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
-			});
-			//getBodyCtrl().reload('/A/customer/history/historyDialog', {id:get_user_data[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
-		});
-		fun_id.appendChild(info_bt);
-		tr.id = num;
-		tr.addEventListener("click", function(e){
-			if (!onClickCheck) {	
-
-			}
-			onClickCheck = false;
-		});
-		tr.appendChild(date_id);
-		tr.appendChild(salesTotal_id);
-		tr.appendChild(descTx_id);
-		tr.appendChild(fun_id);
-		tbody.appendChild(tr);
-	}
-}
-
 //動態產生下方button，index為需disabled的值
-function refreshLink(index,get_user_data) {
+function refreshLink(index,entries) {
 	var listLinkBox = document.getElementById("listLinkBox");
 	$(listLinkBox).empty();
-	var num = getMathRemainder(get_user_data.length,10);
+	var num = getMathRemainder(entries,10);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
 		var a = document.createElement("a");
@@ -89,8 +62,16 @@ function refreshLink(index,get_user_data) {
 		else {
 			li.className = "active";
 			a.addEventListener("click", function(e){
-				refreshLink(this.id,get_user_data);
-				reloadUserTable(this.id,get_user_data);
+				var  bodyBkID = $('#_mainC').children('div').first().attr('id'),
+				bodyCtrl = __.getCtrl(bodyBkID);
+				bodyCtrl.reload('/A/customer/history', {
+					params: { 
+						index : parseInt(this.id),
+						key : '<%=bi.query.key%>',
+						_loc: '<%=bi.locale%>',
+						name:'<%=bi.query.name%>'
+					}
+				});
 			});
 		}
 		li.appendChild(a);
@@ -104,24 +85,10 @@ function  getBodyCtrl()  {
 	return  bodyCtrl;
 };
 
-function getApiData () {
-	callApi (userHistoryListApi,{},function(data) {
-		if (data) {
-			getUserData = data.value.list;
-		}
-	});
-}
-
 ctrl.reloadHistoryList = function(get_tag) {
-	var get_detail_data = [];
 	var ng_id = get_tag.ngID;
-	for (var i = 0; i < getUserData.length; i++) {
-		if(getUserData[i].title == ng_id){
-			get_detail_data.push(getUserData[i]);
-		}
-	}
-	reloadUserTable(0,get_detail_data);
-	refreshLink(0,get_detail_data);
+	var go = "/A/customer/history?index=0&key="+ng_id+"&_loc="+'<%=bi.locale%>'+"&name="+get_tag.name;
+	location.replace(go);
 };
 
 ctrl.reloadHasComplaints = function(ngID) {
@@ -131,3 +98,11 @@ ctrl.reloadHasComplaints = function(ngID) {
 		data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
 	});
 };
+
+ctrl.reView = function (ngID) {
+	var historyDialog = document.getElementById("historyDialog");
+	$(historyDialog).empty();
+	ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
+		data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
+	});
+}

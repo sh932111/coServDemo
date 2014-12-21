@@ -30,7 +30,8 @@
         "service": "/beautywebSource/beautyTm/list"
     },
     "/A/customer/history": {
-        "id": "no"
+        "id": "no",
+        "service": "/beautywebSource/userHistory/list"
     },
     "/A/customer/listLink": {
         "id": "no"

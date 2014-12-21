@@ -15,6 +15,9 @@
     <ph id="edit">
       <zh>編輯</zh>
     </ph>
+    <ph id="view">
+      <zh>檢視</zh>
+    </ph>
     <ph id="delete">
       <zh>刪除</zh>
     </ph>

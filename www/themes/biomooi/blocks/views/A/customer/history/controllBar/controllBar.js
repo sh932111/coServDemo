@@ -1,7 +1,8 @@
 var getUserData = [];
 var getIndex = -1;
 ctrl.startup = function() {
-	$("#mymodal").modal({show:false});
+
+	$("#controllModal").modal({show:false});
 
 	$('#NameValue').on('valuechange', function (e, previous) {
 		hideAllList();
@@ -52,11 +53,10 @@ ctrl.selectUserData = function(){
 };
 
 ctrl.checkSelectData = function(){
+	
+	hideAllList();	
 	if (getIndex != -1) {
 		var get_user_detail_data = getUserData[getIndex];
-		document.getElementById("controllBarName").innerHTML = "姓名："+get_user_detail_data.name;
-		document.getElementById("controllBarCustNo").innerHTML = "客戶編號："+get_user_detail_data.ngID;
-				
 		ctrl.callHandler("regReloadHistoryList",get_user_detail_data);
 	}
 };

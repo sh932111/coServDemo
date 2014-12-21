@@ -2,8 +2,18 @@
 	<h2><%=ph.pageTitle%></h2>
 </div>
 <div>
-	<label class="col-sm-4 control-label" id="controllBarCustNo"><%=ph.custNo%></label>
-	<label class="col-sm-4 control-label" id="controllBarName"><%=ph.name%></label>
+	<label class="col-sm-4 control-label" id="controllBarCustNo"><%=ph.custNo%>
+	<%if(bi.query.name){
+		var custNo = bi.query.custNo%>
+		：<%=custNo%>
+		<%}%>
+	</label>
+	<label class="col-sm-4 control-label" id="controllBarName"><%=ph.name%>
+	<%if(bi.query.name){
+		var name = bi.query.name%>
+		：<%=name%>
+		<%}%>
+	</label>
 	<a href="#controllModal" id="controllModalLink" data-toggle="modal" class="btn btn-mini" style="display:none"></a>
 	<button class="btn btn-query glyphicon glyphicon-search" style="float:right" onclick="<%=ctrl%>.selectUserData()"></button>
 </div>
@@ -45,6 +55,6 @@
 		</div>  
 	</div>
 	<div class="modal-footer modalBox">
-		<a href="" onclick="<%=ctrl%>.checkSelectData()" class="btn btn-query glyphicon glyphicon-search" data-dismiss="modal"></a>
+		<button class="btn btn-query glyphicon glyphicon-search" onclick="<%=ctrl%>.checkSelectData()"></button>
 	</div>
 </div> 
