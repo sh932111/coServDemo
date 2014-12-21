@@ -1,13 +1,5 @@
 var getUserData;
 var onClickCheck;
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var loginApi = "/core/user/login";
-var btCatalogDeleteApi = "/beautywebSource/btCatalog/delete/";
-var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
-var btCatalogListAuxApi = "/beautywebSource/btCatalog/listAux/";
-var beautyTmCreateApi = "/beautywebSource/beautyTm/create";
-var beautyTmListApi = "/beautywebSource/beautyTm/list";
-var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
 
 ctrl.startup = function() {
 	var get_data = [];
@@ -34,22 +26,22 @@ ctrl.startup = function() {
 		});
 	};
 
-ctrl.reloadbtCatalogList = function(nData) {
-	if (nData.category != "總類") {
-		var reload_data = [];
-		for (var i = 0; i < getUserData.length; i++) {
-			if((getUserData[i].category == nData.category) && (getUserData[i].detail == nData.detail)){
-				reload_data.push(getUserData[i]);
+	ctrl.reloadbtCatalogList = function(nData) {
+		if (nData.category != "總類") {
+			var reload_data = [];
+			for (var i = 0; i < getUserData.length; i++) {
+				if((getUserData[i].category == nData.category) && (getUserData[i].detail == nData.detail)){
+					reload_data.push(getUserData[i]);
+				}
 			}
+			reloadUserTable(reload_data,0);
+			refreshLink(reload_data,0);
 		}
-		reloadUserTable(reload_data,0);
-		refreshLink(reload_data,0);
-	}
-	else {
-		reloadUserTable(getUserData,0);
-		refreshLink(getUserData,0);
-	}
-};
+		else {
+			reloadUserTable(getUserData,0);
+			refreshLink(getUserData,0);
+		}
+	};
 
 //動態將List生成
 function reloadUserTable(getAllData,index) {
@@ -137,19 +129,19 @@ function refreshLink(getAllData,index) {
 	var num = getMathRemainder(getAllData.length,10);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.innerHTML = i + 1;
+		a.id = i;
 		if (i == index) {
 			li.className = "disabled";
 		}
 		else {
 			li.className = "active";
+			a.addEventListener("click", function(e){
+				refreshLink(getAllData,this.id);
+				reloadUserTable(getAllData,this.id);
+			});
 		}
-		var a = document.createElement("a");
-		a.innerHTML = i + 1;
-		a.id = i;
-		a.addEventListener("click", function(e){
-			refreshLink(getAllData,this.id);
-			reloadUserTable(getAllData,this.id);
-		});
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
 	}
@@ -157,57 +149,16 @@ function refreshLink(getAllData,index) {
 
 //刪除資料
 function deleteUserData(ngID) {
-	getRoot(function(token){
-		var url = btCatalogDeleteApi+ngID;
-		var  req = {url: url,post: {
-			token : token
-		}};
-		__.api( req, function(data) {
-			if (data.errCode==0) {
-				alert("刪除成功！");
-				window.location.reload();
-			}
-		});
-	});
-}
-
-function deleteAllUserData() {
-	for (var i = 0; i < getUserData.length; i++) {
-		getRoot2(function(token,index){
-			var url = btCatalogDeleteApi+getUserData[index].ngID;
-			var  req = {url: url,post: {
-				token : token
-			}};
-			__.api( req, function(data) {
-				console.log(data);
-			});
-		},i);
-	}
-}
-
-//取得管理員
-function getRoot(callback) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token);
-	});
-}
-
-function getRoot2(callback,index) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token,index);
-	});
+	var url = btCatalogDeleteApi+ngID;
+	callApi (url,{},function(res){
+		if (res) {
+			alert("刪除成功！");
+			window.location.reload();
+		}
+		else {
+			alert("刪除失敗！");
+		}
+	}) ;
 }
 
 //引用
@@ -223,8 +174,8 @@ function usebtCatalogData(getAllData,ngID,index) {
 					var req = {url:url  ,post: post};
 					__.api( req, function(data) {
 						if (data.errCode == 0) {
-					alert("引用成功");
-					window.location.reload();
+							alert("引用成功");
+							window.location.reload();
 						}
 					});
 				}

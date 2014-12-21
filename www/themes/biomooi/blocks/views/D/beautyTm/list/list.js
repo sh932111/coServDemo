@@ -1,9 +1,5 @@
 var getUserData;
 var onClickCheck;
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var loginApi = "/core/user/login";
-var beautyTmUpdateApi = "/beautywebSource/beautyTm/update/";
-var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
 
 ctrl.startup = function() {
 	var get_data = [];
@@ -19,10 +15,6 @@ ctrl.startup = function() {
 		get_data.push(get_json);
 		'<%}; %>';
 		getUserData = get_data;
-
-		// for (var i = 0; i < getUserData.length; i++) {
-		// 	deleteUserData(getUserData[i].ngID);
-		// };
 
 		reloadUserTable(getUserData,0);
 
@@ -132,52 +124,22 @@ function refreshLink(getAllData,index) {
 	var num = getMathRemainder(getAllData.length,10);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.innerHTML = i + 1;
+		a.id = i;
 		if (i == index) {
 			li.className = "disabled";
 		}
 		else {
 			li.className = "active";
+			a.addEventListener("click", function(e){
+				refreshLink(getAllData,this.id);
+				reloadUserTable(getAllData,this.id);
+			});
 		}
-		var a = document.createElement("a");
-		a.innerHTML = i + 1;
-		a.id = i;
-		a.addEventListener("click", function(e){
-			refreshLink(getAllData,this.id);
-			reloadUserTable(getAllData,this.id);
-		});
 		li.appendChild(a);
 		listLinkBox.appendChild(li);
 	}
-}
-
-//決定button數量
-function getMathRemainder(num,resource) {
-	if (resource == 0) {
-		return 1;
-	}
-	var res = 1;
-	var x = 0;
-	for (var i = 0; i < num; i++) {
-		if (x == resource) {
-			x = 0;
-			res++;
-		}
-		x ++;
-	}
-	return res;
-}
-
-//取得管理員
-function getRoot(callback) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token);
-	});
 }
 
 function  getBodyCtrl()  {
@@ -223,16 +185,4 @@ function getBeautyTmData(getAllData,index,result) {
 		isPublic : "1"
 	};
 	return res;
-}
-
-function deleteUserData(ngID) {
-	getRoot(function(token){
-		var url = beautyTmDeleteApi+ngID;
-		var  req = {url: url,post: {
-			token : token
-		}};
-		__.api( req, function(data) {
-			console.log(data);
-		});
-	});
 }

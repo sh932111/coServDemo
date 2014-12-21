@@ -1,5 +1,3 @@
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var btCatalogUpdateApi = "/beautywebSource/beautyTm/update/";
 var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
@@ -40,17 +38,19 @@ ctrl.startup = function() {
 };
 
 ctrl.saveData = function(){
-	var url = btCatalogUpdateApi+"<%=value.ngID%>";
-	var req = {url:url  ,post: getUserData()};
-	__.api( req, function(data) {
-		if (data.errCode == 0) {
-			alert("新增成功！");
-			location.href = "/D/beautyTm/list";
-		}
-		else {
-			alert("新增失敗！");
-		}
-	});
+	var url = beautyTmUpdateApi+"<%=value.ngID%>";
+	var post = getUserData();
+	if (post) {
+		callApi (url,post,function(data){
+			if (data) {
+				alert("更新成功！");
+				location.href = "/D/beautyTm/list";
+			}
+			else {
+				alert("更新失敗！");
+			}
+		});
+	}
 };
 
 function getUserData() {
@@ -93,7 +93,7 @@ function getSpinner() {
 		$(obj).empty();
 		this.getObj = obj2;
 		for (var i = 0; i < text_array.length; i++) {
-	    	var li = document.createElement("li");
+			var li = document.createElement("li");
 			var a = document.createElement("a");
 			a.innerHTML = text_array[i];
 			a.id = i;
@@ -102,12 +102,12 @@ function getSpinner() {
 				spinner1.getText = text_array[this.id];
 			});
 			li.appendChild(a);
-	    	if (i == 0) {
-	    		obj2.innerHTML = text_array[i];
-	    		this.getText = text_array[i];
+			if (i == 0) {
+				obj2.innerHTML = text_array[i];
+				this.getText = text_array[i];
 			}
 			obj.appendChild(li);
-	    }
+		}
 	}
 	this.refresh = function(text) {
 		this.getObj.innerHTML = text;

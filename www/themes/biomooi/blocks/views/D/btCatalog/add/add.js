@@ -1,5 +1,3 @@
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var btCatalogCreateApi = "/beautywebSource/btCatalog/create";
 var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
@@ -16,9 +14,8 @@ ctrl.startup = function() {
 ctrl.saveData = function(){
 	var post = getUserData();
 	if (post) {
-		var req = {url: btCatalogCreateApi ,post: post};
-		__.api( req, function(data) {
-			if (data.errCode == 0) {
+		callApi (btCatalogCreateApi,post,function(data){
+			if (data) {
 				alert("新增成功！");
 				location.href = "/D/btCatalog/list";
 			}

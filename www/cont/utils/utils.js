@@ -11,7 +11,16 @@ var userHistoryCreateApi = "/beautywebSource/userHistory/create";
 var userHistoryListApi = "/beautywebSource/userHistory/list";
 var userHistoryViewApi = "/beautywebSource/userHistory/view/";
 var userHistoryDeleteApi = "/beautywebSource/userHistory/delete/";
-
+//btCatalog api
+var btCatalogDeleteApi = "/beautywebSource/btCatalog/delete/";
+var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
+var btCatalogListAuxApi = "/beautywebSource/btCatalog/listAux/";
+var btCatalogCreateApi = "/beautywebSource/btCatalog/create";
+//beautyTm
+var beautyTmCreateApi = "/beautywebSource/beautyTm/create";
+var beautyTmListApi = "/beautywebSource/beautyTm/list";
+var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
+var beautyTmUpdateApi = "/beautywebSource/beautyTm/update/";
 
 //取得下方button的數目
 function getMathRemainder(num,resource) {
@@ -28,16 +37,6 @@ function getMathRemainder(num,resource) {
 		x ++;
 	}
 	return res;
-}
-
-//判斷男女
-function showGender(i){
-	if (i == "0") {
-		return "女";
-	}
-	else {
-		return "男";
-	}
 }
 
 //使用Api

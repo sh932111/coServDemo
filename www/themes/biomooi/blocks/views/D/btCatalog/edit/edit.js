@@ -1,5 +1,3 @@
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
 var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
@@ -34,14 +32,13 @@ ctrl.saveData = function(){
 	var url = btCatalogUpdateApi+"<%=value.ngID%>";
 	var post = getUserData();
 	if (post) {
-		var req = {url:url  ,post: post};
-		__.api( req, function(data) {
-			if (data.errCode == 0) {
-				alert("新增成功！");
+		callApi (url,post,function(data){
+			if (data) {
+				alert("更新成功！");
 				location.href = "/D/btCatalog/list";
 			}
 			else {
-				alert("新增失敗！");
+				alert("更新失敗！");
 			}
 		});
 	}
