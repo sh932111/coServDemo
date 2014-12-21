@@ -222,3 +222,12 @@ function addTestData (ngID) {
 		}) ;
 	};
 }
+
+function addWaitDialog(obj) {
+	var sp1 = document.createElement("div");
+	sp1.id = "waitDialogView";
+	var sp2 = document.getElementById(obj);
+	var parentDiv = sp2.parentNode;
+	parentDiv.insertBefore(sp1, sp2);
+	return sp1;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phrases>
+	<ph id="setTitle">
+		<zh>提示</zh>
+	</ph>
+	<ph id="setList">
+		<zh>資料載入中，請稍後！</zh>
+	</ph>
+	<ph id="cancel">
+		<zh>取消</zh>
+	</ph>
+</phrases>

@@ -1,7 +1,4 @@
 var getBeautyData;
-var Key = "e4b55ab0-d33c-e355-d7e4-8ef415bf40b9";
-var loginApi = "/core/user/login";
-var beautyTmUpdateApi = "/beautywebSource/beautyTm/update/";
 
 ctrl.startup = function() {
 	$("#beautymodal").modal({show:false});
@@ -25,9 +22,8 @@ ctrl.checkUpdateData = function() {
 	var url = beautyTmUpdateApi+"<%=value.ngID%>";
 	var post =  getBeautyTmData();
 	if (post) {
-		var req = {url:url  ,post:post};
-		__.api( req, function(data) {
-			if (data.errCode == 0) {
+		callApi(url,post,function(res){
+			if (res) {
 				alert("更新成功！");
 				window.location.reload();
 			}
@@ -38,19 +34,6 @@ ctrl.checkUpdateData = function() {
 	}
 	'<%}%>'
 };
-
-//取得管理員
-function getRoot(callback) {
-	var root_reg = {
-		_key : Key,
-		accName : "root",
-		passwd : "root"
-	};
-	var req = {url: loginApi ,post: root_reg};
-	__.api( req, function(data) {
-		callback(data.token);
-	});
-}
 
 function getBeautyTmData() {
 	var check = true ,category = "",detail = "",get_path = "";

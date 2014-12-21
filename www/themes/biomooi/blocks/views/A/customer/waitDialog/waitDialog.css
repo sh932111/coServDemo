@@ -1,0 +1,13 @@
+.modalBox {
+	margin: 0 auto;
+	width: 400px;
+	background: white;
+}
+
+#waitModal {
+	margin-top: 50px;
+}
+
+.myLabel {
+	text-align: center;
+}

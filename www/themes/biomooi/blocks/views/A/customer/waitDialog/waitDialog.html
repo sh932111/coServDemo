@@ -1,0 +1,22 @@
+<a href="#waitModal" id="waitLink" data-toggle="modal" class="btn btn-mini"  style="display:none"></a>
+<div class="modal fade" id="waitModal">
+	<div class="modal-header modalBox">
+		<center>
+			<h4><%=ph.setTitle%></h4>
+		</center>
+	</div>
+	<div class="modal-body modalBox">
+		<div class="row">
+			<label class="col-sm-12 control-label myLabel"><%=ph.setList%></label>
+		</div>
+		<center>
+			<img src="/utils/img/preloading.gif" />
+		</center>
+	</div>
+	<div class="modal-footer modalBox">
+		<center>
+			<button type="button" class="btn btn-save" onclick="<%=ctrl%>.checkUpdateData()" data-dismiss="modal"><%=ph.cancel%></button>
+		</center>
+		
+	</div>
+</div> 

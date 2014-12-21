@@ -1,7 +1,7 @@
 var getUserData;
 var onClickCheck;
 
-ctrl.startup = function() {
+ctrl.startup = function() {	
 	onClickCheck = false;
 
 	var entries = '<%= value.entries; %>';
@@ -13,7 +13,11 @@ ctrl.startup = function() {
 	if (index == -1) {
 		entries = 1;
 	}
-	console.log(entries);
+	
+	// ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){
+	// 	$("#waitLink").click();
+	// });
+
 	var controllBar = document.getElementById("controllBar");
 
 	ctrl.embed(controllBar,"/A/customer/list/controllBar", {},function(data){
@@ -24,6 +28,7 @@ ctrl.startup = function() {
 	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
 		refreshLink( index, entries);
 	});
+
 	//deleteAllData (userHistoryListApi,userHistoryDeleteApi,{}) ;
 	// addTestData ("70865") ;
 	// addTestData ("70865") ;
