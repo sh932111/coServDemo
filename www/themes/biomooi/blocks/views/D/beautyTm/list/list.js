@@ -14,27 +14,29 @@ ctrl.startup = function() {
 		get_json["title"] = '<%=title%>';
 		get_data.push(get_json);
 		'<%}; %>';
-		getUserData = get_data;
+	//load data
+	getUserData = get_data;
+	reloadUserTable(getUserData,0);
 
-		reloadUserTable(getUserData,0);
+	ctrl.embed(addWaitDialog("beautyDialog"),"/A/customer/waitDialog", {},function(data){});
 
-		var beautyDialog = document.getElementById("beautyDialog");
-		ctrl.embed(beautyDialog,"/D/beautyTm/beautyDialog", {params: { _loc: '<%=bi.locale%>',_type: 0}},function(data){
+	var beautyDialog = document.getElementById("beautyDialog");
+	ctrl.embed(beautyDialog,"/D/beautyTm/beautyDialog", {params: { _loc: '<%=bi.locale%>',_type: 0}},function(data){
 
-		});
+	});
 
-		var controllBar = document.getElementById("controllBar");
-		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "beautyTm"}},function(data){
-			var controllBarBt = document.getElementById("controllBarBt");
-			controllBarBt.style.display = "none";
-			data.addHandler("regReloadList", ctrl.reloadbeautyTmList);
-		});
+	var controllBar = document.getElementById("controllBar");
+	ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "beautyTm"}},function(data){
+		var controllBarBt = document.getElementById("controllBarBt");
+		controllBarBt.style.display = "none";
+		data.addHandler("regReloadList", ctrl.reloadbeautyTmList);
+	});
 
-		var listLink = document.getElementById("listLink");
-		ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-			refreshLink(0);
-		});
-	};
+	var listLink = document.getElementById("listLink");
+	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
+		refreshLink(0);
+	});
+};
 
 ctrl.reloadbeautyTmList = function(nData) {
 	if (nData.category != "總類") {
@@ -151,16 +153,19 @@ function  getBodyCtrl()  {
 function useBeautyData(getAllData,ngID,index,result) {
 	var url = beautyTmUpdateApi + ngID;
 	var post = getBeautyTmData(getAllData,index,result);
-	var req = {url: url ,post: post};
-	__.api( req, function(data) {
-		if (data.errCode == 0) {
-			alert("更改成功！");
-			window.location.reload();
-		}
-		else {
-			alert("更改失敗！");
-		}
-	});
+	if (post) {
+		$("#waitLink").click();
+		callApi(url,post,function(res){
+			$("#waitCancel").click();
+			if (res) {
+				alert("更新成功！");
+				window.location.reload();
+			}
+			else {
+				alert("更新失敗！");
+			}
+		});
+	}
 }
 
 function getBeautyTmData(getAllData,index,result) {

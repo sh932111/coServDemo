@@ -24,6 +24,7 @@ ctrl.startup = function() {
 	if (index == -1) {
 		entries = 1;
 	}
+	ctrl.embed(addWaitDialog("historyDialog"),"/A/customer/waitDialog", {},function(data){});
 
 	var historyDialog = document.getElementById("historyDialog");
 	ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {params: { _loc: '<%=bi.locale%>',_type: 0}},function(data){

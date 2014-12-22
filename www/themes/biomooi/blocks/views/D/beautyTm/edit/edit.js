@@ -1,6 +1,8 @@
 var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
+	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
+
 	var selectPicker1 = document.getElementById('selectpicker');
 	var pickerBt1 = document.getElementById('pickerBt');
 	spinner1.loadSpinner(1,selectPicker1,pickerBt1,["小時","分鐘"]);
@@ -27,7 +29,7 @@ ctrl.startup = function() {
 		}
 		else {
 			var get_path = '<%= JSON.parse(value.body).image_url%>';
-			console.log(get_path);
+			
 			var check = Boolean(get_path) ? '<%= JSON.parse(value.body).image_url%>' : false;
 			if (check != "false") {
 				userPhotoImg.src = check;
@@ -41,7 +43,9 @@ ctrl.saveData = function(){
 	var url = beautyTmUpdateApi+"<%=value.ngID%>";
 	var post = getUserData();
 	if (post) {
+		$("#waitLink").click();
 		callApi (url,post,function(data){
+			$("#waitCancel").click();
 			if (data) {
 				alert("更新成功！");
 				location.href = "/D/beautyTm/list";

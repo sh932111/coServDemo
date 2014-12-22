@@ -1,5 +1,7 @@
 
 ctrl.startup = function() {
+	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
+
 	var dateInput = document.getElementById('dateInput');
 	$(dateInput).datetimepicker({
 		format: 'yyyy-mm-dd',
@@ -15,7 +17,9 @@ ctrl.startup = function() {
 ctrl.saveData = function(){
 	var post = getUserData();
 	if (post) {
+		$("#waitLink").click();
 		callApi(userSourceCreateApi,post,function(res){
+			$("#waitCancel").click();
 			if (res) {
 				alert("新增成功！");
 				location.href = "/A/customer/list?_pn=1&_ps=20&key=-1";

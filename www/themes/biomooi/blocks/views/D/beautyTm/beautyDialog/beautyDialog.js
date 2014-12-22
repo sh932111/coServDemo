@@ -22,7 +22,9 @@ ctrl.checkUpdateData = function() {
 	var url = beautyTmUpdateApi+"<%=value.ngID%>";
 	var post =  getBeautyTmData();
 	if (post) {
+		$("#waitLink").click();
 		callApi(url,post,function(res){
+			$("#waitCancel").click();
 			if (res) {
 				alert("更新成功！");
 				window.location.reload();

@@ -12,36 +12,40 @@ ctrl.startup = function() {
 		get_json["ngID"] = '<%=ngID%>';
 		get_data.push(get_json);
 		'<%}; %>';
-		getUserData = get_data;
-		reloadUserTable(getUserData,0);
-		
-		var controllBar = document.getElementById("controllBar");
-		ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "btCatalog"}},function(data){
-			data.addHandler("regReloadList", ctrl.reloadbtCatalogList);
-		});
+	//load Data
+	getUserData = get_data;
+	reloadUserTable(getUserData,0);
 
-		var listLink = document.getElementById("listLink");
-		ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-			refreshLink(getUserData,0);
-		});
-	};
+	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){});
 
-	ctrl.reloadbtCatalogList = function(nData) {
-		if (nData.category != "總類") {
-			var reload_data = [];
-			for (var i = 0; i < getUserData.length; i++) {
-				if((getUserData[i].category == nData.category) && (getUserData[i].detail == nData.detail)){
-					reload_data.push(getUserData[i]);
-				}
+	var controllBar = document.getElementById("controllBar");
+	ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "btCatalog"}},function(data){
+		data.addHandler("regReloadList", ctrl.reloadbtCatalogList);
+	});
+
+	var listLink = document.getElementById("listLink");
+	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
+		refreshLink(getUserData,0);
+	});
+};
+
+//callback
+ctrl.reloadbtCatalogList = function(nData) {
+	if (nData.category != "總類") {
+		var reload_data = [];
+		for (var i = 0; i < getUserData.length; i++) {
+			if((getUserData[i].category == nData.category) && (getUserData[i].detail == nData.detail)){
+				reload_data.push(getUserData[i]);
 			}
-			reloadUserTable(reload_data,0);
-			refreshLink(reload_data,0);
 		}
-		else {
-			reloadUserTable(getUserData,0);
-			refreshLink(getUserData,0);
-		}
-	};
+		reloadUserTable(reload_data,0);
+		refreshLink(reload_data,0);
+	}
+	else {
+		reloadUserTable(getUserData,0);
+		refreshLink(getUserData,0);
+	}
+};
 
 //動態將List生成
 function reloadUserTable(getAllData,index) {
@@ -150,7 +154,9 @@ function refreshLink(getAllData,index) {
 //刪除資料
 function deleteUserData(ngID) {
 	var url = btCatalogDeleteApi+ngID;
+	$("#waitLink").click();
 	callApi (url,{},function(res){
+		$("#waitCancel").click();
 		if (res) {
 			alert("刪除成功！");
 			window.location.reload();
@@ -163,72 +169,95 @@ function deleteUserData(ngID) {
 
 //引用
 function usebtCatalogData(getAllData,ngID,index) {
+	$("#waitLink").click();
 	getBtCatalogImg(ngID,function(path){
-		if (!getAllData[index].use) {
-			var post_beauty = getBeautyTmData(getAllData,index,path);
-			var req1 = {url:beautyTmCreateApi ,post: post_beauty};
-			__.api( req1, function(data) {
-				if (data.errCode == 0) {
-					var url = btCatalogUpdateApi + ngID;
-					var post = getUpdateData(getAllData,index);
-					var req = {url:url  ,post: post};
-					__.api( req, function(data) {
-						if (data.errCode == 0) {
-							alert("引用成功");
-							window.location.reload();
-						}
-					});
-				}
-				else {
-					alert("引用失敗！");
-				}
-			});
-		}
-		else {
-			var req1 = {url:beautyTmListApi ,post: {}};
-			__.api( req1, function(data) {
-				if (data.errCode == 0) {
-					var get_list = data.value.list;
-					for (var i = 0; i < get_list.length; i++) {
-						console.log(get_list[i].title);
-						console.log(getAllData[index].ngID);
-						if (get_list[i].title == getAllData[index].ngID) {
-							var req_url = beautyTmDeleteApi+get_list[i].ngID;
-							var req2 = {url:req_url ,post: {}};
-							__.api( req2, function(data) {
-								if (data.errCode == 0) {
-									var url = btCatalogUpdateApi + ngID;
-									var post = getUpdateData(getAllData,index);
-									var req = {url:url  ,post: post};
-									__.api( req, function(data) {
-										if (data.errCode == 0) {
-											alert("取消引用成功");
-											window.location.reload();
-										}
-									});
-								}
-								else {
-									alert("取消引用失敗！");
-								}
-							});
-						}							
+		if (path) {
+			//判斷是否有圖
+			if (typeof path != 'string') {
+				path = false;
+			}
+			//判斷引用
+			if (!getAllData[index].use) {
+				var post_beauty = getBeautyTmData(getAllData,index,path);
+				callApi(beautyTmCreateApi,post_beauty,function(data){
+					if (data) {
+						var url = btCatalogUpdateApi + ngID;
+						var post = getUpdateData(getAllData,index);
+						callApi(url,post,function(data){
+							$("#waitCancel").click();
+							if (data.errCode == 0) {
+								alert("引用成功");
+								window.location.reload();
+							}
+							else {
+								alert("引用失敗！");
+							}
+						});
 					}
-				}
-				else {
-					alert("取消引用失敗！");
-				}
-			});
-		}
-	});
+					else {
+						$("#waitCancel").click();
+						alert("引用失敗！");
+					}
+				});
+			}
+			else {
+				callApi(beautyTmListApi,{},function(data){
+					if (data) {
+						var get_list = data.value.list;
+						for (var i = 0; i < get_list.length; i++) {
+							if (get_list[i].title == getAllData[index].ngID) {
+								var req_url = beautyTmDeleteApi+get_list[i].ngID;
+								callApi(req_url,{},function(data){
+									if (data) {
+										var url = btCatalogUpdateApi + ngID;
+										var post = getUpdateData(getAllData,index);
+										callApi(url,post,function(data){
+											$("#waitCancel").click();
+											if (data) {
+												alert("取消引用成功");
+												window.location.reload();
+											}
+											else {
+												alert("取消引用失敗！");
+											}
+										});
+									}
+									else {
+										$("#waitCancel").click();
+										alert("取消引用失敗！");
+									}
+								});
+							}							
+						}
+						if (get_list.length == 0) {
+							$("#waitCancel").click();
+							alert("資料讀取失敗！");
+						}
+					}
+					else {
+						$("#waitCancel").click();
+						alert("取消引用失敗！");
+					}
+				});
+}
+}
+else {
+	$("#waitCancel").click();
+	alert("資料讀取失敗！");
+}
+
+});
 }
 
 function getBtCatalogImg(ngID,callback) {
 	var url = btCatalogListAuxApi + ngID;
-	var req = {url:url  ,post: {nType : 1}};
-	__.api( req, function(data) {
+	callApi(url,{nType : 1},function(data){
 		if (data.errCode == 0 && data.value.iconURI) {
 			var path = "http://tw.coimotion.com/images/"+ngID+"?path="+data.value.iconURI;
 			callback(path);
+		}
+		else if (data.errCode == 0) {
+			callback(true);
 		}
 		else {
 			callback(false);
@@ -259,6 +288,7 @@ function getUpdateData(getAllData,index) {
 	return res;
 }
 
+//取得上傳資料
 function getBeautyTmData(getAllData,index,path) {
 	var get_data = {
 		name : getAllData[index].name,

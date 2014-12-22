@@ -12,6 +12,7 @@ var sender = {
 			window.location.reload(); 
 		},
 		error: function(err) {
+			$("#waitCancel").click();
 			alert(JSON.stringify(err));
 		}
 	},
@@ -22,6 +23,7 @@ var sender = {
 		ctrl.sel('input[name="file"]').change(function() {
 			if (isCheckingImage(this)) {
 				ctrl.sel('#uploader').submit();
+				$("#waitLink").click();
 			}
 		});
 		sender.newUploadBtn(ctrl.sel('#addIcon'), 1);

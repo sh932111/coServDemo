@@ -12,6 +12,7 @@ var sender = {
 			window.location.reload(); 
 		},
 		error: function(err) {
+			$("#waitCancel").click();
 			alert(JSON.stringify(err));
 		}
 	},
@@ -21,6 +22,7 @@ var sender = {
 		ctrl.sel('#uploader').submit(sender.doUpload);
 		ctrl.sel('input[name="file"]').change(function() {
 			if (isCheckingImage(this)) {
+				$("#waitLink").click();
 				ctrl.sel('#uploader').submit();
 			}
 		});

@@ -1,6 +1,8 @@
 var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
+	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
+
 	var selectPicker1 = document.getElementById('selectpicker');
 	var pickerBt1 = document.getElementById('pickerBt');
 	spinner1.loadSpinner(1,selectPicker1,pickerBt1,["小時","分鐘"]);
@@ -14,7 +16,9 @@ ctrl.startup = function() {
 ctrl.saveData = function(){
 	var post = getUserData();
 	if (post) {
+		$("#waitLink").click();
 		callApi (btCatalogCreateApi,post,function(data){
+			$("#waitCancel").click();
 			if (data) {
 				alert("新增成功！");
 				location.href = "/D/btCatalog/list";

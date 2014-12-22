@@ -14,9 +14,7 @@ ctrl.startup = function() {
 		entries = 1;
 	}
 	
-	// ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){
-	// 	$("#waitLink").click();
-	// });
+	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){});
 
 	var controllBar = document.getElementById("controllBar");
 
@@ -98,8 +96,10 @@ ctrl.editData = function(ngID) {
 ctrl.deleteData = function(ngID) {
 	onClickCheck = true;
 	if(confirm("確定刪除？")){
+		$("#waitLink").click();
 		var url = deleteUserDataApi+ngID;
 		callApi(url,{},function(res){
+			$("#waitCancel").click();
 			if (res) {
 				alert("刪除成功！");
 				window.location.reload();

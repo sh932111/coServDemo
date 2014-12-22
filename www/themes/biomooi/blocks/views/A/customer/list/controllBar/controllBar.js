@@ -36,8 +36,9 @@ ctrl.addUserData = function(){
 
 ctrl.selectUserData = function(){
 	if (getUserData.length  == 0) {
-		$("#modalLink").click();
+		$("#waitLink").click();
 		callApi(userSourceListApi,{},function(data){
+			$("#waitCancel").click();
 			if (data) {
 				var get_data = [];
 				for (var i = 0; i < data.value.list.length; i++) {
@@ -49,6 +50,7 @@ ctrl.selectUserData = function(){
 					get_data.push(get_json);
 				}
 				getUserData = get_data;
+				$("#modalLink").click();
 			}
 			else {
 				alert("讀取失敗！");
