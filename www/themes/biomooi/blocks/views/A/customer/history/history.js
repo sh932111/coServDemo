@@ -103,7 +103,9 @@ ctrl.reloadHasComplaints = function(ngID) {
 ctrl.reView = function (ngID) {
 	var historyDialog = document.getElementById("historyDialog");
 	$(historyDialog).empty();
+	$("#waitLink").click();
 	ctrl.embed(historyDialog,"/A/customer/history/historyDialog", {id:ngID,params: { _loc: '<%=bi.locale%>',_type: 1}},function(data){
+		$("#waitCancel").click();
 		data.addHandler("regReloadHasComplaints", ctrl.reloadHasComplaints);
 	});
 }
