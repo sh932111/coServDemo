@@ -27,6 +27,7 @@ ctrl.startup = function() {
 	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
 		refreshLink(getUserData,0);
 	});
+	
 };
 
 //callback
@@ -54,8 +55,8 @@ function reloadUserTable(getAllData,index) {
 	var array_lenght = getAllData.length;
 
 	for (var i = 0; i < array_lenght; i++) {
-		var num = i + index * 10;
-		if (i == 10) {
+		var num = i + index * 20;
+		if (i == 20) {
 			break;
 		}
 		else if (num == getAllData.length) {
@@ -130,7 +131,7 @@ function reloadUserTable(getAllData,index) {
 function refreshLink(getAllData,index) {
 	var listLinkBox = document.getElementById("listLinkBox");
 	$(listLinkBox).empty();
-	var num = getMathRemainder(getAllData.length,10);
+	var num = getMathRemainder(getAllData.length,20);
 	for (var i = 0; i < num; i++) {
 		var li = document.createElement("li");
 		var a = document.createElement("a");

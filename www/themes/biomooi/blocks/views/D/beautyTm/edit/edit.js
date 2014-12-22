@@ -58,6 +58,12 @@ ctrl.saveData = function(){
 };
 
 function getUserData() {
+	if(!checkAllNum(document.getElementById('lengthInput').value,"時程")) {
+		return false;
+	}
+	if(!checkAllNum(document.getElementById('priceInput').value,"價錢")) {
+		return false;
+	}
 	var nameInput = document.getElementById('nameInput').value;
 	var lengthInput = document.getElementById('lengthInput').value+spinner1.getText;
 	var audienceInput = document.getElementById('audienceInput').value;

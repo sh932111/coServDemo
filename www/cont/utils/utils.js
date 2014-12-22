@@ -163,7 +163,7 @@ function getNowTime() {
 	var month = dt.getMonth()+1;
 	var day = dt.getDate();
 	var year = dt.getFullYear();
-	var send_time = year +"/"+ month +"/"+ day;
+	var send_time = year +"-"+ month +"-"+ day;
 	return send_time;
 }
 
@@ -230,4 +230,15 @@ function addWaitDialog(obj) {
 	var parentDiv = sp2.parentNode;
 	parentDiv.insertBefore(sp1, sp2);
 	return sp1;
+}
+
+function checkAllNum(keys,alertText) {
+	for (var i = 0; i < keys.length; i++) {
+		var key = keys.charAt(i);
+		if (!checkNum(key)) {
+			alert(alertText+"需為數字！");
+			return false;
+		}
+	}
+	return true;
 }

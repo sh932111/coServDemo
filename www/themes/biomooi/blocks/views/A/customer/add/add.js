@@ -1,12 +1,11 @@
 
 ctrl.startup = function() {
 	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
-
-	var dateInput = document.getElementById('dateInput');
-	$(dateInput).datetimepicker({
+	$("#dateInput").datetimepicker({
 		format: 'yyyy-mm-dd',
 		minView: 3
 	});
+
 	var userPhoto = document.getElementById("userPhoto");
 	ctrl.embed(userPhoto,"/A/customer/uploadImg", {},function(data){
 		var addIcon = document.getElementById("addIcon");

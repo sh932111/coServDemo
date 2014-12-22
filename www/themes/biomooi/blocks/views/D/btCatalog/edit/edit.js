@@ -49,8 +49,14 @@ ctrl.saveData = function(){
 
 function getUserData() {
 	var nameInput = document.getElementById('nameInput').value;
+	if(!checkAllNum(document.getElementById('lengthInput').value,"時程")) {
+		return false;
+	}
 	var lengthInput = document.getElementById('lengthInput').value+spinner1.getText;
 	var audienceInput = document.getElementById('audienceInput').value;
+	if(!checkAllNum(document.getElementById('priceInput').value,"價錢")) {
+		return false;
+	}
 	var priceInput = document.getElementById('priceInput').value+"元";
 	var descTxInput = document.getElementById('descTxInput').value;
 	var check = '<%= JSON.parse(value.body).use%>';
