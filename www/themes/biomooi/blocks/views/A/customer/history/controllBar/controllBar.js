@@ -4,6 +4,12 @@ ctrl.startup = function() {
 
 	$("#controllModal").modal({show:false});
 
+	$("#DateValue").datetimepicker({
+		format: 'yyyy-mm-dd',
+		autoclose: true,
+		minView: 3
+	});
+
 	$('#NameValue').on('valuechange', function (e, previous) {
 		hideAllList();
 		var reload_data = getValueData($(this).val(),1);
@@ -19,7 +25,9 @@ ctrl.startup = function() {
 		var reload_data = getValueData($(this).val(),3);
 		reloadSelectList(reload_data,"NidMenu",this);
 	});
-	$('#DateValue').on('valuechange', function (e, previous) {
+	$('#DateValue')
+	.datetimepicker()
+	.on('changeDate', function(ev){
 		hideAllList();
 		var reload_data = getValueData($(this).val(),4);
 		reloadSelectList(reload_data,"DateMenu",this);
@@ -64,6 +72,10 @@ ctrl.checkSelectData = function(){
 };
 
 ctrl.clearList = function(){
+	hideAllList();	
+};
+ctrl.closeList = function(){
+	clearInput();
 	hideAllList();	
 };
 
@@ -165,4 +177,10 @@ function hideAllList() {
 	for (var i = 0; i < div_array.length; i++) {
 		div_array[i].className = "col-sm-8";
 	}
+}
+function clearInput() {
+	document.getElementById("NameValue").value = "";
+	document.getElementById("PhoneValue").value = "";
+	document.getElementById("NidValue").value = "";
+	document.getElementById("DateValue").value = "";
 }

@@ -32,10 +32,6 @@
 	white-space: nowrap;
 }
 
-.textAreaSize {
-	resize: none;
-}
-
 /* -------------------------------- 
 
  Customized boostrap
@@ -43,7 +39,7 @@
 -------------------------------- */
 
 .page-header {
-	margin-top: 0px;
+	margin-top: 0px !important;
 }
 .table {
 	border-color: #e6e6e6;
@@ -56,7 +52,7 @@
 	padding: 7px;
 }
 .table>tbody>tr>td:last-child {
-	padding: 5px 8px 0;
+	padding: 5px 8px;
 }
 /*按鈕－分類*/
 .btn-purple {
@@ -78,7 +74,8 @@
 	color: #fff;
 	background: #40c494;
 	padding: 6px !important;
-	font-size: 16px;
+	font-size: 16px !important;
+	border: none;
 }
 .btn-insert:hover,
 .btn-insert:focus,
@@ -87,14 +84,15 @@
 .open .dropdown-toggle.btn-insert {
 	color: #fff;
 	background: #2eb282;
-	border-color: #24a576;
+	border: none;	
 }
 /*按鈕－查詢*/
 .btn-query {
 	color: #fff;
 	background: #e8a47a;
 	padding: 6px !important;
-	font-size: 16px;
+	font-size: 16px !important;
+	border: none;
 }
 .btn-query:hover,
 .btn-query:focus,
@@ -102,14 +100,16 @@
 .btn-query.active,
 .open .dropdown-toggle.btn-query {
 	color: #fff;
-	background: #d89670 ;
+	background: #d89670;
+	border: none;
 }
 /*按鈕－匯出*/
 .btn-export {
 	color: #fff;
 	background:#3dccce;
 	padding: 6px !important;
-	font-size: 16px;
+	font-size: 16px !important;
+	border: none;
 }
 .btn-export:hover,
 .btn-export:focus,
@@ -118,26 +118,168 @@
 .open .dropdown-toggle.btn-export {
 	color: #fff;
 	background: #2fbcbf;
+	border: none;
 }
+/*按鈕－儲存*/
+.btn-save {
+	color: #fff;
+	background:#21abc4;
+	border: none;
+}
+.btn-save:hover,
+.btn-save:focus,
+.btn-save:active,
+.btn-save.active,
+.open .dropdown-toggle.btn-export {
+	color: #fff;
+	background: #1ba2ba;
+	border: none;
+}
+/*按鈕－上傳*/
+.btn-upload {
+	color: #fff;
+	background:#D99659;
+	border: none;
+}
+.btn-upload:hover,
+.btn-upload:focus,
+.btn-upload:active,
+.btn-upload.active,
+.open .dropdown-toggle.btn-upload {
+	color: #fff;
+	background: #cc8649;
+	border: none;
+}
+/*按鈕－進入*/
+.btn-enter {
+	color: #fff;
+	background:#fab631;
+	border: none;
+}
+.btn-enter:hover,
+.btn-enter:focus,
+.btn-enter:active,
+.btn-enter.active,
+.open .dropdown-toggle.btn-enter {
+	color: #fff;
+	background: #eaa319;
+	border: none;
+}
+/*按鈕－販售*/
+.btn-sale {
+	color: #fff;
+	background:#CE7CD6;	
+	border: none;
+}
+.btn-sale:hover,
+.btn-sale:focus,
+.btn-sale:active,
+.btn-sale.active,
+.open .dropdown-toggle.btn-sale {
+	color: #fff;
+	background: #ba64c4;
+	border: none;
+}
+/*按鈕－引用*/
+.btn-cite {
+	color: #fff;
+	background:#2077de;	
+	border: none;
+}
+.btn-cite:hover,
+.btn-cite:focus,
+.btn-cite:active,
+.btn-cite.active,
+.open .dropdown-toggle.btn-cite {
+	color: #fff;
+	background: #0e65cd;
+	border: none;
+}
+/*按鈕－取消*/
+.btn-cancel {
+	color: #fff;
+	background:#279db6;	
+	border: none;
+}
+.btn-cancel:hover,
+.btn-cancel:focus,
+.btn-cancel:active,
+.btn-cancel.active,
+.open .dropdown-toggle.btn-cancel {
+	color: #fff;
+	background: #128ca6;
+	border: none;
+}
+/*按鈕－離職*/
+.btn-job {
+	color: #fff;
+	background:#b77ad1;	
+	border: none;
+}
+.btn-job:hover,
+.btn-job:focus,
+.btn-job:active,
+.btn-job.active,
+.open .dropdown-toggle.btn-job {
+	color: #fff;
+	background: #a25dbf;
+	border: none;
+}
+/*按鈕－確認*/
+.btn-confirm {
+	color: #fff;
+	background:#875c57;	
+	border: none;
+}
+.btn-confirm:hover,
+.btn-confirm:focus,
+.btn-confirm:active,
+.btn-confirm.active,
+.open .dropdown-toggle.btn-confirm {
+	color: #fff;
+	background: #72443f;
+	border: none;
+}
+/*按鈕－銷帳*//*按鈕－退貨*/
+.btn-account {
+	color: #fff;
+	background:#F4806C;	
+	border: none;
+}
+.btn-account:hover,
+.btn-account:focus,
+.btn-account:active,
+.btn-account.active,
+.open .dropdown-toggle.btn-account {
+	color: #fff;
+	background: #F4806C;
+	border: none;
+}
+
 code {
 	color: #333;
 	background: transparent;
-}
-.search {
-	margin-top:10px;
-	border: 1px solid #f5f5f5;
-	border-radius: 5px;
-	padding: 6px 15px;
-	background: #f5f5f5;
 }
 input + label {
 	margin-left: 10px;
 }
 input.btn, .btn, .search .btn {
 	padding: 1px 12px 3px;
+	font-size: 14px;
+}
+.btn:focus {
+	outline: none;
 }
 .btn + .btn{
 	margin-left: 5px;
+}
+/* search */
+.search {
+	margin-top:10px;
+	border: 1px solid #f5f5f5;
+	border-radius: 5px;
+	padding: 6px 15px;
+	background: #f5f5f5;
 }
 .inquiry {
 	margin-left: 20px;

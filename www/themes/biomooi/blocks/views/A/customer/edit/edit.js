@@ -7,6 +7,7 @@ ctrl.startup = function() {
 	var dateInput = document.getElementById('dateInput');
 	$(dateInput).datetimepicker({
 		format: 'yyyy-mm-dd',
+		autoclose: true,
 		minView: 3
 	});
 	var userPhoto = document.getElementById("userPhoto");

@@ -3,6 +3,7 @@ ctrl.startup = function() {
 	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
 	$("#dateInput").datetimepicker({
 		format: 'yyyy-mm-dd',
+		autoclose: true,
 		minView: 3
 	});
 

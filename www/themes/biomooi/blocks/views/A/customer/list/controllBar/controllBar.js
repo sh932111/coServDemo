@@ -3,30 +3,42 @@ var getIndex = -1;
 
 ctrl.startup = function() {
 	$("#mymodal").modal({show:false});
+	
+	$("#DateValue").datetimepicker({
+		format: 'yyyy-mm-dd',
+		autoclose: true,
+		minView: 3
+	});
 
+	$('#DateValue')
+	.datetimepicker()
+	.on('changeDate', function(ev){
+		hideAllList();
+		var reload_data = getValueData($(this).val(),4);		
+		reloadSelectList(reload_data,"DateMenu",this);
+	});
 	$('#NameValue').on('valuechange', function (e, previous) {
 		hideAllList();
-		var reload_data = getValueData($(this).val(),1);
+		var reload_data = getValueData($(this).val(),1);		
 		reloadSelectList(reload_data,"NameMenu",this);
 	});
 	$('#PhoneValue').on('valuechange', function (e, previous) {
 		hideAllList();
-		var reload_data = getValueData($(this).val(),2);
+		var reload_data = getValueData($(this).val(),2);		
 		reloadSelectList(reload_data,"PhoneMenu",this);
 	});
 	$('#NidValue').on('valuechange', function (e, previous) {
 		hideAllList();
-		var reload_data = getValueData($(this).val(),3);
+		var reload_data = getValueData($(this).val(),3);		
 		reloadSelectList(reload_data,"NidMenu",this);
-	});
-	$('#DateValue').on('valuechange', function (e, previous) {
-		hideAllList();
-		var reload_data = getValueData($(this).val(),4);
-		reloadSelectList(reload_data,"DateMenu",this);
 	});
 };
 
 ctrl.clearList = function(){
+	hideAllList();	
+};
+ctrl.closeList = function(){
+	clearInput();
 	hideAllList();	
 };
 
@@ -172,3 +184,9 @@ function hideAllList() {
 	}
 }
 
+function clearInput() {
+	document.getElementById("NameValue").value = "";
+	document.getElementById("PhoneValue").value = "";
+	document.getElementById("NidValue").value = "";
+	document.getElementById("DateValue").value = "";
+}
