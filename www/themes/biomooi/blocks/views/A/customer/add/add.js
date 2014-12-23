@@ -31,6 +31,10 @@ ctrl.saveData = function(){
 };
 
 function getUserData() {
+	var matterInput = document.getElementById('matterInput').value;
+	matterInput = matterInput.replace(/  /g, "&nbsp;&nbsp;");
+ 	matterInput = matterInput.replace(/\n/g,"<br>");
+ 	
 	var nameInput = document.getElementById('nameInput').value;
 	var userIdInput = document.getElementById('userIdInput').value;
 	if(!checkUserId(userIdInput)) {
@@ -51,7 +55,7 @@ function getUserData() {
 	if(!checkCellphone(phoneInput)) {
 		return false;
 	}
-	var matterInput = document.getElementById('matterInput').value;
+	
 	var genderView = document.getElementById('genderView').getElementsByTagName('input')[0];
 	var gender = genderView.checked ? "1":"0";
 	var get_data = {

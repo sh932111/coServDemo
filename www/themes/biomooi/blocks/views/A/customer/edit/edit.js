@@ -1,5 +1,7 @@
 
 ctrl.startup = function() {
+	document.getElementById('matterInput').value = document.getElementById('matterInput').value.replace(/<br>/g, "\n"); 
+
 	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
 	
 	var dateInput = document.getElementById('dateInput');
@@ -12,6 +14,7 @@ ctrl.startup = function() {
 	var params = {
 		ngID : get_id
 	};
+	
 	ctrl.embed(userPhoto,"/A/customer/uploadImg", { params:params },function(data){
 		var userPhotoImg = document.getElementById("userPhotoImg");
 		var uri = '<%=value.iconURI%>';
@@ -43,6 +46,10 @@ ctrl.saveData = function(){
 };
 
 function getUserData() {
+	var matterInput = document.getElementById('matterInput').value;
+	matterInput = matterInput.replace(/  /g, "&nbsp;&nbsp;");
+ 	matterInput = matterInput.replace(/\n/g,"<br>");
+ 	
 	var nameInput = document.getElementById('nameInput').value;
 	var userIdInput = document.getElementById('userIdInput').value;
 	if(!checkUserId(userIdInput)) {
@@ -63,7 +70,6 @@ function getUserData() {
 	if(!checkCellphone(phoneInput)) {
 		return false;
 	}
-	var matterInput = document.getElementById('matterInput').value;
 	var genderView = document.getElementById('genderView').getElementsByTagName('input')[0];
 	var gender = genderView.checked ? "1":"0";
 	var get_data = {

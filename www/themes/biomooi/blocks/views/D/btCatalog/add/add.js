@@ -31,6 +31,10 @@ ctrl.saveData = function(){
 };
 
 function getUserData() {
+	var descTxInput = document.getElementById('descTxInput').value;
+	descTxInput = descTxInput.replace(/  /g, "&nbsp;&nbsp;");
+ 	descTxInput = descTxInput.replace(/\n/g,"<br>");
+ 	
 	var nameInput = document.getElementById('nameInput').value;
 	if(!checkAllNum(document.getElementById('lengthInput').value,"時程")) {
 		return false;
@@ -41,7 +45,6 @@ function getUserData() {
 		return false;
 	}
 	var priceInput = document.getElementById('priceInput').value+"元";
-	var descTxInput = document.getElementById('descTxInput').value;
 	var get_data = {
 		name : nameInput,
 		length : lengthInput,

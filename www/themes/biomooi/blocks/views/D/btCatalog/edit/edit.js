@@ -1,6 +1,8 @@
 var spinner1 = new getSpinner();
 
 ctrl.startup = function() {
+	document.getElementById('descTxInput').value = document.getElementById('descTxInput').value.replace(/<br>/g, "\n"); 
+
 	ctrl.embed(addWaitDialog("pageHeader"),"/A/customer/waitDialog", {},function(data){});
 	var selectPicker1 = document.getElementById('selectpicker');
 	var pickerBt1 = document.getElementById('pickerBt');
@@ -48,6 +50,10 @@ ctrl.saveData = function(){
 };
 
 function getUserData() {
+	var descTxInput = document.getElementById('descTxInput').value;
+	descTxInput = descTxInput.replace(/  /g, "&nbsp;&nbsp;");
+ 	descTxInput = descTxInput.replace(/\n/g,"<br>");
+ 	
 	var nameInput = document.getElementById('nameInput').value;
 	if(!checkAllNum(document.getElementById('lengthInput').value,"時程")) {
 		return false;
@@ -58,7 +64,6 @@ function getUserData() {
 		return false;
 	}
 	var priceInput = document.getElementById('priceInput').value+"元";
-	var descTxInput = document.getElementById('descTxInput').value;
 	var check = '<%= JSON.parse(value.body).use%>';
 	check = check == "true";
 	var get_data = {
