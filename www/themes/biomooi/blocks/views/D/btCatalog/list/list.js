@@ -169,29 +169,41 @@ function deleteUserData(ngID) {
 	}) ;
 }
 
-//引用
 function usebtCatalogData(getAllData,ngID,index) {
 	$("#waitLink").click();
 	getBtCatalogImg(ngID,function(path){
 		if (path) {
-			//判斷是否有圖
 			if (typeof path != 'string') {
 				path = false;
 			}
-			//判斷引用
 			if (!getAllData[index].use) {
-				var post_beauty = getBeautyTmData(getAllData,index,path);
-				callApi(beautyTmCreateApi,post_beauty,function(data){
-					if (data) {
-						var url = btCatalogUpdateApi + ngID;
-						var post = getUpdateData(getAllData,index);
-						callApi(url,post,function(data){
-							$("#waitCancel").click();
-							if (data.errCode == 0) {
-								alert("引用成功");
-								window.location.reload();
+				getBeautyTmData(getAllData,index,path,function(post_beauty){
+					if (post_beauty) {
+						console.log(post_beauty);
+						callApi(beautyTmCreateApi,post_beauty,function(data){
+							if (data) {
+								var url = btCatalogUpdateApi + ngID;
+								getUpdateData(getAllData,index,function(post){
+									if (post) {
+										callApi(url,post,function(data){
+											$("#waitCancel").click();
+											if (data.errCode == 0) {
+												alert("引用成功");
+												window.location.reload();
+											}
+											else {
+												alert("引用失敗！");
+											}
+										});
+									}
+									else {
+										$("#waitCancel").click();
+										alert("引用失敗！");
+									}
+								});
 							}
 							else {
+								$("#waitCancel").click();
 								alert("引用失敗！");
 							}
 						});
@@ -201,6 +213,7 @@ function usebtCatalogData(getAllData,ngID,index) {
 						alert("引用失敗！");
 					}
 				});
+				
 			}
 			else {
 				callApi(beautyTmListApi,{},function(data){
@@ -212,14 +225,21 @@ function usebtCatalogData(getAllData,ngID,index) {
 								callApi(req_url,{},function(data){
 									if (data) {
 										var url = btCatalogUpdateApi + ngID;
-										var post = getUpdateData(getAllData,index);
-										callApi(url,post,function(data){
-											$("#waitCancel").click();
-											if (data) {
-												alert("取消引用成功");
-												window.location.reload();
+										getUpdateData(getAllData,index,function(post){
+											if (post) {
+												callApi(url,post,function(data){
+													$("#waitCancel").click();
+													if (data.errCode == 0) {
+														alert("取消引用成功");
+														window.location.reload();
+													}
+													else {
+														alert("取消引用失敗！");
+													}
+												});
 											}
 											else {
+												$("#waitCancel").click();
 												alert("取消引用失敗！");
 											}
 										});
@@ -268,49 +288,116 @@ function getBtCatalogImg(ngID,callback) {
 }
 
 //抓取引用的json data
-function getUpdateData(getAllData,index) {
+function getUpdateData(getAllData,index,callback) {
 	getAllData[index].use = getAllData[index].use ? false : true;
-	var get_data = {
-		name : getAllData[index].name,
-		length : getAllData[index].length,
-		audience : getAllData[index].audience,
-		price : getAllData[index].price,
-		descTx : getAllData[index].descTx,
-		use : getAllData[index].use,
-		category : getAllData[index].category,
-		detail : getAllData[index].detail
-	};
-	var res = {
-		_key : Key,
-		title : getAllData[index].name,
-		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
-		isPublic : "1"
-	};
-	return res;
+	var url = btCatalogViewApi + getAllData[index].ngID;
+
+	callApi(url,{},function(data){
+		if (data) {
+			var get_body = JSON.parse(data.value.body);
+			get_body["use"] = getAllData[index].use;
+			var get_summary = JSON.parse(data.value.summary);
+			get_summary["use"] = getAllData[index].use;
+			var res = {
+				_key : Key,
+				title : getAllData[index].name,
+				body : JSON.stringify(get_body),
+				summary : JSON.stringify(get_summary),
+				isPublic : "1"
+			};
+			callback(res);
+		}
+		else {
+			callback(false);
+		}
+	});
+	// var get_data = {
+	// 	name : getAllData[index].name,
+	// 	length : getAllData[index].length,
+	// 	audience : getAllData[index].audience,
+	// 	price : getAllData[index].price,
+	// 	descTx : getAllData[index].descTx,
+	// 	use : getAllData[index].use,
+	// 	category : getAllData[index].category,
+	// 	detail : getAllData[index].detail
+	// };
+	// var get_data2 = {
+	// 	name : getAllData[index].name,
+	// 	length : getAllData[index].length,
+	// 	audience : getAllData[index].audience,
+	// 	price : getAllData[index].price,
+	// 	use : getAllData[index].use,
+	// 	category : getAllData[index].category,
+	// 	detail : getAllData[index].detail
+	// };
+	// var res = {
+	// 	_key : Key,
+	// 	title : getAllData[index].name,
+	// 	body : JSON.stringify(get_data),
+	// 	summary : JSON.stringify(get_data2),
+	// 	isPublic : "1"
+	// };
+	// return res;
 }
 
 //取得上傳資料
-function getBeautyTmData(getAllData,index,path) {
-	var get_data = {
-		name : getAllData[index].name,
-		length : getAllData[index].length,
-		audience : getAllData[index].audience,
-		price : getAllData[index].price,
-		descTx : getAllData[index].descTx,
-		date : getNowTime(),
-		image_url : path,
-		use : true,
-		category : getAllData[index].category,
-		detail : getAllData[index].detail
-	};
+function getBeautyTmData(getAllData,index,path,callback) {
+	var url = btCatalogViewApi + getAllData[index].ngID;
 
-	var res = {
-		_key : Key,
-		title : getAllData[index].ngID,
-		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
-		isPublic : "1"
-	};
-	return res;
+	callApi(url,{},function(data){
+		if (data) {
+			var get_time = getNowTime();
+			var get_body = JSON.parse(data.value.body);
+			get_body["use"] = true;
+			get_body["image_url"] = path;
+			get_body["date"] = get_time;
+			var get_summary = JSON.parse(data.value.summary);
+			get_summary["use"] = true;
+			get_summary["image_url"] = path;
+			get_summary["date"] = get_time;
+			var res = {
+				_key : Key,
+				title : getAllData[index].ngID,
+				body : JSON.stringify(get_body),
+				summary : JSON.stringify(get_summary),
+				isPublic : "1"
+			};
+			callback(res);
+		}
+		else {
+			callback(false);
+		}
+	});
+	// var get_data = {
+	// 	name : getAllData[index].name,
+	// 	length : getAllData[index].length,
+	// 	audience : getAllData[index].audience,
+	// 	price : getAllData[index].price,
+	// 	descTx : getAllData[index].descTx,
+	// 	date : getNowTime(),
+	// 	image_url : path,
+	// 	use : true,
+	// 	category : getAllData[index].category,
+	// 	detail : getAllData[index].detail
+	// };
+	// var get_data2 = {
+	// 	name : getAllData[index].name,
+	// 	length : getAllData[index].length,
+	// 	audience : getAllData[index].audience,
+	// 	price : getAllData[index].price,
+	// 	date : getNowTime(),
+	// 	image_url : path,
+	// 	use : true,
+	// 	category : getAllData[index].category,
+	// 	detail : getAllData[index].detail
+	// };
+
+	// var res = {
+	// 	_key : Key,
+	// 	title : getAllData[index].ngID,
+	// 	body : JSON.stringify(get_data),
+	// 	summary : JSON.stringify(get_data2),
+	// 	isPublic : "1"
+	// };
+	// return res;
 }

@@ -14,12 +14,15 @@ var userHistoryDeleteApi = "/beautywebSource/userHistory/delete/";
 //btCatalog api
 var btCatalogDeleteApi = "/beautywebSource/btCatalog/delete/";
 var btCatalogUpdateApi = "/beautywebSource/btCatalog/update/";
+var btCatalogViewApi = "/beautywebSource/btCatalog/view/";
 var btCatalogListAuxApi = "/beautywebSource/btCatalog/listAux/";
 var btCatalogCreateApi = "/beautywebSource/btCatalog/create";
+var btCatalogListApi = "/beautywebSource/btCatalog/list";
 //beautyTm
 var beautyTmCreateApi = "/beautywebSource/beautyTm/create";
 var beautyTmListApi = "/beautywebSource/beautyTm/list";
 var beautyTmDeleteApi = "/beautywebSource/beautyTm/delete/";
+var beautyTmViewApi = "/beautywebSource/beautyTm/view/";
 var beautyTmUpdateApi = "/beautywebSource/beautyTm/update/";
 
 //取得下方button的數目
@@ -203,12 +206,21 @@ function getHistoryDataToID(custNo) {
 		consumptionDetail :  getRandomConsumptionDetail () ,
 		hasComplaints : []
 	};
+	var get_data2 = {
+		custNo : custNo,
+		name : getRandomDescTx (),
+		date : getNowTime(),
+		salesTotal : getRandomMoney (),
+		descTx : getRandomDescTx (),
+		consumptionDate : getNowTime(),
+		consumptionDetail :  getRandomConsumptionDetail () 
+	};
 
 	var res = {
 		_key : Key,
 		title : custNo,
 		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data2),
 		isPublic : "1"
 	};
 	return res;

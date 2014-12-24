@@ -152,42 +152,78 @@ function  getBodyCtrl()  {
 
 function useBeautyData(getAllData,ngID,index,result) {
 	var url = beautyTmUpdateApi + ngID;
-	var post = getBeautyTmData(getAllData,index,result);
-	if (post) {
-		$("#waitLink").click();
-		callApi(url,post,function(res){
+	$("#waitLink").click();
+	getBeautyTmData(getAllData,index,result,ngID,function(post){
+		if (post) {
+			callApi(url,post,function(res){
+				$("#waitCancel").click();
+				if (res) {
+					alert("更新成功！");
+					window.location.reload();
+				}
+				else {
+					alert("更新失敗！");
+				}
+			});
+		}
+		else {
 			$("#waitCancel").click();
-			if (res) {
-				alert("更新成功！");
-				window.location.reload();
-			}
-			else {
-				alert("更新失敗！");
-			}
-		});
-	}
+		}
+	});
 }
 
-function getBeautyTmData(getAllData,index,result) {
-	var get_data = {
-		name : getAllData[index].name,
-		length : getAllData[index].length,
-		audience : getAllData[index].audience,
-		price : getAllData[index].price,
-		descTx : getAllData[index].descTx,
-		date : getAllData[index].date,
-		image_url : getAllData[index].image_url,
-		use : result,
-		category : getAllData[index].category,
-		detail : getAllData[index].detail
-	};
+function getBeautyTmData(getAllData,index,result,ngID,callback) {
+	var url = beautyTmViewApi + ngID;
+	callApi(url,{},function(data){
+		if (data) {
+			var get_body = JSON.parse(data.value.body);
+			get_body["use"] = result;
+			var get_summary = JSON.parse(data.value.summary);
+			get_summary["use"] = result;
 
-	var res = {
-		_key : Key,
-		title : getAllData[index].title,
-		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
-		isPublic : "1"
-	};
-	return res;
+			var res = {
+				_key : Key,
+				title : getAllData[index].title,
+				body : JSON.stringify(get_body),
+				summary : JSON.stringify(get_summary),
+				isPublic : "1"
+			};
+
+			callback(res);
+		}
+		else {
+			callback(false);
+		}
+	});
+	// var get_data = {
+	// 	name : getAllData[index].name,
+	// 	length : getAllData[index].length,
+	// 	audience : getAllData[index].audience,
+	// 	price : getAllData[index].price,
+	// 	descTx : getAllData[index].descTx,
+	// 	date : getAllData[index].date,
+	// 	image_url : getAllData[index].image_url,
+	// 	use : result,
+	// 	category : getAllData[index].category,
+	// 	detail : getAllData[index].detail
+	// };
+	// var get_data2 = {
+	// 	name : getAllData[index].name,
+	// 	length : getAllData[index].length,
+	// 	audience : getAllData[index].audience,
+	// 	price : getAllData[index].price,
+	// 	date : getAllData[index].date,
+	// 	image_url : getAllData[index].image_url,
+	// 	use : result,
+	// 	category : getAllData[index].category,
+	// 	detail : getAllData[index].detail
+	// };
+	// var res = {
+	// 	_key : Key,
+	// 	title : getAllData[index].title,
+	// 	body : JSON.stringify(get_data),
+	// 	summary : JSON.stringify(get_data2),
+	// 	isPublic : "1"
+	// };
+	// return res;
 }

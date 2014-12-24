@@ -11,12 +11,16 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label"><%=ph.consumptionDate%></label>
 						<div class="col-sm-8">
+							<%if (errCode === 0){%>
 							<label class="col-sm-12 control-label"><%= JSON.parse(value.body).consumptionDate%>
 							</label>
+							<%}%>
 						</div>
 						<label class="col-sm-4 control-label"><%=ph.consumptionDetail%></label>
 						<div class="col-sm-8">
+							<%if (errCode === 0){%>
 							<label class="col-sm-12 control-label"><%= JSON.parse(value.body).consumptionDetail%></label>
+							<%}%>
 						</div>
 					</div>
 				</form>

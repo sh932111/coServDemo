@@ -91,11 +91,22 @@ function getUserData() {
 		category : '<%= JSON.parse(value.body).category%>',
 		detail : '<%= JSON.parse(value.body).detail%>'
 	};
+	var get_data2 = {
+		name : nameInput,
+		length : lengthInput,
+		audience : audienceInput,
+		price : priceInput,
+		image_url : path,
+		use : get_use,
+		date : '<%= JSON.parse(value.body).date%>',
+		category : '<%= JSON.parse(value.body).category%>',
+		detail : '<%= JSON.parse(value.body).detail%>'
+	};
 	var res = {
 		_key : Key,
 		title : '<%=value.title%>',
 		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data2),
 		isPublic : "1"
 	};
 	return res;

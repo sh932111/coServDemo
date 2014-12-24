@@ -27,12 +27,12 @@ ctrl.startup = function() {
 		refreshLink( index, entries);
 	});
 
-	//deleteAllData (userHistoryListApi,userHistoryDeleteApi,{}) ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
+	// deleteAllData (btCatalogListApi,btCatalogDeleteApi,{}) ;
+	// addTestData ("71082") ;
+	// addTestData ("71082") ;
+	// addTestData ("70863") ;
+	// addTestData ("70863") ;
+	// addTestData ("70863") ;
 	// addTestData ("70865") ;
 	// addTestData ("70865") ;
 	// addTestData ("70865") ;

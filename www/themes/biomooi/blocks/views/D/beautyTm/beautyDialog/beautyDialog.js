@@ -5,6 +5,7 @@ ctrl.startup = function() {
 	var dateInput = document.getElementById('DateValue');
 	$(dateInput).datetimepicker({
 		format: 'yyyy-mm-dd',
+		autoclose: true,
 		minView: 3
 	});
 	var type = '<%=bi.query._type%>';
@@ -60,6 +61,17 @@ function getBeautyTmData() {
 		category : category,
 		detail : detail
 	};
+	var get_data2 = {
+		name : getBeautyData.name,
+		length : getBeautyData.length,
+		audience : getBeautyData.audience,
+		price : document.getElementById("PriceValue").value,
+		date : document.getElementById("DateValue").value,
+		use : check,
+		image_url : get_path,
+		category : category,
+		detail : detail
+	};
 	var title = "";
 	'<%if (errCode === 0) {%>'
 		title = "<%=value.title%>";
@@ -68,7 +80,7 @@ function getBeautyTmData() {
 		_key : Key,
 		title : title,
 		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data2),
 		isPublic : "1"
 	};
 	return res;

@@ -23,3 +23,6 @@
 	width: 75%;
 	float: left;
 }
+.textAreaSize{
+	resize: none;
+}

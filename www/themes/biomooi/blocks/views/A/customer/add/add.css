@@ -31,3 +31,7 @@
     background-position-y: -1px;
     cursor: pointer;
 }
+
+.textAreaSize{
+	resize: none;
+}

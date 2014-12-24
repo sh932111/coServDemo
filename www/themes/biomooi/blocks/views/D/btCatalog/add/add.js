@@ -55,11 +55,20 @@ function getUserData() {
 		category : '<%=bi.query.category%>',
 		detail : '<%=bi.query.detail%>'
 	};
+	var get_data2 = {
+		name : nameInput,
+		length : lengthInput,
+		audience : audienceInput,
+		price : priceInput,
+		use : false,
+		category : '<%=bi.query.category%>',
+		detail : '<%=bi.query.detail%>'
+	};
 	var res = {
 		_key : Key,
 		title : nameInput,
 		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data2),
 		isPublic : "1"
 	};
 	return res;

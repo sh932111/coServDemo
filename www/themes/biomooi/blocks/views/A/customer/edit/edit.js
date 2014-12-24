@@ -37,7 +37,7 @@ ctrl.saveData = function(){
 			$("#waitCancel").click();
 			if (res) {
 				alert("更新成功！");
-				location.href = "/A/customer/list?_pn=1&_ps=20&key=-1";
+				//location.href = "/A/customer/list?_pn=1&_ps=20&key=-1";
 			}
 			else {
 				alert("更新失敗！");
@@ -50,8 +50,7 @@ function getUserData() {
 	var matterInput = document.getElementById('matterInput').value;
 	matterInput = matterInput.replace(/  /g, "&nbsp;&nbsp;");
  	matterInput = matterInput.replace(/\n/g,"<br>");
- 	
-	var nameInput = document.getElementById('nameInput').value;
+ 	var nameInput = document.getElementById('nameInput').value;
 	var userIdInput = document.getElementById('userIdInput').value;
 	if(!checkUserId(userIdInput)) {
 		return false;
@@ -83,11 +82,21 @@ function getUserData() {
 		addr : addrInput,
 		matter : matterInput
 	};
+	var get_data2 = {
+		name : nameInput,
+		nid : userIdInput,
+		dob : dateInput,
+		gender : gender,
+		email : emailInput,
+		phone : phoneInput,
+		addr : addrInput
+	};
+
 	var res = {
 		_key : Key,
 		title : nameInput,
 		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data2),
 		isPublic : "1"
 	};
 	return res;

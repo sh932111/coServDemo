@@ -2,7 +2,11 @@ var getUserData = [];
 var onClickCheck;
 
 ctrl.startup = function() {
-	
+	// var url = deleteUserDataApi+71169;
+	// callApi(url,{},function(res){
+	// 	console.log(res);
+	// });
+
 	var entries = '<%= value.entries; %>';
 	var index = '<%=bi.query.index%>'; 
 	var getKey = '<%=bi.query.key%>';
@@ -79,7 +83,7 @@ function refreshLink(index,entries) {
 		listLinkBox.appendChild(li);
 	}
 }
-
+//Rust is a new programming language for developing reliable and efficient systems. It's designed to support concurrency and parallelism in building platforms that take full advantage of modern hardware. Its static type system is safe and expressive and it provides strong guarantees about isolation, concurrency execution and memory safety.<br><br>Rust combines powerful
 function  getBodyCtrl()  {
 	var  bodyBkID = $('#historyDialog').children('div').first().attr('id'),
 	bodyCtrl = __.getCtrl(bodyBkID);

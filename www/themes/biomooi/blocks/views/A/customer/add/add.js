@@ -35,7 +35,7 @@ function getUserData() {
 	var matterInput = document.getElementById('matterInput').value;
 	matterInput = matterInput.replace(/  /g, "&nbsp;&nbsp;");
  	matterInput = matterInput.replace(/\n/g,"<br>");
- 	
+ 	console.log(matterInput);
 	var nameInput = document.getElementById('nameInput').value;
 	var userIdInput = document.getElementById('userIdInput').value;
 	if(!checkUserId(userIdInput)) {
@@ -69,11 +69,21 @@ function getUserData() {
 		addr : addrInput,
 		matter : matterInput
 	};
+	var get_data2 = {
+		name : nameInput,
+		nid : userIdInput,
+		dob : dateInput,
+		gender : gender,
+		email : emailInput,
+		phone : phoneInput,
+		addr : addrInput
+	};
+
 	var res = {
 		_key : Key,
 		title : nameInput,
 		body : JSON.stringify(get_data),
-		summary : JSON.stringify(get_data),
+		summary : JSON.stringify(get_data2),
 		isPublic : "1"
 	};
 	return res;
