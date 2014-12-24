@@ -101,13 +101,14 @@ function reloadUserTable(getAllData,index) {
 				usebtCatalogData(getAllData,getAllData[this.id].ngID,this.id);
 			}
 		});
+		
 		if (getAllData[num].use) {
 			use_bt.innerHTML = "取消";
-			use_bt.className = "btn";
+			use_bt.className = "btn btn-cancel";
 		}
 		else {
 			use_bt.innerHTML = "引用";
-			use_bt.className = "btn btn-primary";
+			use_bt.className = "btn btn-cite";
 		}
 		use_id.appendChild(use_bt);
 		tr.id = num;
