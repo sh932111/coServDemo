@@ -154,20 +154,31 @@ function pkValue(key,get_text,index) {
 function reloadSelectList(reload_data,divName,obj) {
 	var menu = document.getElementById(divName);
 	$(menu).empty();
+	if (reload_data.length == 0) {
+		var data = {
+			index : -1,
+			num : -1,
+			text : "無資料",
+			key : "無資料"
+		};
+		reload_data.push(data);
+	}
 	for (var i = 0; i < reload_data.length; i++) {
 		var li = document.createElement("li");
 		var a = document.createElement("a");
 		a.innerHTML = reload_data[i].text;
 		a.id = i;
 		a.addEventListener("click", function(e){
-			hideAllList();
 			var index = reload_data[this.id].index;
-			getIndex = index;
-			var get_user_detail_data = getUserData[index];
-			document.getElementById("NameValue").value = get_user_detail_data.name;
-			document.getElementById("PhoneValue").value = get_user_detail_data.phone;
-			document.getElementById("NidValue").value = get_user_detail_data.nid;
-			document.getElementById("DateValue").value = get_user_detail_data.dob;
+			if (index != -1) {
+				hideAllList();
+				getIndex = index;
+				var get_user_detail_data = getUserData[index];
+				document.getElementById("NameValue").value = get_user_detail_data.name;
+				document.getElementById("PhoneValue").value = get_user_detail_data.phone;
+				document.getElementById("NidValue").value = get_user_detail_data.nid;
+				document.getElementById("DateValue").value = get_user_detail_data.dob;
+			}
 		});
 		li.appendChild(a);
 		menu.appendChild(li);
