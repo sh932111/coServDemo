@@ -1,4 +1,7 @@
 ctrl.startup = function() {
+	
+	document.getElementById('descTxInput').value = document.getElementById('descTxInput').value.replace(/<br>/g, "\n"); 
+
 	var userPhoto = document.getElementById("userPhoto");
 	ctrl.embed(userPhoto,"/D/btCatalog/uploadImg", "",function(data){
 		var addIcon = document.getElementById("addIcon");

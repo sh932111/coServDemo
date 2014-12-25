@@ -42,7 +42,7 @@
 					<label><%=ph.descTx%></label>
 				</td>
 				<td>
-					<div><%= JSON.parse(value.body).descTx%></div>
+					<textarea class="form-control textAreaSize" readonly rows="4" id="descTxInput"><%= JSON.parse(value.body).descTx%></textarea>
 				</td>
 			</tr>
 		</table>

@@ -22,3 +22,7 @@
 #genderView {
 	text-align: left;
 }
+
+.textAreaSize{
+	resize: none;
+}

@@ -18,3 +18,7 @@
 	text-align: left;
 	border-top: none; 
 }
+
+.textAreaSize{
+	resize: none;
+}

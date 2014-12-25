@@ -1,4 +1,6 @@
 ctrl.startup = function() {
+	document.getElementById('matterInput').value = document.getElementById('matterInput').value.replace(/<br>/g, "\n"); 
+
 	var userPhoto = document.getElementById("userPhoto");
 	ctrl.embed(userPhoto,"/A/customer/uploadImg", "",function(data){
 		var addIcon = document.getElementById("addIcon");
