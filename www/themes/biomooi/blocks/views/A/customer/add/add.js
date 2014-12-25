@@ -33,9 +33,13 @@ ctrl.saveData = function(){
 
 function getUserData() {
 	var matterInput = document.getElementById('matterInput').value;
+	if (matterInput.length > 256) {
+		alert("注意事項最多只能輸入256個字元！");
+		return false;
+	}
 	matterInput = matterInput.replace(/  /g, "&nbsp;&nbsp;");
  	matterInput = matterInput.replace(/\n/g,"<br>");
- 	console.log(matterInput);
+
 	var nameInput = document.getElementById('nameInput').value;
 	var userIdInput = document.getElementById('userIdInput').value;
 	if(!checkUserId(userIdInput)) {
