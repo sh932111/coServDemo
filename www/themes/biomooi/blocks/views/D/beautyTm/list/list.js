@@ -74,19 +74,19 @@ function reloadUserTable(getAllData,index) {
 		var length_id = document.createElement("td");
 		length_id.innerHTML = getAllData[num].length;
 		var price_id = document.createElement("td");
-		price_id.innerHTML = getAllData[num].price;
+		price_id.innerHTML = "$"+getAllData[num].price;
 		var fun_id = document.createElement("td");
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
 		update_bt.innerHTML = "調價格";
-		update_bt.className = "btn btn-primary";
+		update_bt.className = "btn btn-price";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			getBodyCtrl().reload('/D/beautyTm/beautyDialog', {id:getAllData[this.id].ngID,params: { _loc: '<%=bi.locale%>',_type: 1}});
 		});
 		var delete_bt = document.createElement("button");
 		delete_bt.id = num;
-		delete_bt.className = "btn";
+		delete_bt.className = "btn btn-offer";
 		if (getAllData[num].use) {
 			delete_bt.innerHTML = "不提供";
 		}

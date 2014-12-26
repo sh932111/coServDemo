@@ -34,7 +34,7 @@
 					<label><%=ph.price%></label>
 				</td>
 				<td>
-					<div><%= JSON.parse(value.body).price%></div>
+					<div>$<%= JSON.parse(value.body).price%></div>
 				</td>
 			</tr>
 			<tr>
@@ -46,6 +46,6 @@
 				</td>
 			</tr>
 		</table>
-		<button class="btn" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
+		<button class="btn btn-edit" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
 	</div>
 </div>

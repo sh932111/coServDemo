@@ -3,13 +3,13 @@
 	<table border="1" class="table table-hover">
 		<thead>
 			<tr>
-				<th><%=ph.clientId%></th>
-				<th><%=ph.name%></th>
-				<th><%=ph.gender%></th>
-				<th><%=ph.dob%></th>
-				<th><%=ph.addr%></th>
-				<th><%=ph.phone%></th>
-				<th><%=ph.function%></th>
+				<th class="col-md-1"><%=ph.clientId%></th>
+				<th class="col-md-2"><%=ph.name%></th>
+				<th class="col-md-1"><%=ph.gender%></th>
+				<th class="col-md-2"><%=ph.dob%></th>
+				<th class="col-md-3"><%=ph.addr%></th>
+				<th class="col-md-1"><%=ph.phone%></th>
+				<th class="col-md-2"><%=ph.function%></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +28,7 @@
 						<td><%= summary.addr %></td>
 						<td><%= summary.phone %></td>
 						<td>
-							<button class="btn" onclick="<%=ctrl%>.editData(<%= ngID %>)"><%=ph.edit%></button>
+							<button class="btn btn-edit" onclick="<%=ctrl%>.editData(<%= ngID %>)"><%=ph.edit%></button>
 							<button class="btn btn-danger" onclick="<%=ctrl%>.deleteData(<%= ngID %>)"><%=ph.delete%></button>
 						</td>
 					</tr>

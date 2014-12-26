@@ -16,21 +16,11 @@
 	clear: both;
 }
 
-/* -------------------------------- 
-
-  A、 D
-
--------------------------------- */
-#pgContent {
-	width: 100%;
-	height: 500px;
+*, *:hover, *:focus, a, a:hover, a:focus {
+	text-decoration: none;
 }
 
-.scroll {
-	overflow-x: hidden; 
-	overflow-y: scroll; 
-	white-space: nowrap;
-}
+img {margin-bottom: 15px;}
 
 /* -------------------------------- 
 
@@ -39,7 +29,8 @@
 -------------------------------- */
 
 .page-header {
-	margin-top: 0px !important;
+	margin-top: 0px;
+	margin-bottom: 10px;
 }
 .table {
 	border-color: #e6e6e6;
@@ -50,9 +41,10 @@
 }
 .table>tbody>tr>td {
 	padding: 7px;
+	cursor: pointer;
 }
 .table>tbody>tr>td:last-child {
-	padding: 5px 8px;
+	padding: 5px;
 }
 /*按鈕－分類*/
 .btn-purple {
@@ -125,6 +117,7 @@
 	color: #fff;
 	background:#21abc4;
 	border: none;
+	min-width: 68px;
 }
 .btn-save:hover,
 .btn-save:focus,
@@ -140,6 +133,7 @@
 	color: #fff;
 	background:#D99659;
 	border: none;
+	padding: 6px !important;
 }
 .btn-upload:hover,
 .btn-upload:focus,
@@ -165,11 +159,12 @@
 	background: #eaa319;
 	border: none;
 }
-/*按鈕－販售*/
+/*按鈕－販售*//*按鈕－訂購*/
 .btn-sale {
 	color: #fff;
 	background:#CE7CD6;	
 	border: none;
+	min-width: 68px;
 }
 .btn-sale:hover,
 .btn-sale:focus,
@@ -183,8 +178,9 @@
 /*按鈕－引用*/
 .btn-cite {
 	color: #fff;
-	background:#2077de;	
+	background:#E09953;	
 	border: none;
+	min-width: 68px;
 }
 .btn-cite:hover,
 .btn-cite:focus,
@@ -192,7 +188,7 @@
 .btn-cite.active,
 .open .dropdown-toggle.btn-cite {
 	color: #fff;
-	background: #0e65cd;
+	background: #d18742;
 	border: none;
 }
 /*按鈕－取消*/
@@ -200,6 +196,7 @@
 	color: #fff;
 	background:#279db6;	
 	border: none;
+	min-width: 68px;
 }
 .btn-cancel:hover,
 .btn-cancel:focus,
@@ -215,6 +212,7 @@
 	color: #fff;
 	background:#b77ad1;	
 	border: none;
+	min-width: 68px;
 }
 .btn-job:hover,
 .btn-job:focus,
@@ -230,6 +228,7 @@
 	color: #fff;
 	background:#875c57;	
 	border: none;
+	min-width: 68px;
 }
 .btn-confirm:hover,
 .btn-confirm:focus,
@@ -239,12 +238,14 @@
 	color: #fff;
 	background: #72443f;
 	border: none;
+	min-width: 68px;
 }
 /*按鈕－銷帳*//*按鈕－退貨*/
 .btn-account {
 	color: #fff;
 	background:#F4806C;	
 	border: none;
+	min-width: 68px;
 }
 .btn-account:hover,
 .btn-account:focus,
@@ -254,6 +255,68 @@
 	color: #fff;
 	background: #F4806C;
 	border: none;
+}
+/*按鈕－提供*//*按鈕－提領*/
+.btn-offer {
+	color: #fff;
+	background:#60b2e5;	
+	border: none;
+	min-width: 68px;
+}
+.btn-offer:hover,
+.btn-offer:focus,
+.btn-offer:active,
+.btn-offer.active,
+.open .dropdown-toggle.btn-offer {
+	color: #fff;
+	background: #469ace;
+	border: none;
+}
+/*按鈕－調價*//*按鈕－庫存*/
+.btn-price {
+	color: #fff;
+	background:#ed7daa;	
+	border: none;
+	min-width: 68px;
+}
+.btn-price:hover,
+.btn-price:focus,
+.btn-price:active,
+.btn-price.active,
+.open .dropdown-toggle.btn-price {
+	color: #fff;
+	background: #d86191;
+	border: none;
+}
+/*按鈕－修改*//*按鈕－編輯*/
+.btn-edit {
+	color: #fff;
+	background:#b0b0b0;	
+	border: none;
+	min-width: 68px;
+}
+.btn-edit:hover,
+.btn-edit:focus,
+.btn-edit:active,
+.btn-edit.active,
+.open .dropdown-toggle.btn-edit {
+	color: #fff;
+	background: #9D9B9F;
+	border: none;
+}
+/*按鈕－刪除*/
+.btn-danger {
+	min-width: 68px;
+}
+
+.btn {
+	min-height: 26px;
+}
+.btn:focus {
+	outline: none;
+}
+.btn + .btn{
+	margin-left: 1px;
 }
 
 code {
@@ -267,13 +330,8 @@ input.btn, .btn, .search .btn {
 	padding: 1px 12px 3px;
 	font-size: 14px;
 }
-.btn:focus {
-	outline: none;
-}
-.btn + .btn{
-	margin-left: 5px;
-}
-/* search */
+
+/* search列 */
 .search {
 	margin-top:10px;
 	border: 1px solid #f5f5f5;
@@ -301,9 +359,9 @@ input.btn, .btn, .search .btn {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {  
-  color: #fff;  
-  background-color: #428bca;
-  border-color: #428bca;
+  color: #777;  
+  background-color: #eee;
+  border-color: #ddd;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -328,4 +386,42 @@ input.btn, .btn, .search .btn {
   color: #777;
   background-color: #eee;
   border-color: #ddd;  
+}
+
+/* --------------------------------
+ modal
+-------------------------------- */
+.modal-dialog {
+  margin-top: 5px;
+}
+.modal-header {
+  border-bottom: none;
+  clear: both;  
+}
+.modal-header h4{
+  font-weight: bold;  
+}
+.modal-footer {
+  border-top: none;
+}
+.blue, .gray{
+    float: left;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.blue { 
+  width: 21%;
+  border-top: 2px solid #8EC0E6;
+}
+.gray {
+  width: 79%;
+  border-top: 2px solid #eee;
+}
+/*-- D --*/
+.myLabelA {
+	text-align: right;
+	padding-right: 0;
+}
+.myInput {
+	padding-right: 30px;
 }

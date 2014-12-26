@@ -63,7 +63,7 @@ function getUserData() {
 	if(!checkAllNum(document.getElementById('priceInput').value,"價錢")) {
 		return false;
 	}
-	var priceInput = document.getElementById('priceInput').value+"元";
+	var priceInput = document.getElementById('priceInput').value;
 	var check = '<%= JSON.parse(value.body).use%>';
 	check = check == "true";
 	var get_data = {

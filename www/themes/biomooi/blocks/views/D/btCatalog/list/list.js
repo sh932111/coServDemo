@@ -68,12 +68,12 @@ function reloadUserTable(getAllData,index) {
 		var length_id = document.createElement("td");
 		length_id.innerHTML = getAllData[num].length;
 		var price_id = document.createElement("td");
-		price_id.innerHTML = getAllData[num].price;
+		price_id.innerHTML = "$"+getAllData[num].price;
 		var fun_id = document.createElement("td");
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
 		update_bt.innerHTML = "編輯";
-		update_bt.className = "btn";
+		update_bt.className = "btn btn-edit";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
 			var go = "/D/btCatalog/edit/"+getAllData[this.id].ngID;
@@ -179,7 +179,6 @@ function usebtCatalogData(getAllData,ngID,index) {
 			if (!getAllData[index].use) {
 				getBeautyTmData(getAllData,index,path,function(post_beauty){
 					if (post_beauty) {
-						console.log(post_beauty);
 						callApi(beautyTmCreateApi,post_beauty,function(data){
 							if (data) {
 								var url = btCatalogUpdateApi + ngID;

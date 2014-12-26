@@ -171,49 +171,50 @@ function getNowTime() {
 }
 
 function getRandomMoney () {
-	var maxNum = 2;  
+	var maxNum = 9;  
 	var minNum = 0;  
 	var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
-	var array = ["100","1000","2000"];
+	var array = ["$1000","$1200","$1500","$1800","$2000","$2200","$2500","$2800","$3000","$5000"];
 	return array[n];
 }
 
 function getRandomDescTx () {
-	var maxNum = 3;  
+	var maxNum = 9;  
 	var minNum = 0;  
 	var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
-	var array = ["餅乾","糖果","水果","飲料"];
+	var array = ["卸妝水","化妝水","香水","潔膚液 ","美妝用品","乳液","面膜","精華液","眼部保養","唇部保養"];
 	return array[n];
 }
 
 function getRandomConsumptionDetail () {
-	var maxNum = 3;  
+	var maxNum = 4;  
 	var minNum = 0;  
 	var n = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;  
-	var array = ["買很多","很多","很少","用搶的"];
+	var array = ["優惠給多一點","幾乎都買化妝品","只買男性用品","給予消費建議","買很多不一樣的物品"];
 	return array[n];
 }
 
 //歷史紀錄測試資料
 function getHistoryDataToID(custNo) {
+	var name = getRandomDescTx () + "，" + getRandomDescTx () + "，" + getRandomDescTx ();
 	var get_data = {
 		custNo : custNo,
-		name : getRandomDescTx (),
+		name : name,
 		date : getNowTime(),
 		salesTotal : getRandomMoney (),
-		descTx : getRandomDescTx (),
+		descTx : name,
 		consumptionDate : getNowTime(),
-		consumptionDetail :  getRandomConsumptionDetail () ,
+		consumptionDetail :  name ,
 		hasComplaints : []
 	};
 	var get_data2 = {
 		custNo : custNo,
-		name : getRandomDescTx (),
+		name : name,
 		date : getNowTime(),
 		salesTotal : getRandomMoney (),
-		descTx : getRandomDescTx (),
+		descTx : name,
 		consumptionDate : getNowTime(),
-		consumptionDetail :  getRandomConsumptionDetail () 
+		consumptionDetail : name 
 	};
 
 	var res = {

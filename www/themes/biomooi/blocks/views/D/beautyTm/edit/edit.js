@@ -73,7 +73,7 @@ function getUserData() {
 	var nameInput = document.getElementById('nameInput').value;
 	var lengthInput = document.getElementById('lengthInput').value+spinner1.getText;
 	var audienceInput = document.getElementById('audienceInput').value;
-	var priceInput = document.getElementById('priceInput').value+"元";
+	var priceInput = document.getElementById('priceInput').value;
 	var get_use = '<%= JSON.parse(value.body).use%>';
 	var get_path = '<%= JSON.parse(value.body).image_url%>';
 	var path = Boolean(get_path) ? '<%= JSON.parse(value.body).image_url%>' : false;

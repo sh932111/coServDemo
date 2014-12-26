@@ -27,16 +27,16 @@ ctrl.startup = function() {
 		refreshLink( index, entries);
 	});
 
-	// deleteAllData (btCatalogListApi,btCatalogDeleteApi,{}) ;
+	//deleteAllData (userHistoryListApi,userHistoryDeleteApi,{}) ;
+	// addTestData ("70864") ;
+	// addTestData ("70864") ;
+	// addTestData ("70862") ;
+	// addTestData ("70862") ;
+	// addTestData ("70862") ;
 	// addTestData ("71082") ;
 	// addTestData ("71082") ;
-	// addTestData ("70863") ;
-	// addTestData ("70863") ;
-	// addTestData ("70863") ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
-	// addTestData ("70865") ;
+	// addTestData ("71082") ;
+	// addTestData ("71082") ;
 	// addTestData ("70863") ;
 	// addTestData ("70863") ;
 };
