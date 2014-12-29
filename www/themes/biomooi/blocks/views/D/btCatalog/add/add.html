@@ -7,20 +7,20 @@
 		<table class="table">
 			<tr>
 				<td>
-					<label><%=ph.name%></label>
+					<label class="control-label"><%=ph.name%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control" id="nameInput">
+					<input type="text" class="input-small form-control" id="nameInput">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<label><%=ph.length%></label>
+					<label class="control-label"><%=ph.length%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control myInput" id="lengthInput">
+					<input type="text" class="input-small form-control myInput" id="lengthInput">
 					<div class="btn-group">
-						<a id="pickerBt" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+						<a id="pickerBt" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" id="selectpicker"></ul>
@@ -29,29 +29,34 @@
 			</tr>
 			<tr>
 				<td>
-					<label><%=ph.audience%></label>
+					<label class="control-label"><%=ph.audience%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control" id="audienceInput">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label><%=ph.price%></label>
-				</td>
-				<td>
-					<input type="text" class="form-control myInput" id="priceInput"><label>元</label>
+					<input type="text" class="input-small form-control" id="audienceInput">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<label><%=ph.descTx%></label>
+					<label class="control-label"><%=ph.price%></label>
+				</td>
+				<td>
+					<input type="text" class="input-small form-control" id="priceInput"><label>元</label>
+				</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: text-top;">
+					<label class="control-label"><%=ph.descTx%></label>
 				</td>
 				<td>
 					<textarea class="form-control textAreaSize" rows="3" id="descTxInput"></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align:right;">
+					<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
+				</td>
+			</tr>
 		</table>
-		<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
 	</div>
 </div>

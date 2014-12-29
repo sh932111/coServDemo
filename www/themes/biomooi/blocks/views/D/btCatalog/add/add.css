@@ -26,3 +26,8 @@
 .textAreaSize{
 	resize: none;
 }
+
+#priceInput {
+	width: 90%;
+	float: left;
+}

@@ -20,7 +20,7 @@
 				<td>
 					<input type="text" class="form-control myInput" value="<%= parseInt(JSON.parse(value.body).length)%>" id="lengthInput">
 					<div class="btn-group">
-						<a id="pickerBt" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+						<a id="pickerBt" class="btn  btn-default dropdown-toggle" data-toggle="dropdown" href="#">
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" id="selectpicker"></ul>
@@ -40,11 +40,11 @@
 					<label><%=ph.price%></label>
 				</td>
 				<td>
-					<input type="text" class="form-control myInput"  value="<%= parseInt(JSON.parse(value.body).price)%>"  id="priceInput"><label>元</label>
+					<input type="text" class="form-control"  value="<%= parseInt(JSON.parse(value.body).price)%>"  id="priceInput"><label>元</label>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="vertical-align: text-top;">
 					<label><%=ph.descTx%></label>
 				</td>
 				<td>

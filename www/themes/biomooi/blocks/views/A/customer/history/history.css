@@ -12,3 +12,8 @@
 th ,td{
 	text-align: center;
 }
+.scroll {
+	overflow-x: hidden; 
+	overflow-y: scroll; 
+	white-space: nowrap;
+}

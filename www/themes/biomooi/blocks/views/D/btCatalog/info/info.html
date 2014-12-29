@@ -38,14 +38,19 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="vertical-align: text-top;">
 					<label><%=ph.descTx%></label>
 				</td>
 				<td>
 					<textarea class="form-control textAreaSize" readonly rows="4" id="descTxInput"><%= JSON.parse(value.body).descTx%></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align:right;">
+					<button class="btn btn-edit" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
+				</td>
+			</tr>
 		</table>
-		<button class="btn btn-edit" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
 	</div>
 </div>

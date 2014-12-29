@@ -2,11 +2,7 @@ var getUserData = [];
 var onClickCheck;
 
 ctrl.startup = function() {
-	// var url = deleteUserDataApi+71169;
-	// callApi(url,{},function(res){
-	// 	console.log(res);
-	// });
-
+	
 	var entries = '<%= value.entries; %>';
 	var index = '<%=bi.query.index%>'; 
 	var getKey = '<%=bi.query.key%>';
@@ -27,7 +23,10 @@ ctrl.startup = function() {
 	
 	if (index == -1) {
 		entries = 1;
+		index = 0;
 	}
+	var num = getMathRemainder(getLength,10) ;
+
 	ctrl.embed(addWaitDialog("historyDialog"),"/A/customer/waitDialog", {},function(data){});
 
 	var historyDialog = document.getElementById("historyDialog");
@@ -41,49 +40,23 @@ ctrl.startup = function() {
 	});
 
 	var listLink = document.getElementById("listLink");
-	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-		if (index == -1) {
-			refreshLink(0,getLength);
-		}
-		else {
-			refreshLink(index,getLength);
+	ctrl.embed(listLink,"/A/customer/listLink", {params: { _loc: '<%=bi.locale%>', index: index, entries: num}},function(data){
+		data.addHandler("regReloadList", ctrl.paginationCallBack);
+	});
+};
+ctrl.paginationCallBack = function(index) {
+	var  bodyBkID = $('#_mainC').children('div').first().attr('id'),
+	bodyCtrl = __.getCtrl(bodyBkID);
+	bodyCtrl.reload('/A/customer/history', {
+		params: { 
+			index : index,
+			key : '<%=bi.query.key%>',
+			_loc: '<%=bi.locale%>',
+			name:'<%=bi.query.name%>'
 		}
 	});
 };
 
-//動態產生下方button，index為需disabled的值
-function refreshLink(index,entries) {
-	var listLinkBox = document.getElementById("listLinkBox");
-	$(listLinkBox).empty();
-	var num = getMathRemainder(entries,10);
-	for (var i = 0; i < num; i++) {
-		var li = document.createElement("li");
-		var a = document.createElement("a");
-		a.innerHTML = i + 1;
-		a.id = i;
-		if (i == index) {
-			li.className = "disabled";
-		}
-		else {
-			li.className = "active";
-			a.addEventListener("click", function(e){
-				var  bodyBkID = $('#_mainC').children('div').first().attr('id'),
-				bodyCtrl = __.getCtrl(bodyBkID);
-				bodyCtrl.reload('/A/customer/history', {
-					params: { 
-						index : parseInt(this.id),
-						key : '<%=bi.query.key%>',
-						_loc: '<%=bi.locale%>',
-						name:'<%=bi.query.name%>'
-					}
-				});
-			});
-		}
-		li.appendChild(a);
-		listLinkBox.appendChild(li);
-	}
-}
-//Rust is a new programming language for developing reliable and efficient systems. It's designed to support concurrency and parallelism in building platforms that take full advantage of modern hardware. Its static type system is safe and expressive and it provides strong guarantees about isolation, concurrency execution and memory safety.<br><br>Rust combines powerful
 function  getBodyCtrl()  {
 	var  bodyBkID = $('#historyDialog').children('div').first().attr('id'),
 	bodyCtrl = __.getCtrl(bodyBkID);

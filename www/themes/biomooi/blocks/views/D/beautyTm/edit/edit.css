@@ -20,11 +20,16 @@
 	border-top: none; 
 }
 
+#priceInput {
+	width: 90%;
+	float: left;
+}
 
 .myInput {
 	width: 75%;
 	float: left;
 }
+
 .textAreaSize{
 	resize: none;
 }

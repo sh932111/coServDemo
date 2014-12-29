@@ -6,75 +6,48 @@ ctrl.startup = function() {
 
 	var entries = '<%= value.entries; %>';
 	var index = '<%=bi.query.index%>'; 
-
+	
 	if (!parseInt(index)) {
 		index = 0;
 	}
+
 	if (index == -1) {
 		entries = 1;
 	}
-	
+	var num = getMathRemainder(entries,20) ;
+
 	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){});
 
 	var controllBar = document.getElementById("controllBar");
 
 	ctrl.embed(controllBar,"/A/customer/list/controllBar", {},function(data){
-		data.addHandler("regReloadHistoryList", ctrl.reloadHistoryList);
+		data.addHandler("regReloadList", ctrl.reloadList);
 	});
 
 	var listLink = document.getElementById("listLink");
-	ctrl.embed(listLink,"/A/customer/listLink", {},function(data){
-		refreshLink( index, entries);
+	ctrl.embed(listLink,"/A/customer/listLink", {params: { _loc: '<%=bi.locale%>', index: index, entries: num}},function(data){
+		data.addHandler("regReloadList", ctrl.paginationCallBack);
 	});
-
-	//deleteAllData (userHistoryListApi,userHistoryDeleteApi,{}) ;
-	// addTestData ("70864") ;
-	// addTestData ("70864") ;
-	// addTestData ("70862") ;
-	// addTestData ("70862") ;
-	// addTestData ("70862") ;
-	// addTestData ("71082") ;
-	// addTestData ("71082") ;
-	// addTestData ("71082") ;
-	// addTestData ("71082") ;
-	// addTestData ("70863") ;
-	// addTestData ("70863") ;
+	//addAllCatalogData();
+	// addTestUser("林可新");
+	//deleteAllData (btCatalogListApi,btCatalogDeleteApi,{}) ;
+	//addTestData ("71082") ;
 };
 
-//動態產生下方button，index為需disabled的值
-function refreshLink(index,entries) {
-	var listLinkBox = document.getElementById("listLinkBox");
-	$(listLinkBox).empty();
-	var num = getMathRemainder(entries,20);
-	for (var i = 0; i < num; i++) {
-		var li = document.createElement("li");
-		var a = document.createElement("a");
-		a.innerHTML = i + 1;
-		a.id = i;
-		if (i == index) {
-			li.className = "disabled";
+ctrl.paginationCallBack = function(index) {
+	var page = index + 1;
+	getBodyCtrl().reload('/A/customer/list', {
+		params: { 
+			index : index,
+			key : '<%=bi.query.key%>',
+			_loc: '<%=bi.locale%>',
+			_pn : page,
+			_ps : 20 
 		}
-		else {
-			li.className = "active";
-			a.addEventListener("click", function(e){
-				getBodyCtrl().reload('/A/customer/list', {
-					params: { 
-						index : parseInt(this.id),
-						key : '<%=bi.query.key%>',
-						_loc: '<%=bi.locale%>',
-						_pn : parseInt(this.innerHTML),
-						_ps : 20 
-					}
-				});
-			});
-		}
+	});
+};
 
-		li.appendChild(a);
-		listLinkBox.appendChild(li);
-	}
-}
-
-ctrl.reloadHistoryList = function(get_tag) {
+ctrl.reloadList = function(get_tag) {
 	// if (get_tag != -1) {
 	// 	var go = "/A/customer/list?index=-1&key="+get_tag.ngID+"&_loc="+'<%=bi.locale%>';
 	// 	location.replace(go);

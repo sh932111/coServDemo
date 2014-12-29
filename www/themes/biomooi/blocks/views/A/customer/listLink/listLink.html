@@ -1,3 +1,39 @@
 <div style="text-align:center;">
-	<ul class="pagination" id="listLinkBox"></ul>
+	<ul class="pagination" id="listLinkBox">
+		<li>
+			<a onclick="<%=ctrl%>.goFirst()">«</a>
+		</li>
+		<li>
+			<a onclick="<%=ctrl%>.back()">‹</a>
+		</li>
+		<%  
+			for (var i = 0; i < bi.query.entries ; i++){
+		%>
+			<%
+				if ( parseInt(bi.query.index) == i) {
+			%>
+				<li class="disabled">
+					<a><%= i+1 %></a>
+				</li>
+			<%
+				}
+				else { 
+			%>
+				<li>
+					<a onclick="<%=ctrl%>.goIndex(this)" id="<%= i %>"><%= i+1 %></a>
+				</li>
+			<%
+				}
+			%>
+			
+		<%	
+			}
+		%>
+		<li>
+			<a onclick="<%=ctrl%>.next()">›</a>
+		</li> 
+		<li>
+			<a onclick="<%=ctrl%>.goLast()">»</a>
+		</li>
+	</ul>
 </div>

@@ -77,10 +77,10 @@ ctrl.selectUserData = function(){
 ctrl.checkSelectData = function(){
 	if (getIndex != -1) {
 		var get_user_detail_data = getUserData[getIndex];
-		ctrl.callHandler("regReloadHistoryList",get_user_detail_data);
+		ctrl.callHandler("regReloadList",get_user_detail_data);
 	}
 	else {
-		ctrl.callHandler("regReloadHistoryList",-1);
+		ctrl.callHandler("regReloadList",-1);
 	}
 };
 
