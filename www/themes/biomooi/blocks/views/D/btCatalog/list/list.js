@@ -95,6 +95,7 @@ function reloadCatalogTable(getAllData,index) {
 		price_id.innerHTML = "$"+getAllData[num].price;
 		price_id.className = "tdStyle";
 		var fun_id = document.createElement("td");
+		fun_id.className = "tdStyle2";
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
 		update_bt.innerHTML = "編輯";
@@ -117,6 +118,7 @@ function reloadCatalogTable(getAllData,index) {
 		fun_id.appendChild(update_bt);
 		fun_id.appendChild(delete_bt);
 		var use_id = document.createElement("td");
+		use_id.className = "tdStyle2";
 		var use_bt = document.createElement("button");
 		use_bt.id = num;
 		use_bt.addEventListener("click", function(e){

@@ -163,6 +163,7 @@ function reloadSelectList(reload_data,divName,obj) {
 		var a = document.createElement("a");
 		a.innerHTML = reload_data[i].text;
 		a.id = i;
+		a.style.textAlign = "left";
 		a.addEventListener("click", function(e){
 			var index = reload_data[this.id].index;
 			if (index != -1) {
@@ -179,14 +180,14 @@ function reloadSelectList(reload_data,divName,obj) {
 		menu.appendChild(li);
 	}
 	var root_div = obj.parentNode;
-	root_div.className = "col-sm-8 open";
+	root_div.className = "col-sm-12 open";
 }
 
 function hideAllList() {
-	var formGroup = document.getElementById("formGroup");
+	var formGroup = document.getElementById("tableView");
 	var div_array = formGroup.getElementsByTagName('div');
 	for (var i = 0; i < div_array.length; i++) {
-		div_array[i].className = "col-sm-8";
+		div_array[i].className = "col-sm-12";
 	}
 }
 function clearInput() {

@@ -11,10 +11,21 @@
 .myMenu {
 	margin-left: 15px;
 }
+
 #DateValue {
 	background-image: url(/utils/img/btn_icon.png);
 	background-repeat: no-repeat;
 	background-position: top right;
 	background-position-y: -1px;
 	cursor: pointer;
+}
+
+.inputBox {
+	height: 50px;
+}
+
+.table td {
+	text-align: center;
+	vertical-align: middle;
+	border-top: none; 
 }

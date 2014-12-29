@@ -94,11 +94,12 @@ function addHistoryData (ngID) {
 
 //增加療程資訊
 function addCatalogData(category,detail,name) {
+	var money = getRandomMoney2();
 	var get_data = {
 		name : name,
 		length : getRandomLength(),
 		audience : getRandomAudience(),
-		price : getRandomMoney2(),
+		price : money,
 		descTx : getRandomDescTx2(),
 		use : false,
 		category : category,
@@ -108,7 +109,7 @@ function addCatalogData(category,detail,name) {
 		name : name,
 		length : getRandomLength(),
 		audience : getRandomAudience(),
-		price : getRandomMoney2(),
+		price : money,
 		use : false,
 		category : category,
 		detail : detail
@@ -129,11 +130,12 @@ function addCatalogData(category,detail,name) {
 //歷史紀錄測試資料
 function getHistoryDataToID(custNo) {
 	var name = getRandomDescTx () + "，" + getRandomDescTx () + "，" + getRandomDescTx ();
+	var money = getRandomMoney ();
 	var get_data = {
 		custNo : custNo,
 		name : name,
 		date : getNowTime(),
-		salesTotal : getRandomMoney (),
+		salesTotal : money,
 		descTx : name,
 		consumptionDate : getNowTime(),
 		consumptionDetail :  name ,
@@ -143,7 +145,7 @@ function getHistoryDataToID(custNo) {
 		custNo : custNo,
 		name : name,
 		date : getNowTime(),
-		salesTotal : getRandomMoney (),
+		salesTotal : money,
 		descTx : name,
 		consumptionDate : getNowTime(),
 		consumptionDetail : name 

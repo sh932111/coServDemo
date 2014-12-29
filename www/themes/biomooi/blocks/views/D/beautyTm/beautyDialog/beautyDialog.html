@@ -15,7 +15,7 @@
 							<label class="col-sm-14 control-label myLabel"><%= JSON.parse(value.body).name%></label>
 							<%}%>
 						</div>
-						<label class="col-sm-4 control-label myLabel">$<%=ph.price%></label>
+						<label class="col-sm-4 control-label myLabel"><%=ph.price%></label>
 						<div class="col-sm-8">
 							<%if (errCode === 0){%>
 								<input type="text" class="form-control" value="<%= JSON.parse(value.body).price%>" id="PriceValue">

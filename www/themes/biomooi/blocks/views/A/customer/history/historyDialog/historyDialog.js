@@ -14,14 +14,20 @@ ctrl.startup = function() {
 		'<%}%>'
 		getHistoryData = JSON.parse(get_body);
 		getHistoryData2 = JSON.parse(get_summary);
-		console.log(getHistoryData2);
-		var hasComplaintsDetail = document.getElementById("hasComplaintsDetail");
+		
+		var hasComplaintsDetail = document.getElementById("tableView");
 		var has_complaints = getHistoryData.hasComplaints;
 		for (var i = 0; i < has_complaints.length; i++) {
+			var tr = document.createElement("tr");
+			var td = document.createElement("td");
+			td.style.textAlign = "left";
 			var label = document.createElement("label");
 			label.innerHTML = has_complaints[i];
-			label.className = "col-sm-12 control-label myLabel";
-			hasComplaintsDetail.appendChild(label);
+			label.className = "col-sm-14 control-label myLabel";
+			label.style.marginLeft = "20px";
+			td.appendChild(label);
+			tr.appendChild(td);
+			hasComplaintsDetail.appendChild(tr);
 		}
 	}
 };

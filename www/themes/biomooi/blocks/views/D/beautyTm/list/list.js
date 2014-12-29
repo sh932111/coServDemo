@@ -101,6 +101,7 @@ function reloadBeautyTable(getAllData,index) {
 		price_id.innerHTML = "$"+getAllData[num].price;
 		price_id.className = "tdStyle";
 		var fun_id = document.createElement("td");
+		fun_id.className = "tdStyle2";
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
 		update_bt.innerHTML = "調價格";

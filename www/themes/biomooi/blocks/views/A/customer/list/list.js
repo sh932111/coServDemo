@@ -30,7 +30,7 @@ ctrl.startup = function() {
 	});
 	//addAllCatalogData();
 	// addTestUser("林可新");
-	//deleteAllData (btCatalogListApi,btCatalogDeleteApi,{}) ;
+	//deleteAllData (beautyTmListApi,beautyTmDeleteApi,{}) ;
 	//addTestData ("71082") ;
 };
 
