@@ -13,6 +13,10 @@ ctrl.startup = function() {
 	});
 };
 
+ctrl.goIndex = function(){
+	location.replace("/D/btCatalog/list");
+};
+
 ctrl.saveData = function(){
 	var post = getUserData();
 	if (post) {

@@ -1,6 +1,12 @@
 <div class="page-header" id="pageHeader">
 	<h2><%=ph.pageTitle%></h2>
 </div>
+<ol class="breadcrumb">
+	<li>
+		<a href="javascript: <%=ctrl%>.goIndex()"><%=ph.categoryTitle%></a>
+	</li>
+	<li><%=ph.pageTitle%></li>
+</ol>
 <div id="userPhoto"></div>
 <div id="userData">
 	<div class="tableBox">
@@ -48,7 +54,7 @@
 					<label class="control-label"><%=ph.descTx%></label>
 				</td>
 				<td>
-					<textarea class="form-control textAreaSize" rows="3" id="descTxInput"></textarea>
+					<textarea class="form-control textAreaSize" rows="4" id="descTxInput"></textarea>
 				</td>
 			</tr>
 			<tr>
