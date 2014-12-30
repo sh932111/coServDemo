@@ -1,6 +1,12 @@
 <div class="page-header" id="pageHeader">
 	<h2><%=ph.pageTitle%></h2>
 </div>
+<ol class="breadcrumb">
+	<li>
+		<a href="javascript: history.go(-1);"><%=ph.categoryTitle%></a>
+	</li>
+	<li><%=ph.pageTitle%></li>
+</ol>
 <div id="userPhoto"></div>
 <div id="userData">
 	<div class="tableBox">

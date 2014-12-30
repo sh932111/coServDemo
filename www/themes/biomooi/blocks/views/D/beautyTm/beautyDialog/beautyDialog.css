@@ -19,3 +19,9 @@
     background-position-y: -1px;
     cursor: pointer;
 }
+
+.table td {
+	text-align: center;
+	vertical-align: middle;
+	border-top: none; 
+}

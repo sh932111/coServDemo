@@ -140,3 +140,12 @@ function getSpinner() {
 		this.getText = text;
 	}
 }
+
+ctrl.goIndex = function(){
+	location.replace("/D/beautyTm/list");
+};
+
+ctrl.goInfo = function(){
+	var get_id = '<%=value.ngID%>';
+	location.replace("/D/beautyTm/info/"+get_id);
+};

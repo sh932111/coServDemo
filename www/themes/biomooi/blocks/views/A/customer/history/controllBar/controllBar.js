@@ -184,7 +184,7 @@ function reloadSelectList(reload_data,divName,obj) {
 }
 
 function hideAllList() {
-	var formGroup = document.getElementById("tableView");
+	var formGroup = document.getElementById("myTableView");
 	var div_array = formGroup.getElementsByTagName('div');
 	for (var i = 0; i < div_array.length; i++) {
 		div_array[i].className = "col-sm-12";

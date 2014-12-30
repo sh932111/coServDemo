@@ -26,5 +26,9 @@ ctrl.startup = function() {
 
 ctrl.editData = function(){
 	var go = "/D/beautyTm/edit/"+"<%=value.ngID%>";
-	location.href = go;
+	location.replace(go);
+};
+
+ctrl.goIndex = function(){
+	location.replace("/D/beautyTm/list");
 };

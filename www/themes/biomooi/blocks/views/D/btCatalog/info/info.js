@@ -18,5 +18,9 @@ ctrl.startup = function() {
 
 ctrl.editData = function(){
 	var go = "/D/btCatalog/edit/"+"<%=value.ngID%>";
-	location.href = go;
+	location.replace(go);
+};
+
+ctrl.goIndex = function(){
+	location.replace("/D/btCatalog/list");
 };

@@ -17,5 +17,9 @@ ctrl.startup = function() {
 
 ctrl.editData = function(){
 	var go = "/A/customer/edit/"+"<%=value.ngID%>";
-	location.href = go;
+	location.replace(go);
+};
+
+ctrl.goIndex = function(){
+	location.replace("/A/customer/list?_pn=1&_ps=20&key=-1");
 };

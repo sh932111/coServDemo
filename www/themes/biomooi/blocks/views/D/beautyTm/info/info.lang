@@ -3,6 +3,9 @@
   <ph id="pageTitle">
     <zh>檢視療程</zh>
   </ph>
+  <ph id="categoryTitle">
+    <zh>療程項目維護</zh>
+  </ph>
 	<ph id="name">
 		<zh>名稱</zh>
 	</ph>

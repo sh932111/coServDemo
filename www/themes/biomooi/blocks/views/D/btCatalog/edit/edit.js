@@ -49,6 +49,15 @@ ctrl.saveData = function(){
 	}
 };
 
+ctrl.goIndex = function(){
+	location.replace("/D/btCatalog/list");
+};
+
+ctrl.goInfo = function(){
+	var get_id = '<%=value.ngID%>';
+	location.replace("/D/btCatalog/info/"+get_id);
+};
+
 function getUserData() {
 	var descTxInput = document.getElementById('descTxInput').value;
 	descTxInput = descTxInput.replace(/  /g, "&nbsp;&nbsp;");

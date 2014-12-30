@@ -3,6 +3,9 @@
 	<ph id="pageTitle">
 		<zh>檢視客戶資料</zh>
 	</ph>
+	<ph id="categoryTitle">
+		<zh>客戶查詢</zh>
+	</ph>
 	<ph id="name">
 		<zh>姓名</zh>
 	</ph>

@@ -1,39 +1,59 @@
 <a href="#beautymodal" id="beautymodalLink" data-toggle="modal" class="btn btn-mini"  style="display:none"></a>
 <div class="modal fade" id="beautymodal">
-	<div class="modal-header modalBox">
-		<button class="close" data-dismiss="modal">x</button>
-		<h4><%=ph.setPrice%></h4>
-	</div>
-	<div class="modal-body modalBox">
-		<div class="row">
-			<div class="col-sm-10">
-				<form class="form-horizontal" role="form">
-					<div class="form-group">
-						<label class="col-sm-4 control-label myLabel"><%=ph.name%></label>
-						<div class="col-sm-8">
-							<%if (errCode === 0){%>
-							<label class="col-sm-14 control-label myLabel"><%= JSON.parse(value.body).name%></label>
-							<%}%>
-						</div>
-						<label class="col-sm-4 control-label myLabel"><%=ph.price%></label>
-						<div class="col-sm-8">
-							<%if (errCode === 0){%>
-								<input type="text" class="form-control" value="<%= JSON.parse(value.body).price%>" id="PriceValue">
-							<%}%>
-						</div>
-						<label class="col-sm-4 control-label myLabel"><%=ph.date%></label>
-						<div class="col-sm-8">
-							<%if (errCode === 0){%>
-								<input type="text" class="form-control" value="<%= JSON.parse(value.body).date%>"  id="DateValue">
-							<%}%>
-						</div>
-					</div>
-				</form>
+	<div class="modal-dialog"> 
+		<div class="modal-content modalBox">
+			<div class="modal-header modalBox">
+				<button class="close" data-dismiss="modal">&times;</button>
+				<h4><%=ph.setPrice%></h4>
+				<hr class="blue"></hr>
+				<hr class="gray"></hr> 
 			</div>
-			<div class="col-sm-6"></div>
-		</div>  
-	</div>
-	<div class="modal-footer modalBox">
-		<button type="button" class="btn btn-save" onclick="<%=ctrl%>.checkUpdateData()" data-dismiss="modal"><%=ph.check%></button>
+			<div class="modal-body modalBox">
+				<table class="table" id="tableView">
+					<tr>
+						<td style="text-align:right;" class="col-sm-3">
+							<label><%=ph.name%></label>
+						</td>
+						<td style="text-align:left;">
+							<div>
+								<%if (errCode === 0){%>
+								<label class="col-sm-14 control-label myLabel"><%= JSON.parse(value.body).name%></label>
+								<%}%>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right;" class="col-sm-3">
+							<label><%=ph.price%></label>
+						</td>
+						<td style="text-align:left;">
+							<div>
+								<%if (errCode === 0){%>
+								<input type="text" class="form-control" value="<%= JSON.parse(value.body).price%>" id="PriceValue">
+								<%}%>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right;" class="col-sm-3">
+							<label><%=ph.date%></label>
+						</td>
+						<td style="text-align:left;">
+							<div>
+								<%if (errCode === 0){%>
+								<input type="text" class="form-control" value="<%= JSON.parse(value.body).date%>"  id="DateValue">
+								<%}%>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align:right;">
+							<button type="button" class="btn btn-save" onclick="<%=ctrl%>.checkUpdateData()" data-dismiss="modal"><%=ph.check%></button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </div> 

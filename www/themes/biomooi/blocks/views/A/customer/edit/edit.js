@@ -46,6 +46,15 @@ ctrl.saveData = function(){
 	}
 };
 
+ctrl.goIndex = function(){
+	location.replace("/A/customer/list?_pn=1&_ps=20&key=-1");
+};
+
+ctrl.goInfo = function(){
+	var get_id = '<%=value.ngID%>';
+	location.replace("/A/customer/info/"+get_id);
+};
+
 function getUserData() {
 	var matterInput = document.getElementById('matterInput').value;
 	if (matterInput.length > 256) {
