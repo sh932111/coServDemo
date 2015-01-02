@@ -1,22 +1,26 @@
 <a href="#waitModal" id="waitLink" data-toggle="modal" class="btn btn-mini"  style="display:none"></a>
 <div class="modal fade" id="waitModal">
-	<div class="modal-header modalBox">
-		<center>
-			<h4><%=ph.setTitle%></h4>
-		</center>
-	</div>
-	<div class="modal-body modalBox">
-		<div class="row">
-			<label class="col-sm-12 control-label myLabel"><%=ph.setList%></label>
-		</div>
-		<center>
-			<img src="/utils/img/preloading.gif" />
-		</center>
-	</div>
-	<div class="modal-footer modalBox">
-		<center>
-			<button type="button" class="btn btn-save" id="waitCancel" data-dismiss="modal" style="display:none"><%=ph.cancel%></button>
-		</center>
-		
+	<div class="modal-dialog"> 
+		<div class="modal-content modalBox">
+			<div class="modal-header">
+				<h4><%=ph.setTitle%></h4>
+				<hr class="blue"></hr>
+				<hr class="gray"></hr>
+			</div>
+			<div class="modal-body waitBody">
+				<center>
+					<img src="/utils/img/preloading.gif" width="150px" />
+				</center>
+				<div class="row">
+					<label class="col-sm-12 control-label myLabel"><%=ph.setList%></label>
+				</div>
+			</div>
+			<div class="modal-footer" style="display:none">
+				<center>
+					<button type="button" class="btn btn-save" id="waitCancel" data-dismiss="modal"><%=ph.cancel%></button>
+				</center>
+
+			</div>
+		</div> 	
 	</div>
 </div> 

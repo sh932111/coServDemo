@@ -19,5 +19,6 @@
 	border-top: none; 
 }
 .textAreaSize{
+	background-color: white;
 	resize: none;
 }

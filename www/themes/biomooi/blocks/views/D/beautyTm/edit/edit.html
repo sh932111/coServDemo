@@ -28,7 +28,7 @@
 				</td>
 				<td>
 					<input type="text" class="form-control myInput" value="<%= parseInt(JSON.parse(value.body).length)%>" id="lengthInput">
-					<div class="btn-group">
+					<div class="btn-group myGroup">
 						<a id="pickerBt" class="btn  btn-default dropdown-toggle" data-toggle="dropdown" href="#">
 							<span class="caret"></span>
 						</a>
@@ -60,7 +60,12 @@
 					<textarea class="form-control textAreaSize" rows="4" id="descTxInput"><%= JSON.parse(value.body).descTx%></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align:right;">
+					<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
+				</td>
+			</tr>
 		</table>
-		<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
 	</div>
 </div>

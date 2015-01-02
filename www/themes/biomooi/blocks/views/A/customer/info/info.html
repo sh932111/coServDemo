@@ -79,7 +79,12 @@
 					<textarea class="form-control textAreaSize" readonly rows="3" id="matterInput"><%= JSON.parse(value.body).matter%></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align:right;">
+					<button class="btn btn-edit" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
+				</td>
+			</tr>
 		</table>
-		<button class="btn btn-edit" onclick="<%=ctrl%>.editData()"><%=ph.edit%></button>
 	</div>
 </div>

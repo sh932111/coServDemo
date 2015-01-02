@@ -93,7 +93,12 @@
 					<textarea class="form-control textAreaSize" rows="3" id="matterInput"><%= JSON.parse(value.body).matter%></textarea>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td style="text-align:right;">
+					<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
+				</td>
+			</tr>
 		</table>
-		<button class="btn btn-save" onclick="<%=ctrl%>.saveData()"><%=ph.save%></button>
 	</div>
 </div>
