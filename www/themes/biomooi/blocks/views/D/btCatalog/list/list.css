@@ -5,20 +5,9 @@
 	height: 75px;
 }
 
-.tableView {
-	height: 315px;
-}
-
 th{
 	text-align: center;
 }
-
-.scroll {
-	overflow-x: hidden; 
-	overflow-y: scroll; 
-	white-space: nowrap;
-}
-
 .tdStyle {
 	text-align: right;
 }
