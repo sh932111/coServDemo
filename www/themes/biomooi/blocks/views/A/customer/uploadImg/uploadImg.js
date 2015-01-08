@@ -41,30 +41,3 @@ var sender = {
 		$.ajax(sender.settings);
 	}
 };
-
-function isCheckingImage(obj) {
-	var v=$(obj).val();
-	if(v !=''){
-		var a = v.lastIndexOf("."); 
-
-		var str = v.substring(a + 1);
-		console.log(str);
-
-		var imgArr = [ "jpg","jpeg","gif","bmp","JPG","JPEG","GIF","BMP","png","PNG"];
-		if($.inArray(str, imgArr)=='-1'){
-			clearFileInput(obj);
-			alert('請選擇正確的圖片格式！');
-			return false;
-		} 
-	}
-	return true;
-}
-
-function clearFileInput(ctrl) {
-	try {
-		ctrl.value = null;
-	} catch(ex) { }
-	if (ctrl.value) {
-		ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
-	}
-}

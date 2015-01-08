@@ -15,7 +15,6 @@ ctrl.startup = function() {
 		else {
 			var get_path = '<%= JSON.parse(value.body).image_url%>';
 			var check = Boolean(get_path) ? '<%= JSON.parse(value.body).image_url%>' : false;
-			console.log(get_path);
 			if (check != "false") {
 				userPhotoImg.src = check;
 				userPhotoImg.style.height = "auto";
