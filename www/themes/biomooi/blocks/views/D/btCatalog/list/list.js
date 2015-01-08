@@ -22,10 +22,7 @@ ctrl.startup = function() {
 	changeCatalogData = get_data;
 	reloadCatalogTable(getCatalogData,0);
 
-	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){
-
-		$("#waitLink").click();
-	});
+	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){});
 
 	var controllBar = document.getElementById("controllBar");
 	ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "btCatalog"}},function(data){
