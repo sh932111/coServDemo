@@ -22,7 +22,10 @@ ctrl.startup = function() {
 	changeCatalogData = get_data;
 	reloadCatalogTable(getCatalogData,0);
 
-	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){});
+	ctrl.embed(addWaitDialog("controllBar"),"/A/customer/waitDialog", {},function(data){
+
+		$("#waitLink").click();
+	});
 
 	var controllBar = document.getElementById("controllBar");
 	ctrl.embed(controllBar,"/D/btCatalog/controllBar", {params: { _loc: '<%=bi.locale%>',_type: "btCatalog"}},function(data){
@@ -98,7 +101,7 @@ function reloadCatalogTable(getAllData,index) {
 		fun_id.className = "tdStyle2";
 		var update_bt = document.createElement("button");
 		update_bt.id = num;
-		update_bt.innerHTML = "編輯";
+		update_bt.innerHTML = "修改";
 		update_bt.className = "btn btn-edit";
 		update_bt.addEventListener("click", function(e){
 			onClickCheck = true;
